@@ -1,23 +1,15 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getStyles } from '../components/styles';
 import { towns } from '../data/towns';
+import { useSeo } from '../lib/seo';
 
 export default function NotFound() {
   const styles = getStyles(false);
 
-  useEffect(() => {
-    const previousTitle = document.title;
-    document.title = 'Page Not Found | Nicholas Liappas';
-    const robots = document.createElement('meta');
-    robots.name = 'robots';
-    robots.content = 'noindex';
-    document.head.appendChild(robots);
-    return () => {
-      document.title = previousTitle;
-      robots.remove();
-    };
-  }, []);
+  useSeo({
+    title: 'Page Not Found | Nicholas Liappas',
+    meta: [{ name: 'robots', content: 'noindex' }]
+  });
 
   return (
     <div style={styles.container}>

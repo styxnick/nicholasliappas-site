@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getStyles } from '../components/styles';
 import ContactForm from '../components/ContactForm';
+import { useSeo, SITE_URL } from '../lib/seo';
 
 export default function Home({ trackEvent }) {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
@@ -32,9 +33,17 @@ export default function Home({ trackEvent }) {
     return () => clearInterval(timer);
   }, []);
 
-  useEffect(() => {
-    document.title = 'Nicholas Liappas | Real Estate Broker | North Shore, Queens & North Fork NY';
-    const metaTags = [
+  const schemas = [
+      { "@context": "https://schema.org", "@type": "WebSite", "name": "Nicholas Liappas – The Liappas Team at Compass", "url": "https://nicholasliappas.com", "inLanguage": "en-US" },
+      { "@context": "https://schema.org", "@type": "Person", "@id": "https://nicholasliappas.com/#person", "name": "Nicholas Liappas", "givenName": "Nicholas", "familyName": "Liappas", "jobTitle": "Licensed Associate Real Estate Broker", "url": "https://nicholasliappas.com", "image": "https://nicholasliappas.com/nicholas-headshot.jpg", "telephone": "+1-516-214-7761", "email": "nicholas.liappas@compass.com", "alumniOf": { "@type": "CollegeOrUniversity", "name": "Stony Brook University" }, "knowsLanguage": [{"@type":"Language","name":"English"},{"@type":"Language","name":"Greek"}], "worksFor": { "@type": "Organization", "name": "Compass", "url": "https://www.compass.com" }, "address": { "@type": "PostalAddress", "addressLocality": "Manhasset", "addressRegion": "NY", "postalCode": "11030", "addressCountry": "US" }, "sameAs": ["https://instagram.com/nicholasliappas","https://www.linkedin.com/in/nicholas-liappas-73482128/","https://x.com/nickliappas","https://www.facebook.com/nickliappas/","https://www.compass.com/agents/nicholas-liappas/"] },
+      { "@context": "https://schema.org", "@type": ["RealEstateAgent","LocalBusiness"], "@id": "https://nicholasliappas.com/#business", "name": "Nicholas Liappas – The Liappas Team at Compass", "alternateName": ["The Liappas Team","Nicholas Liappas Compass"], "url": "https://nicholasliappas.com", "logo": "https://nicholasliappas.com/logo-black.png", "image": "https://nicholasliappas.com/nicholas-headshot.jpg", "telephone": "+1-516-214-7761", "email": "nicholas.liappas@compass.com", "priceRange": "$$$", "address": { "@type": "PostalAddress", "streetAddress": "1050 Northern Blvd", "addressLocality": "Manhasset", "addressRegion": "NY", "postalCode": "11030", "addressCountry": "US" }, "geo": { "@type": "GeoCoordinates", "latitude": "40.7979", "longitude": "-73.7004" }, "openingHoursSpecification": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "08:00", "closes": "20:00" }, "areaServed": [{"@type":"City","name":"Manhasset"},{"@type":"City","name":"Port Washington"},{"@type":"City","name":"Roslyn"},{"@type":"City","name":"East Hills"},{"@type":"City","name":"Glen Head"},{"@type":"City","name":"Glenwood Landing"},{"@type":"City","name":"Great Neck"},{"@type":"City","name":"Bayside"},{"@type":"City","name":"Greenport"},{"@type":"City","name":"Cutchogue"},{"@type":"AdministrativeArea","name":"Nassau County, NY"},{"@type":"AdministrativeArea","name":"Suffolk County, NY"},{"@type":"AdministrativeArea","name":"Queens, NY"},{"@type":"AdministrativeArea","name":"North Shore, Long Island"},{"@type":"AdministrativeArea","name":"North Fork, Long Island"}], "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "bestRating": "5", "worstRating": "1", "ratingCount": "47" }, "review": [{"@type":"Review","author":{"@type":"Person","name":"First-Time Buyers, North Shore"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"From day one, Nick was determined to help us find the perfect home. Always competent and on the ball."},{"@type":"Review","author":{"@type":"Person","name":"Seller, Roslyn"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"I had 3 cash offers within the first four days. Highest selling 1 bedroom Coop price in Roslyn Gardens history."}], "sameAs": ["https://instagram.com/nicholasliappas","https://www.linkedin.com/in/nicholas-liappas-73482128/","https://x.com/nickliappas","https://www.facebook.com/nickliappas/","https://www.compass.com/agents/nicholas-liappas/"] },
+      { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type":"Question","name":"What areas does Nicholas Liappas serve?","acceptedAnswer":{"@type":"Answer","text":"Nicholas Liappas serves Long Island's North Shore (Manhasset, Port Washington, Roslyn, East Hills, Glen Head, Glenwood Landing, Great Neck, Oyster Bay), Queens (Bayside, Flushing), and the North Fork (Greenport, Cutchogue, Southold)."}},{"@type":"Question","name":"What makes Nicholas Liappas different?","acceptedAnswer":{"@type":"Answer","text":"Nicholas brings 15+ years of real estate experience combined with a hands-on construction background, delivering record-breaking results including the highest-selling 1-bedroom co-op price in Roslyn Gardens history."}},{"@type":"Question","name":"How can I contact Nicholas Liappas?","acceptedAnswer":{"@type":"Answer","text":"Call 516-214-7761, email nicholas.liappas@compass.com, or submit a consultation request at nicholasliappas.com. Available 7 days a week, 8AM–8PM."}}] },
+      { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type":"ListItem","position":1,"name":"Home","item":"https://nicholasliappas.com"},{"@type":"ListItem","position":2,"name":"About","item":"https://nicholasliappas.com/#about"},{"@type":"ListItem","position":3,"name":"Services","item":"https://nicholasliappas.com/#services"},{"@type":"ListItem","position":4,"name":"Contact","item":"https://nicholasliappas.com/#contact"}] }
+  ];
+
+  useSeo({
+    title: 'Nicholas Liappas | Real Estate Broker | North Shore, Queens & North Fork NY',
+    meta: [
       { name: 'description', content: 'Nicholas Liappas – Licensed Associate Real Estate Broker at Compass. Serving Manhasset, Port Washington, Roslyn, East Hills, Glen Head, Glenwood Landing, Great Neck, Bayside & North Fork. Record-breaking sales, construction expertise, 15+ years experience. Call 516-214-7761.' },
       { name: 'keywords', content: 'Nicholas Liappas, Nicholas Liappas realtor, Nicholas Liappas Compass, Liappas Team, real estate agent Manhasset NY, real estate agent Port Washington NY, real estate agent Roslyn NY, real estate agent East Hills NY, real estate agent Glen Head NY, real estate agent Glenwood Landing NY, real estate agent Great Neck NY, real estate agent Bayside Queens, real estate agent North Fork NY, real estate broker North Shore Long Island, luxury homes North Shore Long Island, homes for sale Manhasset, homes for sale Port Washington, homes for sale Roslyn, homes for sale East Hills, homes for sale Glen Head, homes for sale Glenwood Landing, homes for sale Great Neck, Compass real estate Long Island, buy home Long Island, sell home Long Island, commercial real estate Long Island, developer sales Long Island, Nassau County realtor, Suffolk County realtor, North Fork luxury homes' },
       { name: 'author', content: 'Nicholas Liappas' },
@@ -44,64 +53,19 @@ export default function Home({ trackEvent }) {
       { name: 'geo.placename', content: 'Manhasset, New York' },
       { name: 'geo.position', content: '40.7979;-73.7004' },
       { name: 'ICBM', content: '40.7979, -73.7004' },
-      { name: 'theme-color', content: '#1a1a1a' },
-      { name: 'format-detection', content: 'telephone=yes' },
       { name: 'revisit-after', content: '7 days' },
       { name: 'language', content: 'English' },
       { name: 'category', content: 'Real Estate' },
       { name: 'coverage', content: 'Long Island, Queens, North Fork, New York' },
       { property: 'og:title', content: 'Nicholas Liappas | Real Estate Broker | North Shore, Queens & North Fork NY' },
       { property: 'og:description', content: 'Licensed Associate Real Estate Broker at Compass. Record-breaking results for buyers & sellers across Manhasset, Port Washington, Roslyn, East Hills, Glen Head, Glenwood Landing, Great Neck, Bayside & North Fork. Built Different, Sold Better.' },
-      { property: 'og:type', content: 'website' },
-      { property: 'og:url', content: 'https://nicholasliappas.com' },
-      { property: 'og:site_name', content: 'Nicholas Liappas – The Liappas Team at Compass' },
-      { property: 'og:locale', content: 'en_US' },
-      { property: 'og:image', content: 'https://nicholasliappas.com/nicholas-headshot.jpg' },
-      { property: 'og:image:width', content: '1200' },
-      { property: 'og:image:height', content: '630' },
-      { property: 'og:image:alt', content: 'Nicholas Liappas – Licensed Associate Real Estate Broker at Compass' },
-      { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:site', content: '@nickliappas' },
-      { name: 'twitter:creator', content: '@nickliappas' },
+      { property: 'og:url', content: `${SITE_URL}/` },
       { name: 'twitter:title', content: 'Nicholas Liappas | Real Estate Broker | North Shore, Queens & North Fork NY' },
       { name: 'twitter:description', content: 'Licensed Associate Real Estate Broker at Compass. Record-breaking results for buyers & sellers across Long Island & Queens. Built Different, Sold Better.' },
-      { name: 'twitter:image', content: 'https://nicholasliappas.com/nicholas-headshot.jpg' },
-      { name: 'apple-mobile-web-app-title', content: 'Nicholas Liappas' },
-      { name: 'apple-mobile-web-app-capable', content: 'yes' },
-    ];
-    metaTags.forEach(tag => {
-      const meta = document.createElement('meta');
-      if (tag.name) meta.name = tag.name;
-      if (tag.property) meta.setAttribute('property', tag.property);
-      meta.content = tag.content;
-      document.head.appendChild(meta);
-    });
-    const hints = [
-      { rel: 'canonical', href: 'https://nicholasliappas.com' },
-      { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-      { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true },
-      { rel: 'dns-prefetch', href: 'https://www.compass.com' },
-    ];
-    hints.forEach(h => {
-      const link = document.createElement('link');
-      link.rel = h.rel; link.href = h.href;
-      if (h.crossorigin) link.setAttribute('crossorigin', '');
-      document.head.appendChild(link);
-    });
-    const schemas = [
-      { "@context": "https://schema.org", "@type": "WebSite", "name": "Nicholas Liappas – The Liappas Team at Compass", "url": "https://nicholasliappas.com", "inLanguage": "en-US" },
-      { "@context": "https://schema.org", "@type": "Person", "@id": "https://nicholasliappas.com/#person", "name": "Nicholas Liappas", "givenName": "Nicholas", "familyName": "Liappas", "jobTitle": "Licensed Associate Real Estate Broker", "url": "https://nicholasliappas.com", "image": "https://nicholasliappas.com/nicholas-headshot.jpg", "telephone": "+1-516-214-7761", "email": "nicholas.liappas@compass.com", "alumniOf": { "@type": "CollegeOrUniversity", "name": "Stony Brook University" }, "knowsLanguage": [{"@type":"Language","name":"English"},{"@type":"Language","name":"Greek"}], "worksFor": { "@type": "Organization", "name": "Compass", "url": "https://www.compass.com" }, "address": { "@type": "PostalAddress", "addressLocality": "Manhasset", "addressRegion": "NY", "postalCode": "11030", "addressCountry": "US" }, "sameAs": ["https://instagram.com/nicholasliappas","https://www.linkedin.com/in/nicholas-liappas-73482128/","https://x.com/nickliappas","https://www.facebook.com/nickliappas/","https://www.compass.com/agents/nicholas-liappas/"] },
-      { "@context": "https://schema.org", "@type": ["RealEstateAgent","LocalBusiness"], "@id": "https://nicholasliappas.com/#business", "name": "Nicholas Liappas – The Liappas Team at Compass", "alternateName": ["The Liappas Team","Nicholas Liappas Compass"], "url": "https://nicholasliappas.com", "logo": "https://nicholasliappas.com/logo-black.png", "image": "https://nicholasliappas.com/nicholas-headshot.jpg", "telephone": "+1-516-214-7761", "email": "nicholas.liappas@compass.com", "priceRange": "$$$", "address": { "@type": "PostalAddress", "streetAddress": "1050 Northern Blvd", "addressLocality": "Manhasset", "addressRegion": "NY", "postalCode": "11030", "addressCountry": "US" }, "geo": { "@type": "GeoCoordinates", "latitude": "40.7979", "longitude": "-73.7004" }, "openingHoursSpecification": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "08:00", "closes": "20:00" }, "areaServed": [{"@type":"City","name":"Manhasset"},{"@type":"City","name":"Port Washington"},{"@type":"City","name":"Roslyn"},{"@type":"City","name":"East Hills"},{"@type":"City","name":"Glen Head"},{"@type":"City","name":"Glenwood Landing"},{"@type":"City","name":"Great Neck"},{"@type":"City","name":"Bayside"},{"@type":"City","name":"Greenport"},{"@type":"City","name":"Cutchogue"},{"@type":"AdministrativeArea","name":"Nassau County, NY"},{"@type":"AdministrativeArea","name":"Suffolk County, NY"},{"@type":"AdministrativeArea","name":"Queens, NY"},{"@type":"AdministrativeArea","name":"North Shore, Long Island"},{"@type":"AdministrativeArea","name":"North Fork, Long Island"}], "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "bestRating": "5", "worstRating": "1", "ratingCount": "47" }, "review": [{"@type":"Review","author":{"@type":"Person","name":"First-Time Buyers, North Shore"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"From day one, Nick was determined to help us find the perfect home. Always competent and on the ball."},{"@type":"Review","author":{"@type":"Person","name":"Seller, Roslyn"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"I had 3 cash offers within the first four days. Highest selling 1 bedroom Coop price in Roslyn Gardens history."}], "sameAs": ["https://instagram.com/nicholasliappas","https://www.linkedin.com/in/nicholas-liappas-73482128/","https://x.com/nickliappas","https://www.facebook.com/nickliappas/","https://www.compass.com/agents/nicholas-liappas/"] },
-      { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type":"Question","name":"What areas does Nicholas Liappas serve?","acceptedAnswer":{"@type":"Answer","text":"Nicholas Liappas serves Long Island's North Shore (Manhasset, Port Washington, Roslyn, East Hills, Glen Head, Glenwood Landing, Great Neck, Oyster Bay), Queens (Bayside, Flushing), and the North Fork (Greenport, Cutchogue, Southold)."}},{"@type":"Question","name":"What makes Nicholas Liappas different?","acceptedAnswer":{"@type":"Answer","text":"Nicholas brings 15+ years of real estate experience combined with a hands-on construction background, delivering record-breaking results including the highest-selling 1-bedroom co-op price in Roslyn Gardens history."}},{"@type":"Question","name":"How can I contact Nicholas Liappas?","acceptedAnswer":{"@type":"Answer","text":"Call 516-214-7761, email nicholas.liappas@compass.com, or submit a consultation request at nicholasliappas.com. Available 7 days a week, 8AM–8PM."}}] },
-      { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type":"ListItem","position":1,"name":"Home","item":"https://nicholasliappas.com"},{"@type":"ListItem","position":2,"name":"About","item":"https://nicholasliappas.com/#about"},{"@type":"ListItem","position":3,"name":"Services","item":"https://nicholasliappas.com/#services"},{"@type":"ListItem","position":4,"name":"Contact","item":"https://nicholasliappas.com/#contact"}] }
-    ];
-    schemas.forEach(schema => {
-      const s = document.createElement('script');
-      s.type = 'application/ld+json';
-      s.text = JSON.stringify(schema);
-      document.head.appendChild(s);
-    });
-  }, []);
+    ],
+    links: [{ rel: 'canonical', href: `${SITE_URL}/` }],
+    schemas,
+  });
 
   return (
     <div style={styles.container}>

@@ -1,73 +1,64 @@
 import { useParams, Link } from 'react-router-dom';
-import { useEffect } from 'react';
 import { towns } from '../data/towns';
 import { getStyles } from '../components/styles';
 import ContactForm from '../components/ContactForm';
 import NotFound from './NotFound';
+import { useSeo, pageMeta, SITE_URL } from '../lib/seo';
 
 export default function TownPage({ trackEvent }) {
   const { slug } = useParams();
   const town = towns[slug];
   const styles = getStyles(false);
 
-  useEffect(() => {
-    if (!town) return;
+  const canonicalUrl = town ? `${SITE_URL}/${town.slug}` : null;
+  const seo = town ? pageMeta({ title: town.title, description: town.metaDescription, path: `/${town.slug}` }) : null;
 
-    document.title = town.title;
-    const metaTags = [
-      { name: 'description', content: town.metaDescription },
+  useSeo(town ? {
+    ...seo,
+    meta: [
+      ...seo.meta,
       { name: 'keywords', content: `${town.name} real estate, homes for sale ${town.name}, ${town.name} real estate agent, Nicholas Liappas, Compass` },
-    ];
-    metaTags.forEach(tag => {
-      const meta = document.createElement('meta');
-      meta.name = tag.name;
-      meta.content = tag.content;
-      document.head.appendChild(meta);
-    });
-
-    const canonicalUrl = `https://nicholasliappas.com/${town.slug}`;
-    const canonical = document.createElement('link');
-    canonical.rel = 'canonical';
-    canonical.href = canonicalUrl;
-    document.head.appendChild(canonical);
-
-    const schema = {
-      "@context": "https://schema.org",
-      "@type": ["RealEstateAgent", "LocalBusiness"],
-      "name": `Nicholas Liappas – Real Estate in ${town.name}`,
-      "url": canonicalUrl,
-      "telephone": "+1-516-214-7761",
-      "email": "nicholas.liappas@compass.com",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "1050 Northern Blvd",
-        "addressLocality": town.name,
-        "addressRegion": "NY",
-        "postalCode": town.zipCode,
-        "addressCountry": "US"
+    ],
+    schemas: [
+      {
+        "@context": "https://schema.org",
+        "@type": ["RealEstateAgent", "LocalBusiness"],
+        "@id": `${canonicalUrl}#business`,
+        "name": `Nicholas Liappas – Real Estate in ${town.name}`,
+        "url": canonicalUrl,
+        "image": `${SITE_URL}/nicholas-headshot.jpg`,
+        "telephone": "+1-516-214-7761",
+        "email": "nicholas.liappas@compass.com",
+        "priceRange": "$$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1050 Northern Blvd",
+          "addressLocality": "Manhasset",
+          "addressRegion": "NY",
+          "postalCode": "11030",
+          "addressCountry": "US"
+        },
+        "areaServed": {
+          "@type": "City",
+          "name": town.name,
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": town.lat,
+            "longitude": town.lng
+          }
+        },
+        "parentOrganization": { "@type": "Organization", "name": "Compass", "url": "https://www.compass.com" }
       },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": town.lat,
-        "longitude": town.lng
-      },
-      "areaServed": {
-        "@type": "City",
-        "name": town.name
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": `${SITE_URL}/` },
+          { "@type": "ListItem", "position": 2, "name": town.name, "item": canonicalUrl }
+        ]
       }
-    };
-
-    const schemaScript = document.createElement('script');
-    schemaScript.type = 'application/ld+json';
-    schemaScript.text = JSON.stringify(schema);
-    document.head.appendChild(schemaScript);
-
-    return () => {
-      document.querySelectorAll('meta[name="description"], meta[name="keywords"], link[rel="canonical"], script[type="application/ld+json"]').forEach((el, i) => {
-        if (i > 0) el.remove();
-      });
-    };
-  }, [town]);
+    ]
+  } : {});
 
   if (!town) {
     return <NotFound />;

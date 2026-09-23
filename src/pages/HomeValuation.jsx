@@ -1,7 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { getStyles } from '../components/styles';
 import { submitNetlifyForm, HoneypotField, HONEYPOT_FIELD } from '../lib/netlifyForms';
+import { useSeo, pageMeta } from '../lib/seo';
 
 const STEP_FIELDS = {
   1: ['address', 'zipCode'],
@@ -25,24 +26,18 @@ export default function HomeValuation({ trackEvent }) {
   const formRef = useRef(null);
   const styles = getStyles(false);
 
-  useEffect(() => {
-    document.title = 'Free Home Valuation | Nicholas Liappas | Compass Real Estate';
-    const metaTags = [
-      { name: 'description', content: 'Get a free, no-obligation home valuation for your North Shore property. Nicholas Liappas at Compass provides personalized Comparative Market Analysis (CMA) for Manhasset, Port Washington, Roslyn, and more.' },
+  const seo = pageMeta({
+    title: 'Free Home Valuation | Nicholas Liappas | Compass Real Estate',
+    description: 'Get a free, no-obligation home valuation for your North Shore property. Nicholas Liappas at Compass provides personalized Comparative Market Analysis (CMA) for Manhasset, Port Washington, Roslyn, and more.',
+    path: '/home-valuation'
+  });
+  useSeo({
+    ...seo,
+    meta: [
+      ...seo.meta,
       { name: 'keywords', content: 'home valuation, free home valuation, CMA, comparative market analysis, North Shore real estate, Manhasset valuation, Port Washington valuation' },
-    ];
-    metaTags.forEach(tag => {
-      const meta = document.createElement('meta');
-      meta.name = tag.name;
-      meta.content = tag.content;
-      document.head.appendChild(meta);
-    });
-
-    const canonical = document.createElement('link');
-    canonical.rel = 'canonical';
-    canonical.href = 'https://nicholasliappas.com/home-valuation';
-    document.head.appendChild(canonical);
-  }, []);
+    ]
+  });
 
   // Returns true when every required field for the current step has a
   // non-whitespace value and passes native constraint validation.
