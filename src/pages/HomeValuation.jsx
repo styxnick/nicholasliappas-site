@@ -212,7 +212,7 @@ export default function HomeValuation({ trackEvent }) {
                       height: '40px',
                       borderRadius: '50%',
                       background: step >= s ? '#1a1a1a' : '#e0e0e0',
-                      color: step >= s ? '#fff' : '#999',
+                      color: step >= s ? '#fff' : '#5f5f5f',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -255,7 +255,9 @@ export default function HomeValuation({ trackEvent }) {
                   </p>
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                    <label htmlFor="hv-address" style={styles.srOnly}>Property Address</label>
                     <input
+                      id="hv-address"
                       type="text"
                       name="address"
                       placeholder="Property Address"
@@ -265,7 +267,9 @@ export default function HomeValuation({ trackEvent }) {
                       required
                       style={styles.input}
                     />
+                    <label htmlFor="hv-zipCode" style={styles.srOnly}>Zip Code</label>
                     <input
+                      id="hv-zipCode"
                       type="text"
                       name="zipCode"
                       placeholder="Zip Code"
@@ -306,7 +310,9 @@ export default function HomeValuation({ trackEvent }) {
                   </p>
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                    <label htmlFor="hv-name" style={styles.srOnly}>Full Name</label>
                     <input
+                      id="hv-name"
                       type="text"
                       name="name"
                       placeholder="Full Name"
@@ -316,7 +322,9 @@ export default function HomeValuation({ trackEvent }) {
                       required
                       style={styles.input}
                     />
+                    <label htmlFor="hv-email" style={styles.srOnly}>Email Address</label>
                     <input
+                      id="hv-email"
                       type="email"
                       name="email"
                       placeholder="Email Address"
@@ -326,7 +334,9 @@ export default function HomeValuation({ trackEvent }) {
                       required
                       style={styles.input}
                     />
+                    <label htmlFor="hv-phone" style={styles.srOnly}>Phone Number (Optional)</label>
                     <input
+                      id="hv-phone"
                       type="tel"
                       name="phone"
                       placeholder="Phone Number (Optional)"
@@ -388,7 +398,7 @@ export default function HomeValuation({ trackEvent }) {
                         fontSize: '11px',
                         letterSpacing: '2px',
                         textTransform: 'uppercase',
-                        color: '#888',
+                        color: '#707070',
                         marginBottom: '8px'
                       }}>Property Address</p>
                       <p style={{
@@ -404,7 +414,7 @@ export default function HomeValuation({ trackEvent }) {
                         fontSize: '11px',
                         letterSpacing: '2px',
                         textTransform: 'uppercase',
-                        color: '#888',
+                        color: '#707070',
                         marginBottom: '8px'
                       }}>Zip Code</p>
                       <p style={{
@@ -420,7 +430,7 @@ export default function HomeValuation({ trackEvent }) {
                         fontSize: '11px',
                         letterSpacing: '2px',
                         textTransform: 'uppercase',
-                        color: '#888',
+                        color: '#707070',
                         marginBottom: '8px'
                       }}>Your Name</p>
                       <p style={{
@@ -436,7 +446,7 @@ export default function HomeValuation({ trackEvent }) {
                         fontSize: '11px',
                         letterSpacing: '2px',
                         textTransform: 'uppercase',
-                        color: '#888',
+                        color: '#707070',
                         marginBottom: '8px'
                       }}>Email Address</p>
                       <p style={{

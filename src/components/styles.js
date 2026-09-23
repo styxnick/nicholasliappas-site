@@ -70,7 +70,7 @@ export const getStyles = (isScrolled) => ({
     fontWeight: 500,
     letterSpacing: '4px',
     textTransform: 'uppercase',
-    color: '#888',
+    color: '#707070',
     marginBottom: '16px'
   },
   sectionTitle: {
@@ -117,7 +117,18 @@ export const getStyles = (isScrolled) => ({
     fontFamily: "'Montserrat', sans-serif",
     fontSize: '14px',
     transition: 'all 0.3s ease',
-    background: '#fff',
-    outline: 'none'
+    background: '#fff'
+  },
+  // Visually hidden but available to screen readers (form labels).
+  srOnly: {
+    position: 'absolute',
+    width: '1px',
+    height: '1px',
+    padding: 0,
+    margin: '-1px',
+    overflow: 'hidden',
+    clip: 'rect(0, 0, 0, 0)',
+    whiteSpace: 'nowrap',
+    border: 0
   }
 });

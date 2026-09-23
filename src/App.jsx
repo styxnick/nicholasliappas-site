@@ -23,14 +23,6 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const link = document.createElement('link');
-    link.href = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap';
-    link.rel = 'stylesheet';
-    document.head.appendChild(link);
-    return () => document.head.removeChild(link);
-  }, []);
-
-  useEffect(() => {
     // Google Analytics
     const script = document.createElement('script');
     script.src = 'https://www.googletagmanager.com/gtag/js?id=G-1FTQ8KS469';

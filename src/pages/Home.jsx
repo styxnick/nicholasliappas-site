@@ -28,10 +28,10 @@ export default function Home({ trackEvent }) {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setActiveTestimonial((prev) => (prev + 1) % 3);
+      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
     }, 6000);
     return () => clearInterval(timer);
-  }, []);
+  }, [activeTestimonial, testimonials.length]);
 
   const schemas = [
       { "@context": "https://schema.org", "@type": "WebSite", "name": "Nicholas Liappas – The Liappas Team at Compass", "url": "https://nicholasliappas.com", "inLanguage": "en-US" },
@@ -317,16 +317,23 @@ export default function Home({ trackEvent }) {
               position: 'relative',
               overflow: 'hidden'
             }}>
-              <img
-                src="/nicholas-headshot.jpg"
-                alt="Nicholas Liappas - Licensed Associate Real Estate Broker at Compass"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'center top'
-                }}
-              />
+              <picture>
+                <source srcSet="/nicholas-headshot.webp" type="image/webp" />
+                <img
+                  src="/nicholas-headshot.jpg"
+                  alt="Nicholas Liappas - Licensed Associate Real Estate Broker at Compass"
+                  width="1800"
+                  height="1201"
+                  loading="lazy"
+                  decoding="async"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center top'
+                  }}
+                />
+              </picture>
             </div>
             <div style={{
               position: 'absolute',
@@ -401,10 +408,10 @@ export default function Home({ trackEvent }) {
             </div>
 
             <div style={{ marginTop: '24px' }}>
-              <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '12px', color: '#888', marginBottom: '8px' }}>
+              <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '12px', color: '#707070', marginBottom: '8px' }}>
                 Languages: English & Greek
               </p>
-              <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '12px', color: '#888' }}>
+              <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '12px', color: '#707070' }}>
                 Education: Stony Brook University, B.A. Philosophy
               </p>
             </div>
@@ -473,7 +480,7 @@ export default function Home({ trackEvent }) {
                   fontSize: '10px',
                   letterSpacing: '2px',
                   textTransform: 'uppercase',
-                  color: '#888'
+                  color: '#707070'
                 }}>In Sales Volume</span>
               </div>
               <div>
@@ -489,7 +496,7 @@ export default function Home({ trackEvent }) {
                   fontSize: '10px',
                   letterSpacing: '2px',
                   textTransform: 'uppercase',
-                  color: '#888'
+                  color: '#707070'
                 }}>Transactions Closed</span>
               </div>
               <div>
@@ -505,7 +512,7 @@ export default function Home({ trackEvent }) {
                   fontSize: '10px',
                   letterSpacing: '2px',
                   textTransform: 'uppercase',
-                  color: '#888'
+                  color: '#707070'
                 }}>Years Experience</span>
               </div>
             </div>
@@ -518,16 +525,23 @@ export default function Home({ trackEvent }) {
               position: 'relative',
               overflow: 'hidden'
             }}>
-              <img
-                src="/team-photo.jpg"
-                alt="The Liappas Team at Compass - Real Estate Agents serving North Shore, Queens and North Fork"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'center'
-                }}
-              />
+              <picture>
+                <source srcSet="/team-photo.webp" type="image/webp" />
+                <img
+                  src="/team-photo.jpg"
+                  alt="The Liappas Team at Compass - Real Estate Agents serving North Shore, Queens and North Fork"
+                  width="1400"
+                  height="934"
+                  loading="lazy"
+                  decoding="async"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center'
+                  }}
+                />
+              </picture>
             </div>
             <div style={{
               position: 'absolute',
@@ -549,6 +563,9 @@ export default function Home({ trackEvent }) {
               <img
                 src="/compass_white.png"
                 alt="Compass"
+                width="102"
+                height="14"
+                loading="lazy"
                 style={{ height: '14px', width: 'auto' }}
               />
             </div>
@@ -632,7 +649,7 @@ export default function Home({ trackEvent }) {
                 transition: 'all 0.6s ease',
                 pointerEvents: i === activeTestimonial ? 'auto' : 'none'
               }}>
-                <div style={{ fontSize: '48px', color: '#e0e0e0', marginBottom: '24px' }}>"</div>
+                <div aria-hidden="true" style={{ fontSize: '48px', color: '#e0e0e0', marginBottom: '24px' }}>"</div>
                 <p style={{
                   fontSize: 'clamp(16px, 2vw, 22px)',
                   fontWeight: 300,
@@ -658,7 +675,7 @@ export default function Home({ trackEvent }) {
                   <span style={{
                     fontFamily: "'Montserrat', sans-serif",
                     fontSize: '11px',
-                    color: '#888',
+                    color: '#707070',
                     letterSpacing: '1px'
                   }}>{testimonial.location}</span>
                 </div>
@@ -668,7 +685,10 @@ export default function Home({ trackEvent }) {
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginTop: '48px' }}>
             {testimonials.map((_, i) => (
-              <button key={i} onClick={() => setActiveTestimonial(i)} style={{
+              <button key={i} type="button" onClick={() => setActiveTestimonial(i)}
+                aria-label={`Show testimonial ${i + 1} of ${testimonials.length}`}
+                aria-pressed={i === activeTestimonial}
+                style={{
                 width: i === activeTestimonial ? '40px' : '10px',
                 height: '10px',
                 borderRadius: '5px',
@@ -698,7 +718,7 @@ export default function Home({ trackEvent }) {
             letterSpacing: '4px',
             textTransform: 'uppercase',
             marginBottom: '12px',
-            color: '#888'
+            color: '#707070'
           }}>Follow Along</p>
           <h3 style={{ fontSize: '28px', fontWeight: 300, letterSpacing: '1px' }}>@nicholasliappas</h3>
         </a>

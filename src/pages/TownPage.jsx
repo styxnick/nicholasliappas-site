@@ -197,7 +197,7 @@ export default function TownPage({ trackEvent }) {
                 fontSize: '12px',
                 letterSpacing: '2px',
                 textTransform: 'uppercase',
-                color: '#888',
+                color: '#707070',
                 marginBottom: '12px'
               }}>Average Price</p>
               <p style={{
@@ -221,7 +221,7 @@ export default function TownPage({ trackEvent }) {
                 fontSize: '12px',
                 letterSpacing: '2px',
                 textTransform: 'uppercase',
-                color: '#888',
+                color: '#707070',
                 marginBottom: '12px'
               }}>Zip Code</p>
               <p style={{
@@ -245,7 +245,7 @@ export default function TownPage({ trackEvent }) {
                 fontSize: '12px',
                 letterSpacing: '2px',
                 textTransform: 'uppercase',
-                color: '#888',
+                color: '#707070',
                 marginBottom: '12px'
               }}>Property Style</p>
               <p style={{
@@ -366,7 +366,7 @@ export default function TownPage({ trackEvent }) {
                 <p style={{
                   fontFamily: "'Montserrat', sans-serif",
                   fontSize: '13px',
-                  color: '#888',
+                  color: '#707070',
                   marginBottom: '16px',
                   lineHeight: 1.6
                 }}>

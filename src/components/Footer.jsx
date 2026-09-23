@@ -17,14 +17,14 @@ export default function Footer({ trackEvent }) {
         }}>
           {/* About */}
           <div>
-            <h4 style={{
+            <h2 style={{
               fontFamily: "'Montserrat', sans-serif",
               fontSize: '12px',
               fontWeight: 600,
               letterSpacing: '3px',
               textTransform: 'uppercase',
               marginBottom: '24px'
-            }}>About</h4>
+            }}>About</h2>
             <p style={{
               fontFamily: "'Montserrat', sans-serif",
               fontSize: '13px',
@@ -37,8 +37,9 @@ export default function Footer({ trackEvent }) {
             <div style={{ display: 'flex', gap: '16px', marginTop: '20px' }}>
               <a href="https://instagram.com/nicholasliappas" target="_blank" rel="noopener noreferrer"
                  onClick={() => trackEvent('click', 'Social', 'Instagram_Footer')}
+                 aria-label="Follow Nicholas Liappas on Instagram"
                  style={{ color: '#fff', textDecoration: 'none' }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <rect x="2" y="2" width="20" height="20" rx="5" />
                   <circle cx="12" cy="12" r="4" fill="#1a1a1a" />
                   <circle cx="18" cy="6" r="1.5" fill="#1a1a1a" />
@@ -46,8 +47,9 @@ export default function Footer({ trackEvent }) {
               </a>
               <a href="https://www.linkedin.com/in/nicholas-liappas-73482128/" target="_blank" rel="noopener noreferrer"
                  onClick={() => trackEvent('click', 'Social', 'LinkedIn_Footer')}
+                 aria-label="Connect with Nicholas Liappas on LinkedIn"
                  style={{ color: '#fff', textDecoration: 'none' }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
                   <rect x="2" y="9" width="4" height="12" />
                   <circle cx="4" cy="4" r="2" />
@@ -55,8 +57,9 @@ export default function Footer({ trackEvent }) {
               </a>
               <a href="https://x.com/nickliappas" target="_blank" rel="noopener noreferrer"
                  onClick={() => trackEvent('click', 'Social', 'X_Twitter_Footer')}
+                 aria-label="Follow Nicholas Liappas on X"
                  style={{ color: '#fff', textDecoration: 'none' }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
               </a>
@@ -65,14 +68,14 @@ export default function Footer({ trackEvent }) {
 
           {/* Communities */}
           <div>
-            <h4 style={{
+            <h2 style={{
               fontFamily: "'Montserrat', sans-serif",
               fontSize: '12px',
               fontWeight: 600,
               letterSpacing: '3px',
               textTransform: 'uppercase',
               marginBottom: '24px'
-            }}>Communities</h4>
+            }}>Communities</h2>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               {Object.values(towns).map((town) => (
                 <li key={town.slug} style={{ marginBottom: '12px' }}>
@@ -96,14 +99,14 @@ export default function Footer({ trackEvent }) {
 
           {/* Services */}
           <div>
-            <h4 style={{
+            <h2 style={{
               fontFamily: "'Montserrat', sans-serif",
               fontSize: '12px',
               fontWeight: 600,
               letterSpacing: '3px',
               textTransform: 'uppercase',
               marginBottom: '24px'
-            }}>Services</h4>
+            }}>Services</h2>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               {['Home Buying', 'Home Selling', 'Home Valuation', 'Commercial', 'Investment Properties', 'Relocation'].map((service) => (
                 <li key={service} style={{ marginBottom: '12px' }}>
@@ -127,14 +130,14 @@ export default function Footer({ trackEvent }) {
 
           {/* Contact */}
           <div>
-            <h4 style={{
+            <h2 style={{
               fontFamily: "'Montserrat', sans-serif",
               fontSize: '12px',
               fontWeight: 600,
               letterSpacing: '3px',
               textTransform: 'uppercase',
               marginBottom: '24px'
-            }}>Contact</h4>
+            }}>Contact</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <a href="tel:516-214-7761"
                  onClick={() => trackEvent('click', 'Contact', 'Phone_Footer')}

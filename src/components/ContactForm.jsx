@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useId } from 'react';
 import { getStyles } from './styles';
 import { submitNetlifyForm, HoneypotField, HONEYPOT_FIELD } from '../lib/netlifyForms';
 
@@ -10,6 +10,7 @@ export default function ContactForm({ trackEvent, formName = 'contact' }) {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(false);
   const resetTimer = useRef(null);
+  const id = useId();
 
   const styles = getStyles(false);
 
@@ -91,39 +92,50 @@ export default function ContactForm({ trackEvent, formName = 'contact' }) {
           }}>Request a Consultation</h3>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <label htmlFor={`${id}-name`} style={styles.srOnly}>Full Name</label>
             <input
+              id={`${id}-name`}
               type="text"
               name="name"
               placeholder="Full Name"
+              autoComplete="name"
               value={formData.name}
               onChange={(e) => setFormData({...formData, name: e.target.value})}
               required
               style={styles.input}
             />
+            <label htmlFor={`${id}-email`} style={styles.srOnly}>Email Address</label>
             <input
+              id={`${id}-email`}
               type="email"
               name="email"
               placeholder="Email Address"
+              autoComplete="email"
               value={formData.email}
               onChange={(e) => setFormData({...formData, email: e.target.value})}
               required
               style={styles.input}
             />
+            <label htmlFor={`${id}-phone`} style={styles.srOnly}>Phone Number</label>
             <input
+              id={`${id}-phone`}
               type="tel"
               name="phone"
               placeholder="Phone Number"
+              autoComplete="tel"
               value={formData.phone}
               onChange={(e) => setFormData({...formData, phone: e.target.value})}
               required
               style={styles.input}
             />
+            <label htmlFor={`${id}-interest`} style={styles.srOnly}>I'm interested in</label>
             <select
+              id={`${id}-interest`}
               name="interest"
               value={formData.interest}
               onChange={(e) => setFormData({...formData, interest: e.target.value})}
               required
-              style={{ ...styles.input, color: formData.interest ? '#1a1a1a' : '#999' }}
+              style={{ ...styles.input, color: formData.interest ? '#1a1a1a' : '#707070' }}
             >
               <option value="">I'm interested in...</option>
               <option value="buying">Buying a Home</option>
@@ -155,7 +167,7 @@ export default function ContactForm({ trackEvent, formName = 'contact' }) {
             <p style={{
               fontFamily: "'Montserrat', sans-serif",
               fontSize: '11px',
-              color: '#999',
+              color: '#707070',
               textAlign: 'center',
               lineHeight: 1.6
             }}>
