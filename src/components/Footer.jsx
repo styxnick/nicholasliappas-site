@@ -107,7 +107,7 @@ export default function Footer({ trackEvent }) {
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               {['Home Buying', 'Home Selling', 'Home Valuation', 'Commercial', 'Investment Properties', 'Relocation'].map((service) => (
                 <li key={service} style={{ marginBottom: '12px' }}>
-                  <a href="/#services"
+                  <Link to="/#services"
                     style={{
                       fontFamily: "'Montserrat', sans-serif",
                       fontSize: '13px',
@@ -119,7 +119,7 @@ export default function Footer({ trackEvent }) {
                     onMouseLeave={(e) => e.target.style.color = '#ccc'}
                   >
                     {service}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { getStyles } from '../components/styles';
 
 export default function HomeValuation({ trackEvent }) {
@@ -158,12 +159,12 @@ export default function HomeValuation({ trackEvent }) {
               }}>
                 Your request has been received. Nicholas will prepare your personalized home valuation and reach out within 24-48 hours.
               </p>
-              <a href="/" style={{
+              <Link to="/" style={{
                 ...styles.btnPrimary,
                 display: 'inline-block'
               }}>
                 Back to Home
-              </a>
+              </Link>
             </div>
           ) : (
             <form

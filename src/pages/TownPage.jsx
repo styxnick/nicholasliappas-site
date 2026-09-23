@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { towns } from '../data/towns';
 import { getStyles } from '../components/styles';
 import ContactForm from '../components/ContactForm';
+import NotFound from './NotFound';
 
 export default function TownPage({ trackEvent }) {
   const { slug } = useParams();
@@ -69,13 +70,7 @@ export default function TownPage({ trackEvent }) {
   }, [town]);
 
   if (!town) {
-    return (
-      <div style={styles.container}>
-        <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <h1>Town not found</h1>
-        </div>
-      </div>
-    );
+    return <NotFound />;
   }
 
   const otherTowns = Object.values(towns).filter(t => t.slug !== slug);
@@ -129,9 +124,9 @@ export default function TownPage({ trackEvent }) {
           </p>
 
           <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="#contact" onClick={() => trackEvent('click', 'CTA', `Schedule_${town.slug}`)} style={styles.btnPrimary}>
+            <Link to={`/${town.slug}#contact`} onClick={() => trackEvent('click', 'CTA', `Schedule_${town.slug}`)} style={styles.btnPrimary}>
               Schedule Consultation
-            </a>
+            </Link>
             <a href="tel:516-214-7761"
                onClick={() => trackEvent('click', 'Contact', `Phone_${town.slug}`)}
                style={styles.btnOutline}>
@@ -277,7 +272,7 @@ export default function TownPage({ trackEvent }) {
       </section>
 
       {/* CTA Section */}
-      <section id="contact" style={{ padding: '120px 5%', background: '#fff' }}>
+      <section id="contact" style={{ padding: '120px 5%', background: '#fff', scrollMarginTop: '72px' }}>
         <div style={{
           maxWidth: '1200px',
           margin: '0 auto',

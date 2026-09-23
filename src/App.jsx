@@ -5,6 +5,8 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import TownPage from './pages/TownPage';
 import HomeValuation from './pages/HomeValuation';
+import NotFound from './pages/NotFound';
+import ScrollManager from './components/ScrollManager';
 import { getStyles } from './components/styles';
 
 // Set to your Meta Pixel ID (e.g. '1234567890') to enable Facebook tracking. Leave empty to disable.
@@ -19,10 +21,6 @@ export default function App() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
 
   useEffect(() => {
     const link = document.createElement('link');
@@ -90,11 +88,13 @@ export default function App() {
 
   return (
     <div style={styles.container}>
+      <ScrollManager />
       <Nav trackEvent={trackEvent} />
       <Routes>
         <Route path="/" element={<Home trackEvent={trackEvent} />} />
         <Route path="/home-valuation" element={<HomeValuation trackEvent={trackEvent} />} />
         <Route path="/:slug" element={<TownPage trackEvent={trackEvent} />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer trackEvent={trackEvent} />
     </div>

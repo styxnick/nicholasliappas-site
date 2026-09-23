@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { getStyles } from '../components/styles';
 import ContactForm from '../components/ContactForm';
 
@@ -168,9 +169,9 @@ export default function Home({ trackEvent }) {
           </p>
 
           <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="#contact" onClick={() => trackEvent('click', 'CTA', 'Schedule_Hero')} style={styles.btnPrimary}>
+            <Link to="/#contact" onClick={() => trackEvent('click', 'CTA', 'Schedule_Hero')} style={styles.btnPrimary}>
               Schedule Consultation
-            </a>
+            </Link>
             <a href="https://www.compass.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('click', 'CTA', 'Search_Hero')} style={styles.btnOutline}>
               Your Search Begins Here
             </a>
@@ -204,7 +205,7 @@ export default function Home({ trackEvent }) {
       </section>
 
       {/* Lead Capture Section */}
-      <section id="contact" aria-label="Contact form" style={{ padding: '120px 5%', background: '#fff' }}>
+      <section id="contact" aria-label="Contact form" style={{ padding: '120px 5%', background: '#fff', scrollMarginTop: '72px' }}>
         <div style={{
           maxWidth: '1200px',
           margin: '0 auto',
@@ -336,7 +337,7 @@ export default function Home({ trackEvent }) {
       </section>
 
       {/* About Nicholas Section */}
-      <section id="about" aria-label="About Nicholas Liappas" style={{ padding: '120px 5%', background: '#f8f8f8' }}>
+      <section id="about" aria-label="About Nicholas Liappas" style={{ padding: '120px 5%', background: '#f8f8f8', scrollMarginTop: '72px' }}>
         <div style={{
           maxWidth: '1200px',
           margin: '0 auto',
@@ -592,7 +593,7 @@ export default function Home({ trackEvent }) {
       </section>
 
       {/* Services Section */}
-      <section id="services" aria-label="Real estate services" style={{ padding: '120px 5%', background: '#fff' }}>
+      <section id="services" aria-label="Real estate services" style={{ padding: '120px 5%', background: '#fff', scrollMarginTop: '72px' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '80px' }}>
             <p style={styles.sectionSubtitle}>Full-Service Real Estate</p>
@@ -629,8 +630,7 @@ export default function Home({ trackEvent }) {
               <div key={i} style={{
                 padding: '40px',
                 background: '#fafafa',
-                transition: 'all 0.4s ease',
-                cursor: 'pointer'
+                transition: 'all 0.4s ease'
               }}>
                 <span style={{ fontSize: '32px', display: 'block', marginBottom: '24px' }}>{service.icon}</span>
                 <h3 style={{
@@ -767,9 +767,9 @@ export default function Home({ trackEvent }) {
             Let's discuss your real estate goals and create a personalized strategy.
           </p>
           <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="#contact" onClick={() => trackEvent('click', 'CTA', 'Schedule_Bottom')} style={{ ...styles.btnPrimary, background: '#fff', color: '#1a1a1a' }}>
+            <Link to="/#contact" onClick={() => trackEvent('click', 'CTA', 'Schedule_Bottom')} style={{ ...styles.btnPrimary, background: '#fff', color: '#1a1a1a' }}>
               Schedule Consultation
-            </a>
+            </Link>
             <a href="tel:516-214-7761"
                onClick={() => trackEvent('click', 'Contact', 'Phone_CTA')}
                style={{
