@@ -29,3 +29,6 @@ Thumbs.db
 
 # Deploy artifacts
 *.zip
+
+# Local Netlify folder
+.netlify
