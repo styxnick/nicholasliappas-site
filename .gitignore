@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-deploy/
+build-latest/
+deploy/
+
+# Generated at build time (scripts/generate-sitemap.mjs)
+public/sitemap.xml
+
+# Full-resolution photo originals (17MB+ each) — kept locally, not in git
+originals-fullres/
+
+# Vite
+*.timestamp-*.mjs
+.vite/
+
+# Env
+.env
+.env.*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Deploy artifacts
+*.zip
