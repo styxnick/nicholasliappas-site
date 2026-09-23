@@ -3,26 +3,28 @@ import { Link } from 'react-router-dom';
 import { getStyles } from '../components/styles';
 import ContactForm from '../components/ContactForm';
 import { useSeo, SITE_URL } from '../lib/seo';
+import { GOOGLE_REVIEWS_URL } from '../data/site';
 
 export default function Home({ trackEvent }) {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const styles = getStyles(false);
 
+  // Verbatim excerpts from Google reviews (5.0, all five-star). Full names as shown on Google.
   const testimonials = [
     {
-      name: "First-Time Buyers",
-      text: "From day one, Nick was determined to help us find the perfect home. Always competent and on the ball, he made it his mission to find the house that would suit our needs at the right price point. He did nothing but assure us and maintain our confidence!",
-      location: "North Shore"
+      name: "Marc DeSimone",
+      text: "From our very first meeting, Nick took the time to understand exactly what we were looking for and went above and beyond to make sure we found the perfect home. The negotiation process can be daunting, but Nick handled it with finesse, ensuring we got the best possible deal.",
+      location: "Home Purchase"
     },
     {
-      name: "Patient & Professional",
-      text: "Nick was patient with us from the very start of our search. He maintained his professionalism and open communication during the whole process. He was always responsive and gave us valuable feedback from his past experience in the construction industry.",
-      location: "Dream Home Purchase"
+      name: "Kevin Caballes",
+      text: "We were moving from Brooklyn back to Long Island and he really helped us navigate the buying process when searching for the right home for us including recommending different lawyers, inspectors, etc who were all also great to work with. He also was able to guide us in getting my mother's home ready for sale and had multiple offers ready for us after the first open house.",
+      location: "Bought & Sold, Long Island"
     },
     {
-      name: "Record-Breaking Sale",
+      name: "Matthew Weitzman",
       text: "I had 3 cash offers within the first four days. He yielded me a closing deal $7k above asking price, and the highest selling 1 bedroom Coop price in Roslyn Gardens history. I couldn't have been happier!",
-      location: "Roslyn"
+      location: "Sold, Roslyn"
     },
   ];
 
@@ -36,7 +38,7 @@ export default function Home({ trackEvent }) {
   const schemas = [
       { "@context": "https://schema.org", "@type": "WebSite", "name": "Nicholas Liappas – The Liappas Team at Compass", "url": "https://nicholasliappas.com", "inLanguage": "en-US" },
       { "@context": "https://schema.org", "@type": "Person", "@id": "https://nicholasliappas.com/#person", "name": "Nicholas Liappas", "givenName": "Nicholas", "familyName": "Liappas", "jobTitle": "Licensed Associate Real Estate Broker", "url": "https://nicholasliappas.com", "image": "https://nicholasliappas.com/nicholas-headshot.jpg", "telephone": "+1-516-214-7761", "email": "nicholas.liappas@compass.com", "alumniOf": { "@type": "CollegeOrUniversity", "name": "Stony Brook University" }, "knowsLanguage": [{"@type":"Language","name":"English"},{"@type":"Language","name":"Greek"}], "worksFor": { "@type": "Organization", "name": "Compass", "url": "https://www.compass.com" }, "address": { "@type": "PostalAddress", "addressLocality": "Manhasset", "addressRegion": "NY", "postalCode": "11030", "addressCountry": "US" }, "sameAs": ["https://instagram.com/nicholasliappas","https://www.linkedin.com/in/nicholas-liappas-73482128/","https://x.com/nickliappas","https://www.facebook.com/nickliappas/","https://www.compass.com/agents/nicholas-liappas/"] },
-      { "@context": "https://schema.org", "@type": ["RealEstateAgent","LocalBusiness"], "@id": "https://nicholasliappas.com/#business", "name": "Nicholas Liappas – The Liappas Team at Compass", "alternateName": ["The Liappas Team","Nicholas Liappas Compass"], "url": "https://nicholasliappas.com", "logo": "https://nicholasliappas.com/logo-black.png", "image": "https://nicholasliappas.com/nicholas-headshot.jpg", "telephone": "+1-516-214-7761", "email": "nicholas.liappas@compass.com", "priceRange": "$$$", "address": { "@type": "PostalAddress", "streetAddress": "1050 Northern Blvd", "addressLocality": "Manhasset", "addressRegion": "NY", "postalCode": "11030", "addressCountry": "US" }, "geo": { "@type": "GeoCoordinates", "latitude": "40.7979", "longitude": "-73.7004" }, "openingHoursSpecification": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "08:00", "closes": "20:00" }, "areaServed": [{"@type":"City","name":"Manhasset"},{"@type":"City","name":"Port Washington"},{"@type":"City","name":"Roslyn"},{"@type":"City","name":"East Hills"},{"@type":"City","name":"Glen Head"},{"@type":"City","name":"Glenwood Landing"},{"@type":"City","name":"Great Neck"},{"@type":"City","name":"Bayside"},{"@type":"City","name":"Greenport"},{"@type":"City","name":"Cutchogue"},{"@type":"AdministrativeArea","name":"Nassau County, NY"},{"@type":"AdministrativeArea","name":"Suffolk County, NY"},{"@type":"AdministrativeArea","name":"Queens, NY"},{"@type":"AdministrativeArea","name":"North Shore, Long Island"},{"@type":"AdministrativeArea","name":"North Fork, Long Island"}], "review": [{"@type":"Review","author":{"@type":"Person","name":"First-Time Buyers, North Shore"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"From day one, Nick was determined to help us find the perfect home. Always competent and on the ball."},{"@type":"Review","author":{"@type":"Person","name":"Seller, Roslyn"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"I had 3 cash offers within the first four days. Highest selling 1 bedroom Coop price in Roslyn Gardens history."}], "sameAs": ["https://instagram.com/nicholasliappas","https://www.linkedin.com/in/nicholas-liappas-73482128/","https://x.com/nickliappas","https://www.facebook.com/nickliappas/","https://www.compass.com/agents/nicholas-liappas/"] },
+      { "@context": "https://schema.org", "@type": ["RealEstateAgent","LocalBusiness"], "@id": "https://nicholasliappas.com/#business", "name": "Nicholas Liappas – The Liappas Team at Compass", "alternateName": ["The Liappas Team","Nicholas Liappas Compass"], "url": "https://nicholasliappas.com", "logo": "https://nicholasliappas.com/logo-black.png", "image": "https://nicholasliappas.com/nicholas-headshot.jpg", "telephone": "+1-516-214-7761", "email": "nicholas.liappas@compass.com", "priceRange": "$$$", "address": { "@type": "PostalAddress", "streetAddress": "1050 Northern Blvd", "addressLocality": "Manhasset", "addressRegion": "NY", "postalCode": "11030", "addressCountry": "US" }, "geo": { "@type": "GeoCoordinates", "latitude": "40.7979", "longitude": "-73.7004" }, "openingHoursSpecification": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "08:00", "closes": "20:00" }, "areaServed": [{"@type":"City","name":"Manhasset"},{"@type":"City","name":"Port Washington"},{"@type":"City","name":"Roslyn"},{"@type":"City","name":"East Hills"},{"@type":"City","name":"Glen Head"},{"@type":"City","name":"Glenwood Landing"},{"@type":"City","name":"Great Neck"},{"@type":"City","name":"Bayside"},{"@type":"City","name":"Greenport"},{"@type":"City","name":"Cutchogue"},{"@type":"AdministrativeArea","name":"Nassau County, NY"},{"@type":"AdministrativeArea","name":"Suffolk County, NY"},{"@type":"AdministrativeArea","name":"Queens, NY"},{"@type":"AdministrativeArea","name":"North Shore, Long Island"},{"@type":"AdministrativeArea","name":"North Fork, Long Island"}], "sameAs": ["https://instagram.com/nicholasliappas","https://www.linkedin.com/in/nicholas-liappas-73482128/","https://x.com/nickliappas","https://www.facebook.com/nickliappas/","https://www.compass.com/agents/nicholas-liappas/","https://maps.google.com/?cid=8697876814809743847"] },
       { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type":"Question","name":"What areas does Nicholas Liappas serve?","acceptedAnswer":{"@type":"Answer","text":"Nicholas Liappas serves Long Island's North Shore (Manhasset, Port Washington, Roslyn, East Hills, Glen Head, Glenwood Landing, Great Neck, Oyster Bay), Queens (Bayside, Flushing), and the North Fork (Greenport, Cutchogue, Southold)."}},{"@type":"Question","name":"What makes Nicholas Liappas different?","acceptedAnswer":{"@type":"Answer","text":"Nicholas brings 15+ years of real estate experience combined with a hands-on construction background, delivering record-breaking results including the highest-selling 1-bedroom co-op price in Roslyn Gardens history."}},{"@type":"Question","name":"How can I contact Nicholas Liappas?","acceptedAnswer":{"@type":"Answer","text":"Call 516-214-7761, email nicholas.liappas@compass.com, or submit a consultation request at nicholasliappas.com. Available 7 days a week, 8AM–8PM."}}] },
       { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type":"ListItem","position":1,"name":"Home","item":"https://nicholasliappas.com"},{"@type":"ListItem","position":2,"name":"About","item":"https://nicholasliappas.com/#about"},{"@type":"ListItem","position":3,"name":"Services","item":"https://nicholasliappas.com/#services"},{"@type":"ListItem","position":4,"name":"Contact","item":"https://nicholasliappas.com/#contact"}] }
   ];
@@ -699,6 +701,23 @@ export default function Home({ trackEvent }) {
               }} />
             ))}
           </div>
+
+          <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer"
+             onClick={() => trackEvent('click', 'Social', 'Google_Reviews')}
+             style={{
+               display: 'inline-block',
+               marginTop: '40px',
+               fontFamily: "'Montserrat', sans-serif",
+               fontSize: '12px',
+               letterSpacing: '2px',
+               textTransform: 'uppercase',
+               color: '#1a1a1a',
+               textDecoration: 'none',
+               borderBottom: '1px solid #1a1a1a',
+               paddingBottom: '4px'
+             }}>
+            Read all reviews on Google →
+          </a>
         </div>
       </section>
 

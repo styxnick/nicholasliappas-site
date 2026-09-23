@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { getStyles } from '../components/styles';
 import { submitNetlifyForm, HoneypotField, HONEYPOT_FIELD } from '../lib/netlifyForms';
 import { useSeo, pageMeta } from '../lib/seo';
+import { GOOGLE_REVIEWS_URL } from '../data/site';
 
 const STEP_FIELDS = {
   1: ['address', 'zipCode'],
@@ -575,16 +576,16 @@ export default function HomeValuation({ trackEvent }) {
           }}>
             {[
               {
-                name: 'Lisa M.',
-                text: 'Nicholas\'s valuation was spot-on. His market analysis gave us confidence in our asking price, and we received multiple offers within the first week.'
+                name: 'Gra Falos',
+                text: 'We were unsure about the market and even willing to sell cheap, but Nick knew the real value of our home and had a list of serious, respectful buyers ready to go. Thanks to him, we sold our property in record time and for far more than we ever could have expected.'
               },
               {
-                name: 'Robert & Sarah K.',
-                text: 'The detailed CMA helped us understand the local market. Nicholas explained everything clearly, and we felt prepared for the selling process.'
+                name: 'Leslie Granger',
+                text: 'From the moment I was in contract on my new home out of state, Nick moved quickly to advise and position my house in the best way possible for the market. Nick was diligent with open houses, communicative and calming during a turbulent time in the market and ultimately, was successful in getting the best deal done.'
               },
               {
-                name: 'James H.',
-                text: 'I was amazed at the thoroughness of Nicholas\'s valuation. He identified unique features of our home that really helped with the sale.'
+                name: 'Evangelia Urquiola',
+                text: 'Within one days time he had pictures taken and my home listed on the market. He was very efficient in setting up open houses, following up with prospective buyers, keeping in contact with lawyers and myself throughout the entire process.'
               },
             ].map((testimonial, i) => (
               <div key={i} style={{
@@ -613,6 +614,23 @@ export default function HomeValuation({ trackEvent }) {
               </div>
             ))}
           </div>
+
+          <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer"
+             onClick={() => trackEvent('click', 'Social', 'Google_Reviews_Valuation')}
+             style={{
+               display: 'inline-block',
+               marginTop: '40px',
+               fontFamily: "'Montserrat', sans-serif",
+               fontSize: '12px',
+               letterSpacing: '2px',
+               textTransform: 'uppercase',
+               color: '#1a1a1a',
+               textDecoration: 'none',
+               borderBottom: '1px solid #1a1a1a',
+               paddingBottom: '4px'
+             }}>
+            Read all reviews on Google →
+          </a>
         </div>
       </section>
 
