@@ -1,34 +1,37 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { getStyles } from './styles';
+import { submitNetlifyForm, HoneypotField, HONEYPOT_FIELD } from '../lib/netlifyForms';
+
+const emptyForm = { name: '', email: '', phone: '', interest: '', [HONEYPOT_FIELD]: '' };
 
 export default function ContactForm({ trackEvent, formName = 'contact' }) {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', interest: '' });
+  const [formData, setFormData] = useState(emptyForm);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(false);
+  const resetTimer = useRef(null);
 
   const styles = getStyles(false);
 
+  useEffect(() => () => clearTimeout(resetTimer.current), []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (submitting) return;
     setSubmitError(false);
+    setSubmitting(true);
 
     try {
-      const res = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          'form-name': formName,
-          ...formData
-        }).toString()
-      });
-      if (!res.ok) throw new Error(`Form POST failed: ${res.status}`);
+      await submitNetlifyForm(formName, formData);
       trackEvent('form_submit', 'Lead_Generation', formData.interest || 'General');
       setFormSubmitted(true);
-      setTimeout(() => setFormSubmitted(false), 6000);
-      setFormData({ name: '', email: '', phone: '', interest: '' });
+      resetTimer.current = setTimeout(() => setFormSubmitted(false), 6000);
+      setFormData(emptyForm);
     } catch (error) {
       console.error('Form submission error:', error);
       setSubmitError(true);
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -79,7 +82,7 @@ export default function ContactForm({ trackEvent, formName = 'contact' }) {
           aria-label="Request consultation form"
         >
           <input type="hidden" name="form-name" value={formName} />
-          <input type="hidden" name="bot-field" />
+          <HoneypotField value={formData[HONEYPOT_FIELD]} onChange={(e) => setFormData({...formData, [HONEYPOT_FIELD]: e.target.value})} />
           <h3 style={{
             fontSize: '24px',
             fontWeight: 400,
@@ -131,8 +134,8 @@ export default function ContactForm({ trackEvent, formName = 'contact' }) {
               <option value="relocation">Relocation Services</option>
             </select>
 
-            <button type="submit" style={{ ...styles.btnPrimary, width: '100%', marginTop: '12px' }}>
-              Get Started
+            <button type="submit" disabled={submitting} style={{ ...styles.btnPrimary, width: '100%', marginTop: '12px', opacity: submitting ? 0.7 : 1 }}>
+              {submitting ? 'Sending…' : 'Get Started'}
             </button>
 
             {submitError && (

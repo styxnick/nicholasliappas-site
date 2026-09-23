@@ -1,6 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { getStyles } from '../components/styles';
+import { submitNetlifyForm, HoneypotField, HONEYPOT_FIELD } from '../lib/netlifyForms';
+
+const STEP_FIELDS = {
+  1: ['address', 'zipCode'],
+  2: ['name', 'email']
+};
 
 export default function HomeValuation({ trackEvent }) {
   const [step, setStep] = useState(1);
@@ -9,10 +15,14 @@ export default function HomeValuation({ trackEvent }) {
     zipCode: '',
     name: '',
     email: '',
-    phone: ''
+    phone: '',
+    [HONEYPOT_FIELD]: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(false);
+  const [stepError, setStepError] = useState('');
+  const formRef = useRef(null);
   const styles = getStyles(false);
 
   useEffect(() => {
@@ -34,50 +44,60 @@ export default function HomeValuation({ trackEvent }) {
     document.head.appendChild(canonical);
   }, []);
 
-  const handleNext = (e) => {
-    e.preventDefault();
-    if (step === 1 && !formData.address.trim()) {
-      alert('Please enter a property address');
-      return;
+  // Returns true when every required field for the current step has a
+  // non-whitespace value and passes native constraint validation.
+  const validateStep = () => {
+    const form = formRef.current;
+    if (form && !form.reportValidity()) return false;
+    const missing = STEP_FIELDS[step]?.filter((f) => !formData[f].trim());
+    if (missing?.length) {
+      setStepError('Please complete all required fields before continuing.');
+      return false;
     }
-    if (step === 1 && !formData.zipCode.trim()) {
-      alert('Please enter a zip code');
-      return;
-    }
-    if (step === 2 && !formData.name.trim()) {
-      alert('Please enter your name');
-      return;
-    }
-    if (step === 2 && !formData.email.trim()) {
-      alert('Please enter your email');
-      return;
-    }
-    if (step < 3) {
-      setStep(step + 1);
-    }
+    setStepError('');
+    return true;
   };
 
+  const goToStep = (next) => {
+    setStepError('');
+    setStep(next);
+  };
+
+  // Single submit handler: Enter or the visible button advances a step
+  // (after validation) until step 3, where it actually sends the form.
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (step < 3) {
+      if (validateStep()) goToStep(step + 1);
+      return;
+    }
+    if (submitting) return;
     setSubmitError(false);
+    setSubmitting(true);
 
     try {
-      const res = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          'form-name': 'home-valuation',
-          ...formData
-        }).toString()
-      });
-      if (!res.ok) throw new Error(`Form POST failed: ${res.status}`);
+      await submitNetlifyForm('home-valuation', formData);
       trackEvent('form_submit', 'Lead_Generation', 'Home_Valuation');
       setSubmitted(true);
     } catch (error) {
       console.error('Form submission error:', error);
       setSubmitError(true);
+    } finally {
+      setSubmitting(false);
     }
   };
+
+  const stepErrorMessage = stepError && (
+    <p role="alert" style={{
+      fontFamily: "'Montserrat', sans-serif",
+      fontSize: '13px',
+      color: '#b00020',
+      lineHeight: 1.6,
+      margin: 0
+    }}>
+      {stepError}
+    </p>
+  );
 
   return (
     <div style={styles.container}>
@@ -168,6 +188,7 @@ export default function HomeValuation({ trackEvent }) {
             </div>
           ) : (
             <form
+              ref={formRef}
               name="home-valuation"
               method="POST"
               data-netlify="true"
@@ -176,7 +197,7 @@ export default function HomeValuation({ trackEvent }) {
               aria-label="Home valuation form"
             >
               <input type="hidden" name="form-name" value="home-valuation" />
-              <input type="hidden" name="bot-field" />
+              <HoneypotField value={formData[HONEYPOT_FIELD]} onChange={(e) => setFormData({...formData, [HONEYPOT_FIELD]: e.target.value})} />
 
               {/* Step Indicator */}
               <div style={{
@@ -243,6 +264,7 @@ export default function HomeValuation({ trackEvent }) {
                       type="text"
                       name="address"
                       placeholder="Property Address"
+                      autoComplete="street-address"
                       value={formData.address}
                       onChange={(e) => setFormData({...formData, address: e.target.value})}
                       required
@@ -252,13 +274,18 @@ export default function HomeValuation({ trackEvent }) {
                       type="text"
                       name="zipCode"
                       placeholder="Zip Code"
+                      autoComplete="postal-code"
+                      inputMode="numeric"
+                      pattern="[0-9]{5}(-[0-9]{4})?"
+                      title="Enter a 5-digit ZIP code"
                       value={formData.zipCode}
                       onChange={(e) => setFormData({...formData, zipCode: e.target.value})}
                       required
                       style={styles.input}
                     />
 
-                    <button onClick={handleNext} style={{ ...styles.btnPrimary, width: '100%', marginTop: '12px' }}>
+                    {stepErrorMessage}
+                    <button type="submit" style={{ ...styles.btnPrimary, width: '100%', marginTop: '12px' }}>
                       Next
                     </button>
                   </div>
@@ -288,6 +315,7 @@ export default function HomeValuation({ trackEvent }) {
                       type="text"
                       name="name"
                       placeholder="Full Name"
+                      autoComplete="name"
                       value={formData.name}
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
                       required
@@ -297,6 +325,7 @@ export default function HomeValuation({ trackEvent }) {
                       type="email"
                       name="email"
                       placeholder="Email Address"
+                      autoComplete="email"
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
                       required
@@ -306,15 +335,17 @@ export default function HomeValuation({ trackEvent }) {
                       type="tel"
                       name="phone"
                       placeholder="Phone Number (Optional)"
+                      autoComplete="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({...formData, phone: e.target.value})}
                       style={styles.input}
                     />
 
+                    {stepErrorMessage}
                     <div style={{ display: 'flex', gap: '12px' }}>
                       <button
                         type="button"
-                        onClick={() => setStep(1)}
+                        onClick={() => goToStep(1)}
                         style={{
                           ...styles.btnOutline,
                           flex: 1,
@@ -324,7 +355,7 @@ export default function HomeValuation({ trackEvent }) {
                         }}>
                         Back
                       </button>
-                      <button onClick={handleNext} style={{ ...styles.btnPrimary, flex: 1 }}>
+                      <button type="submit" style={{ ...styles.btnPrimary, flex: 1 }}>
                         Next
                       </button>
                     </div>
@@ -434,7 +465,7 @@ export default function HomeValuation({ trackEvent }) {
                   <div style={{ display: 'flex', gap: '12px' }}>
                     <button
                       type="button"
-                      onClick={() => setStep(2)}
+                      onClick={() => goToStep(2)}
                       style={{
                         ...styles.btnOutline,
                         flex: 1,
@@ -444,8 +475,8 @@ export default function HomeValuation({ trackEvent }) {
                       }}>
                       Back
                     </button>
-                    <button type="submit" onClick={handleSubmit} style={{ ...styles.btnPrimary, flex: 1 }}>
-                      Get My Valuation
+                    <button type="submit" disabled={submitting} style={{ ...styles.btnPrimary, flex: 1, opacity: submitting ? 0.7 : 1 }}>
+                      {submitting ? 'Sending…' : 'Get My Valuation'}
                     </button>
                   </div>
                   {submitError && (
