@@ -330,6 +330,11 @@ export default function Nav({ trackEvent }) {
         {socialIcons(textColor)}
         <Link to="/#contact" style={{
           ...styles.navLink,
+          fontFamily: "'Montserrat', sans-serif",
+          fontSize: '11px',
+          fontWeight: 400,
+          letterSpacing: '2px',
+          textTransform: 'uppercase',
           padding: '12px 28px',
           border: `1px solid ${textColor}`
         }} onClick={() => trackEvent('click', 'CTA', 'Nav_Connect')}>

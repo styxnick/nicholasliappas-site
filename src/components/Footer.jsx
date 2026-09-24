@@ -193,12 +193,12 @@ export default function Footer({ trackEvent }) {
                style={{ color: '#888', textDecoration: 'none' }}>
               Compass
             </a>
-            <a href="/#" style={{ color: '#888', textDecoration: 'none' }}>
+            <Link to="/privacy" style={{ color: '#888', textDecoration: 'none' }}>
               Privacy Policy
-            </a>
-            <a href="/#" style={{ color: '#888', textDecoration: 'none' }}>
+            </Link>
+            <Link to="/terms" style={{ color: '#888', textDecoration: 'none' }}>
               Terms of Service
-            </a>
+            </Link>
           </div>
         </div>
       </div>

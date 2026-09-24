@@ -32,7 +32,7 @@ export default function TownPage({ trackEvent }) {
         "priceRange": "$$$",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "1050 Northern Blvd",
+          "streetAddress": "1468 Northern Blvd",
           "addressLocality": "Manhasset",
           "addressRegion": "NY",
           "postalCode": "11030",

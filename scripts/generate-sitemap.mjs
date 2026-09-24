@@ -8,7 +8,7 @@ import { towns } from '../src/data/towns.js';
 const SITE_URL = 'https://nicholasliappas.com';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const paths = ['/', '/home-valuation', ...Object.values(towns).map((t) => `/${t.slug}`)];
+const paths = ['/', '/home-valuation', '/privacy', '/terms', ...Object.values(towns).map((t) => `/${t.slug}`)];
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
