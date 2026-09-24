@@ -11,6 +11,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://www.googletagmanager.com" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" />
+    <script>
+      // Homepage only: preload the hero poster (the largest paint) before the app bundle runs.
+      if (location.pathname === '/') {
+        var l = document.createElement('link');
+        l.rel = 'preload'; l.as = 'image'; l.href = '/video/colonial-home-loop-poster.jpg'; l.fetchPriority = 'high';
+        document.head.appendChild(l);
+      }
+    </script>
     <style>
       /* Global focus ring: visible on both light and dark backgrounds. All other styling is inline (src/components/styles.js). */
       :focus-visible { outline: 2px solid #1a1a1a; outline-offset: 2px; box-shadow: 0 0 0 4px #fff; }
