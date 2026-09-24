@@ -32,3 +32,6 @@ Thumbs.db
 
 # Local Netlify folder
 .netlify
+
+# Raw hero video sources (only the web-encoded loop + poster live in public/video)
+Splash Video/

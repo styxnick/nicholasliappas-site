@@ -4,10 +4,18 @@ import { getStyles } from '../components/styles';
 import ContactForm from '../components/ContactForm';
 import { useSeo, SITE_URL } from '../lib/seo';
 import { GOOGLE_REVIEWS_URL } from '../data/site';
+import { useMediaQuery } from '../lib/useMediaQuery';
 
 export default function Home({ trackEvent }) {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const styles = getStyles(false);
+  // Hero background: looping video on desktop; poster image only on phones
+  // (saves data) and for users who prefer reduced motion.
+  const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+  const smallScreen = useMediaQuery('(max-width: 768px)');
+  const showHeroVideo = !reducedMotion && !smallScreen;
+  // Tighter tracking on phones so the hero lines don't wrap or orphan a word.
+  const heroButtonMobile = smallScreen ? { letterSpacing: '1.5px', padding: '18px 28px', whiteSpace: 'nowrap' } : {};
 
   // Verbatim excerpts from Google reviews (5.0, all five-star). Full names as shown on Google.
   const testimonials = [
@@ -73,16 +81,40 @@ export default function Home({ trackEvent }) {
     <div style={styles.container}>
       {/* Hero Section */}
       <section aria-label="Introduction" style={styles.hero}>
+        {/* Background: poster image always (instant paint), video layered on top when allowed */}
+        <img
+          src="/video/colonial-home-loop-poster.jpg"
+          alt=""
+          aria-hidden="true"
+          width="832"
+          height="464"
+          fetchPriority="high"
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}
+        />
+        {showHeroVideo && (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/video/colonial-home-loop-poster.jpg"
+            aria-hidden="true"
+            tabIndex={-1}
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}
+          >
+            <source src="/video/colonial-home-loop.mp4" type="video/mp4" />
+          </video>
+        )}
+        {/* Dark overlay keeps the white hero text readable over the footage:
+            ~50% base plus a soft radial darkening centred behind the text block */}
         <div style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #1a1a1a 100%)',
-          zIndex: 0
-        }} />
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.03) 0%, transparent 60%), radial-gradient(ellipse at 70% 20%, rgba(255,255,255,0.04) 0%, transparent 50%)',
+          background: [
+            'radial-gradient(ellipse 58% 52% at 50% 52%, rgba(8,8,8,0.7) 0%, rgba(8,8,8,0.45) 55%, rgba(8,8,8,0) 100%)',
+            'linear-gradient(180deg, rgba(10,10,10,0.5) 0%, rgba(10,10,10,0.45) 50%, rgba(10,10,10,0.65) 100%)'
+          ].join(', '),
           zIndex: 1
         }} />
 
@@ -91,7 +123,7 @@ export default function Home({ trackEvent }) {
             fontFamily: "'Montserrat', sans-serif",
             fontSize: '11px',
             fontWeight: 400,
-            letterSpacing: '6px',
+            letterSpacing: smallScreen ? '3px' : '6px',
             textTransform: 'uppercase',
             marginBottom: '24px',
             opacity: 0.7
@@ -113,7 +145,7 @@ export default function Home({ trackEvent }) {
             fontFamily: "'Montserrat', sans-serif",
             fontSize: 'clamp(14px, 2vw, 18px)',
             fontWeight: 500,
-            letterSpacing: '8px',
+            letterSpacing: smallScreen ? '3px' : '8px',
             textTransform: 'uppercase',
             marginBottom: '40px',
             opacity: 0.9
@@ -129,16 +161,17 @@ export default function Home({ trackEvent }) {
             maxWidth: '600px',
             margin: '0 auto 48px',
             lineHeight: 2,
-            opacity: 0.7
+            opacity: 0.85,
+            textShadow: '0 1px 14px rgba(0,0,0,0.7), 0 0 2px rgba(0,0,0,0.5)'
           }}>
             Licensed Associate Real Estate Broker specializing in residential, commercial, and development sales across the North Shore, Queens & North Fork markets.
           </p>
 
           <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/#contact" onClick={() => trackEvent('click', 'CTA', 'Schedule_Hero')} style={styles.btnPrimary}>
+            <Link to="/#contact" onClick={() => trackEvent('click', 'CTA', 'Schedule_Hero')} style={{ ...styles.btnPrimary, ...heroButtonMobile }}>
               Schedule Consultation
             </Link>
-            <a href="https://www.compass.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('click', 'CTA', 'Search_Hero')} style={styles.btnOutline}>
+            <a href="https://www.compass.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('click', 'CTA', 'Search_Hero')} style={{ ...styles.btnOutline, ...heroButtonMobile }}>
               Your Search Begins Here
             </a>
           </div>
@@ -160,7 +193,8 @@ export default function Home({ trackEvent }) {
             fontSize: '10px',
             letterSpacing: '3px',
             color: '#fff',
-            opacity: 0.5
+            opacity: 0.6,
+            textShadow: '0 1px 8px rgba(0,0,0,0.7)'
           }}>SCROLL</span>
           <div style={{
             width: '1px',
