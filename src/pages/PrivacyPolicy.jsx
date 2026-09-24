@@ -24,7 +24,7 @@ export default function PrivacyPolicy() {
       <p style={s.p}>We do not sell your personal information. We share it only with service providers that help us run the Site and respond to you (for example, our hosting and email providers), and with Compass as required to provide brokerage services.</p>
 
       <h2 style={s.h2}>Analytics and cookies</h2>
-      <p style={s.p}>We use Google Analytics to understand how visitors use the Site. Google Analytics sets cookies and collects information such as pages visited, approximate location, device and browser type. We may also use the Meta Pixel to measure the effectiveness of our advertising. You can limit this tracking with your browser's cookie settings, the Google Analytics opt-out browser add-on, or your Meta ad preferences.</p>
+      <p style={s.p}>We use Google Analytics to understand how visitors use the Site. Google Analytics sets cookies and collects information such as pages visited, approximate location, device and browser type. You can limit this tracking with your browser's cookie settings or the Google Analytics opt-out browser add-on.</p>
 
       <h2 style={s.h2}>Retention</h2>
       <p style={s.p}>We keep form submissions for as long as needed to respond to you and to meet our legal obligations. You can ask us to delete your information at any time using the contact details below.</p>
