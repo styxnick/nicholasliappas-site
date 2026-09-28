@@ -5,6 +5,12 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# Event function: netlify/functions/submission-created.js emails each
+# Netlify Forms lead via Resend (needs RESEND_API_KEY env var).
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
 # SPA: serve index.html for every route so react-router handles it.
 [[redirects]]
   from = "/*"
