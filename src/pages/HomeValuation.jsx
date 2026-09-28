@@ -138,7 +138,7 @@ export default function HomeValuation({ trackEvent }) {
             margin: '0 auto',
             lineHeight: 1.8
           }}>
-            Receive a personalized Comparative Market Analysis (CMA) from Nicholas Liappas, a Licensed Associate Real Estate Broker at Compass with 15+ years of North Shore expertise.
+            Receive a personalized Comparative Market Analysis (CMA) from Nicholas Liappas, a Licensed Associate Real Estate Broker at Compass with 8 years of North Shore expertise.
           </p>
         </div>
       </section>
