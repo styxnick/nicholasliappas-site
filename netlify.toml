@@ -11,6 +11,28 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
+# Common un-hyphenated typos of community slugs.
+[[redirects]]
+  from = "/portwashington"
+  to = "/port-washington"
+  status = 301
+[[redirects]]
+  from = "/glenhead"
+  to = "/glen-head"
+  status = 301
+[[redirects]]
+  from = "/glenwoodlanding"
+  to = "/glenwood-landing"
+  status = 301
+[[redirects]]
+  from = "/easthills"
+  to = "/east-hills"
+  status = 301
+[[redirects]]
+  from = "/homevaluation"
+  to = "/home-valuation"
+  status = 301
+
 # SPA: serve index.html for every route so react-router handles it.
 [[redirects]]
   from = "/*"
