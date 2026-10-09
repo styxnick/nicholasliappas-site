@@ -8,7 +8,8 @@
     "prebuild": "node scripts/generate-sitemap.mjs",
     "build": "vite build",
     "preview": "vite preview",
-    "sitemap": "node scripts/generate-sitemap.mjs"
+    "sitemap": "node scripts/generate-sitemap.mjs",
+    "test": "vitest run"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -17,6 +18,8 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.2.1",
-    "vite": "^5.1.0"
+    "jsdom": "^25.0.1",
+    "vite": "^5.1.0",
+    "vitest": "^2.1.9"
   }
 }

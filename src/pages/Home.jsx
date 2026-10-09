@@ -6,7 +6,7 @@ import { useSeo, SITE_URL } from '../lib/seo';
 import { GOOGLE_REVIEWS_URL } from '../data/site';
 import { useMediaQuery } from '../lib/useMediaQuery';
 
-export default function Home({ trackEvent }) {
+export default function Home({ track }) {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const styles = getStyles(false);
   // Hero background: looping video on desktop; poster image only on phones
@@ -168,10 +168,10 @@ export default function Home({ trackEvent }) {
           </p>
 
           <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/#contact" onClick={() => trackEvent('click', 'CTA', 'Schedule_Hero')} style={{ ...styles.btnPrimary, ...heroButtonMobile }}>
+            <Link to="/#contact" onClick={() => track('cta_click', { cta: 'schedule', placement: 'hero' })} style={{ ...styles.btnPrimary, ...heroButtonMobile }}>
               Schedule Consultation
             </Link>
-            <a href="https://www.compass.com" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('click', 'CTA', 'Search_Hero')} style={{ ...styles.btnOutline, ...heroButtonMobile }}>
+            <a href="https://www.compass.com" target="_blank" rel="noopener noreferrer" onClick={() => track('cta_click', { cta: 'search', placement: 'hero' })} style={{ ...styles.btnOutline, ...heroButtonMobile }}>
               Your Search Begins Here
             </a>
           </div>
@@ -254,7 +254,7 @@ export default function Home({ trackEvent }) {
               gap: '12px'
             }}>
               <a href="tel:516-214-7761"
-                 onClick={() => trackEvent('click', 'Contact', 'Phone_Mobile')}
+                 onClick={() => track('phone_click', { placement: 'contact' })}
                  style={{
                    fontFamily: "'Montserrat', sans-serif",
                    fontSize: '14px',
@@ -265,7 +265,7 @@ export default function Home({ trackEvent }) {
                 M: 516-214-7761
               </a>
               <a href="mailto:nicholas.liappas@compass.com"
-                 onClick={() => trackEvent('click', 'Contact', 'Email')}
+                 onClick={() => track('email_click', { placement: 'contact' })}
                  style={{
                    fontFamily: "'Montserrat', sans-serif",
                    fontSize: '14px',
@@ -275,7 +275,7 @@ export default function Home({ trackEvent }) {
                 nicholas.liappas@compass.com
               </a>
               <a href="https://instagram.com/nicholasliappas" target="_blank" rel="noopener noreferrer"
-                 onClick={() => trackEvent('click', 'Social', 'Instagram_Contact')}
+                 onClick={() => track('social_click', { network: 'instagram', placement: 'contact' })}
                  style={{
                    fontFamily: "'Montserrat', sans-serif",
                    fontSize: '14px',
@@ -294,7 +294,7 @@ export default function Home({ trackEvent }) {
                 @nicholasliappas
               </a>
               <a href="https://www.linkedin.com/in/nicholas-liappas-73482128/" target="_blank" rel="noopener noreferrer"
-                 onClick={() => trackEvent('click', 'Social', 'LinkedIn_Contact')}
+                 onClick={() => track('social_click', { network: 'linkedin', placement: 'contact' })}
                  style={{
                    fontFamily: "'Montserrat', sans-serif",
                    fontSize: '14px',
@@ -313,7 +313,7 @@ export default function Home({ trackEvent }) {
                 LinkedIn
               </a>
               <a href="https://x.com/nickliappas" target="_blank" rel="noopener noreferrer"
-                 onClick={() => trackEvent('click', 'Social', 'X_Twitter_Contact')}
+                 onClick={() => track('social_click', { network: 'x', placement: 'contact' })}
                  style={{
                    fontFamily: "'Montserrat', sans-serif",
                    fontSize: '14px',
@@ -332,7 +332,7 @@ export default function Home({ trackEvent }) {
             </div>
           </div>
 
-          <ContactForm trackEvent={trackEvent} formName="contact" />
+          <ContactForm track={track} formName="contact" />
         </div>
       </section>
 
@@ -737,7 +737,7 @@ export default function Home({ trackEvent }) {
           </div>
 
           <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer"
-             onClick={() => trackEvent('click', 'Social', 'Google_Reviews')}
+             onClick={() => track('social_click', { network: 'google_reviews', placement: 'testimonials' })}
              style={{
                display: 'inline-block',
                marginTop: '40px',
@@ -758,7 +758,7 @@ export default function Home({ trackEvent }) {
       {/* Instagram CTA */}
       <section style={{ padding: '80px 5%', background: '#f8f8f8', textAlign: 'center' }}>
         <a href="https://instagram.com/nicholasliappas" target="_blank" rel="noopener noreferrer"
-           onClick={() => trackEvent('click', 'Social', 'Instagram_CTA')}
+           onClick={() => track('social_click', { network: 'instagram', placement: 'bottom_cta' })}
            style={{ textDecoration: 'none', color: '#1a1a1a' }}>
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ marginBottom: '24px' }}>
             <rect x="2" y="2" width="20" height="20" rx="5" />
@@ -804,11 +804,11 @@ export default function Home({ trackEvent }) {
             Let's discuss your real estate goals and create a personalized strategy.
           </p>
           <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/#contact" onClick={() => trackEvent('click', 'CTA', 'Schedule_Bottom')} style={{ ...styles.btnPrimary, background: '#fff', color: '#1a1a1a' }}>
+            <Link to="/#contact" onClick={() => track('cta_click', { cta: 'schedule', placement: 'bottom_cta' })} style={{ ...styles.btnPrimary, background: '#fff', color: '#1a1a1a' }}>
               Schedule Consultation
             </Link>
             <a href="tel:516-214-7761"
-               onClick={() => trackEvent('click', 'Contact', 'Phone_CTA')}
+               onClick={() => track('phone_click', { placement: 'bottom_cta' })}
                style={{
                  ...styles.btnOutline,
                  border: '1px solid rgba(255,255,255,0.3)'

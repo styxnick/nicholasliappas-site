@@ -9,6 +9,9 @@ const FROM = 'Nicholas Liappas Website <leads@nicholasliappas.com>';
 const DEFAULT_TO = 'nicholas.liappas@compass.com';
 const SITE_ID = '1bb10d34-4eb0-41e0-bd36-4a6cd3fde292';
 
+// First-touch attribution stamped on every submission by src/lib/netlifyForms.jsx.
+const ATTRIBUTION_FIELDS = ['landing_page', 'source', 'medium', 'campaign', 'referrer'];
+
 const escapeHtml = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 export default async (request) => {
@@ -20,9 +23,18 @@ export default async (request) => {
 
   const { payload } = await request.json();
   const formName = payload.form_name || 'unknown';
+  const data = payload.data || {};
+  const hidden = new Set(['ip', 'user_agent', 'bot-field', ...ATTRIBUTION_FIELDS]);
   const fields = payload.ordered_human_fields?.length
-    ? payload.ordered_human_fields.map((f) => [f.title, f.value])
-    : Object.entries(payload.data || {}).filter(([k]) => !['ip', 'user_agent', 'referrer', 'bot-field'].includes(k));
+    ? payload.ordered_human_fields.filter((f) => !hidden.has(f.name)).map((f) => [f.title, f.value])
+    : Object.entries(data).filter(([k]) => !hidden.has(k));
+  const dash = (v) => v || '—';
+  const attribution = [
+    ['Landing page', dash(data.landing_page)],
+    ['Source', data.source ? `${data.source} (${data.medium || 'none'})` : '—'],
+    ['Campaign', dash(data.campaign)],
+    ['Referrer', dash(data.referrer)],
+  ];
   const leadName = payload.name || payload.data?.name || 'Unknown';
   const leadEmail = payload.email || payload.data?.email || '';
   const when = new Date(payload.created_at || Date.now()).toLocaleString('en-US', { timeZone: 'America/New_York', dateStyle: 'medium', timeStyle: 'short' });
@@ -34,7 +46,9 @@ export default async (request) => {
     '',
     ...fields.map(([k, v]) => `${k}: ${v || '—'}`),
     '',
-    `Referrer: ${payload.data?.referrer || '—'}`,
+    'Attribution',
+    ...attribution.map(([k, v]) => `${k}: ${v}`),
+    '',
     `All submissions: ${dashboard}`
   ].join('\n');
 
@@ -44,6 +58,10 @@ export default async (request) => {
       <p style="margin:0 0 20px;color:#707070">Received ${escapeHtml(when)} ET</p>
       <table cellpadding="0" cellspacing="0" style="border-collapse:collapse">
         ${fields.map(([k, v]) => `<tr><td style="padding:6px 16px 6px 0;color:#707070;vertical-align:top">${escapeHtml(k)}</td><td style="padding:6px 0;font-weight:600">${escapeHtml(v || '—')}</td></tr>`).join('')}
+      </table>
+      <p style="margin:24px 0 4px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#707070">Attribution</p>
+      <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;font-size:13px">
+        ${attribution.map(([k, v]) => `<tr><td style="padding:4px 16px 4px 0;color:#707070;vertical-align:top">${escapeHtml(k)}</td><td style="padding:4px 0">${escapeHtml(v)}</td></tr>`).join('')}
       </table>
       <p style="margin:24px 0 0;font-size:13px;color:#707070">Reply to this email to answer ${escapeHtml(leadName)} directly.<br><a href="${dashboard}" style="color:#1a1a1a">All submissions in Netlify</a></p>
     </div>`;

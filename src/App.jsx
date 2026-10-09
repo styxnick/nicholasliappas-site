@@ -10,7 +10,7 @@ import NotFound from './pages/NotFound';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Terms from './pages/Terms';
 import { getStyles } from './components/styles';
-import { initAnalytics, trackPageView, trackEvent } from './lib/analytics';
+import { initAnalytics, trackPageView, track } from './lib/analytics';
 
 export default function App() {
   const location = useLocation();
@@ -28,16 +28,16 @@ export default function App() {
   return (
     <div style={styles.container}>
       <ScrollManager />
-      <Nav trackEvent={trackEvent} />
+      <Nav track={track} />
       <Routes>
-        <Route path="/" element={<Home trackEvent={trackEvent} />} />
-        <Route path="/home-valuation" element={<HomeValuation trackEvent={trackEvent} />} />
+        <Route path="/" element={<Home track={track} />} />
+        <Route path="/home-valuation" element={<HomeValuation track={track} />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<Terms />} />
-        <Route path="/:slug" element={<TownPage trackEvent={trackEvent} />} />
+        <Route path="/:slug" element={<TownPage track={track} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <Footer trackEvent={trackEvent} />
+      <Footer track={track} />
     </div>
   );
 }

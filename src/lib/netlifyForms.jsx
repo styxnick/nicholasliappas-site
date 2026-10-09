@@ -1,13 +1,17 @@
 // Shared Netlify Forms submission.
 // Field names sent here MUST match the hidden mirror forms in index.html —
 // Netlify only stores fields it discovered there at deploy time.
+// Every submission also carries the first-touch attribution fields
+// (landing_page, source, medium, campaign, referrer) from analytics.js.
+import { getAttribution } from './analytics';
+
 export const HONEYPOT_FIELD = 'bot-field';
 
 export async function submitNetlifyForm(formName, fields) {
   // Honeypot tripped: a bot filled the hidden field. Pretend success, send nothing.
   if (fields[HONEYPOT_FIELD]) return;
 
-  const body = new URLSearchParams({ 'form-name': formName, ...fields }).toString();
+  const body = new URLSearchParams({ 'form-name': formName, ...fields, ...getAttribution() }).toString();
   const res = await fetch('/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

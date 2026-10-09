@@ -4,7 +4,7 @@ import { submitNetlifyForm, HoneypotField, HONEYPOT_FIELD } from '../lib/netlify
 
 const emptyForm = { name: '', email: '', phone: '', interest: '', [HONEYPOT_FIELD]: '' };
 
-export default function ContactForm({ trackEvent, formName = 'contact' }) {
+export default function ContactForm({ track, formName = 'contact' }) {
   const [formData, setFormData] = useState(emptyForm);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -24,7 +24,7 @@ export default function ContactForm({ trackEvent, formName = 'contact' }) {
 
     try {
       await submitNetlifyForm(formName, formData);
-      trackEvent('form_submit', 'Lead_Generation', formData.interest || 'General');
+      track('generate_lead', { form_name: formName, interest: formData.interest || 'general' });
       setFormSubmitted(true);
       resetTimer.current = setTimeout(() => setFormSubmitted(false), 6000);
       setFormData(emptyForm);

@@ -10,7 +10,7 @@ const socialLinks = [
   {
     href: 'https://instagram.com/nicholasliappas',
     label: 'Follow Nicholas Liappas on Instagram',
-    event: 'Instagram',
+    network: 'instagram',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
         <rect x="2" y="2" width="20" height="20" rx="5" />
@@ -22,7 +22,7 @@ const socialLinks = [
   {
     href: 'https://www.linkedin.com/in/nicholas-liappas-73482128/',
     label: 'Connect with Nicholas Liappas on LinkedIn',
-    event: 'LinkedIn',
+    network: 'linkedin',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
         <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
@@ -34,7 +34,7 @@ const socialLinks = [
   {
     href: 'https://x.com/nickliappas',
     label: 'Follow Nicholas Liappas on X',
-    event: 'X_Twitter',
+    network: 'x',
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -43,7 +43,7 @@ const socialLinks = [
   }
 ];
 
-export default function Nav({ trackEvent }) {
+export default function Nav({ track }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -141,8 +141,8 @@ export default function Nav({ trackEvent }) {
   );
 
   const socialIcons = (color) => socialLinks.map((s) => (
-    <a key={s.event} href={s.href} target="_blank" rel="noopener noreferrer"
-       onClick={() => trackEvent('click', 'Social', s.event)}
+    <a key={s.network} href={s.href} target="_blank" rel="noopener noreferrer"
+       onClick={() => track('social_click', { network: s.network, placement: 'nav' })}
        aria-label={s.label}
        style={{ color, textDecoration: 'none', display: 'inline-flex', padding: '6px', margin: '-6px' }}>
       {s.icon}
@@ -235,7 +235,7 @@ export default function Nav({ trackEvent }) {
             </div>
 
             <Link to="/#contact"
-              onClick={() => trackEvent('click', 'CTA', 'Nav_Connect')}
+              onClick={() => track('cta_click', { cta: 'connect', placement: 'nav' })}
               style={{ ...styles.btnOutline, display: 'block', textAlign: 'center' }}>
               LET'S CONNECT
             </Link>
@@ -337,7 +337,7 @@ export default function Nav({ trackEvent }) {
           textTransform: 'uppercase',
           padding: '12px 28px',
           border: `1px solid ${textColor}`
-        }} onClick={() => trackEvent('click', 'CTA', 'Nav_Connect')}>
+        }} onClick={() => track('cta_click', { cta: 'connect', placement: 'nav' })}>
           LET'S CONNECT
         </Link>
       </div>
