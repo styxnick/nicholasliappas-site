@@ -2,7 +2,7 @@
 // Field names sent here MUST match the hidden mirror forms in index.html —
 // Netlify only stores fields it discovered there at deploy time.
 // Every submission also carries the first-touch attribution fields
-// (landing_page, source, medium, campaign, referrer) from analytics.js.
+// (landing_page, source, medium, campaign, referrer_url) from analytics.js.
 import { getAttribution } from './analytics';
 
 export const HONEYPOT_FIELD = 'bot-field';

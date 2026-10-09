@@ -25,14 +25,14 @@ describe('submitNetlifyForm attribution', () => {
     await forms.submitNetlifyForm('contact', { name: 'A', email: 'a@b.c', 'bot-field': '' });
     expect(body()).toMatchObject({
       'form-name': 'contact', name: 'A', email: 'a@b.c',
-      landing_page: '/manhasset', source: 'instagram', medium: 'social', campaign: 'spring', referrer: 'https://www.instagram.com/',
+      landing_page: '/manhasset', source: 'instagram', medium: 'social', campaign: 'spring', referrer_url: 'https://www.instagram.com/',
     });
   });
 
   it('sends empty attribution strings when analytics was never initialised', async () => {
     const { forms } = await load();
     await forms.submitNetlifyForm('contact', { name: 'A', 'bot-field': '' });
-    expect(body()).toMatchObject({ landing_page: '', source: '', medium: '', campaign: '', referrer: '' });
+    expect(body()).toMatchObject({ landing_page: '', source: '', medium: '', campaign: '', referrer_url: '' });
   });
 
   it('does not let caller fields overwrite attribution', async () => {

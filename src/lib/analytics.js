@@ -6,7 +6,9 @@
 //   navigations are counted (gtag's automatic page_view only fires once).
 // - track(name, params) is passed down to components. Every event carries
 //   page_type, town and first_source so GA4 can group by them.
-// - getAttribution() returns the first-touch record; netlifyForms spreads it
+// - getAttribution() returns the first-touch record (landing_page, source,
+//   medium, campaign, referrer_url; named referrer_url because Netlify Forms
+//   reserves `referrer` for the HTTP Referer); netlifyForms spreads it
 //   into every lead so the lead email and CSV show where it came from.
 //
 // Event vocabulary (see docs/superpowers/specs/2026-10-09-analytics-design.md):
@@ -25,7 +27,7 @@ export const FB_PIXEL_ID = '';
 
 const ATTR_KEY = 'nl_attr';
 const INTERNAL_KEY = 'nl_internal';
-const EMPTY_ATTRIBUTION = Object.freeze({ landing_page: '', source: '', medium: '', campaign: '', referrer: '' });
+const EMPTY_ATTRIBUTION = Object.freeze({ landing_page: '', source: '', medium: '', campaign: '', referrer_url: '' });
 
 // ---------------------------------------------------------------------------
 // Pure helpers (unit tested in analytics.test.js)
@@ -92,7 +94,7 @@ export function deriveAttribution({ pathname, search, referrer, hostname }) {
     source: clean(params.get('utm_source')) || refSource,
     medium: clean(params.get('utm_medium')) || refMedium,
     campaign: clean(params.get('utm_campaign')),
-    referrer: referrer || '',
+    referrer_url: referrer || '',
   };
 }
 

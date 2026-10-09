@@ -5,7 +5,7 @@ import { JSDOM } from 'jsdom';
 
 // Netlify only stores fields it discovers in the hidden mirror forms at deploy
 // time, so every form must declare the attribution fields netlifyForms sends.
-const ATTRIBUTION = ['landing_page', 'source', 'medium', 'campaign', 'referrer'];
+const ATTRIBUTION = ['landing_page', 'source', 'medium', 'campaign', 'referrer_url'];
 const html = readFileSync(resolve(process.cwd(), 'index.html'), 'utf8');
 const forms = [...new JSDOM(html).window.document.querySelectorAll('form[netlify]')];
 

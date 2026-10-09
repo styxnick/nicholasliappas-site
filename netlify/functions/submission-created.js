@@ -10,7 +10,7 @@ const DEFAULT_TO = 'nicholas.liappas@compass.com';
 const SITE_ID = '1bb10d34-4eb0-41e0-bd36-4a6cd3fde292';
 
 // First-touch attribution stamped on every submission by src/lib/netlifyForms.jsx.
-const ATTRIBUTION_FIELDS = ['landing_page', 'source', 'medium', 'campaign', 'referrer'];
+const ATTRIBUTION_FIELDS = ['landing_page', 'source', 'medium', 'campaign', 'referrer_url'];
 
 const escapeHtml = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -33,7 +33,7 @@ export default async (request) => {
     ['Landing page', dash(data.landing_page)],
     ['Source', data.source ? `${data.source} (${data.medium || 'none'})` : '—'],
     ['Campaign', dash(data.campaign)],
-    ['Referrer', dash(data.referrer)],
+    ['Referrer', dash(data.referrer_url)],
   ];
   const leadName = payload.name || payload.data?.name || 'Unknown';
   const leadEmail = payload.email || payload.data?.email || '';

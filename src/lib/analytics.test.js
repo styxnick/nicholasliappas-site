@@ -72,11 +72,11 @@ describe('deriveAttribution landing page and raw referrer', () => {
   it('records the landing pathname and the raw referrer string', () => {
     const r = derive({ pathname: '/port-washington', referrer: 'https://www.instagram.com/' });
     expect(r.landing_page).toBe('/port-washington');
-    expect(r.referrer).toBe('https://www.instagram.com/');
+    expect(r.referrer_url).toBe('https://www.instagram.com/');
   });
 
   it('returns exactly the five attribution fields', () => {
-    expect(Object.keys(derive()).sort()).toEqual(['campaign', 'landing_page', 'medium', 'referrer', 'source']);
+    expect(Object.keys(derive()).sort()).toEqual(['campaign', 'landing_page', 'medium', 'referrer_url', 'source']);
   });
 });
 

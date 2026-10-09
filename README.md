@@ -54,7 +54,7 @@ Both forms POST to Netlify Forms. The field names sent from React **must** match
 hidden mirror forms in `index.html` (`contact`: name, email, phone, interest;
 `home-valuation`: address, zipCode, name, email, phone; both include `bot-field`).
 `netlifyForms.jsx` also appends five attribution fields to every submission
-(`landing_page`, `source`, `medium`, `campaign`, `referrer`), which each mirror form
+(`landing_page`, `source`, `medium`, `campaign`, `referrer_url`; not `referrer`, which Netlify reserves for the HTTP Referer), which each mirror form
 declares as hidden inputs; `src/test/mirrorForms.test.js` enforces this.
 If you add a field, add it in both places. Email notifications are configured in the
 Netlify dashboard.

@@ -1,7 +1,7 @@
 // Shapes one Netlify Forms submission into a flat CSV row (used by export-leads.mjs).
 export const HEADERS = [
   'form', 'submitted_at', 'name', 'email', 'phone', 'interest', 'address', 'zip',
-  'landing_page', 'source', 'medium', 'campaign', 'referrer', 'netlify_id'
+  'landing_page', 'source', 'medium', 'campaign', 'referrer_url', 'netlify_id'
 ];
 
 export function toRow(form, s) {
@@ -20,7 +20,7 @@ export function toRow(form, s) {
     source: d.source ?? '',
     medium: d.medium ?? '',
     campaign: d.campaign ?? '',
-    referrer: d.referrer ?? '',
+    referrer_url: d.referrer_url ?? '',
     netlify_id: s.id
   };
 }

@@ -11,19 +11,19 @@ const submission = (fields, extra = {}) => ({
 
 describe('lead-row', () => {
   it('appends the five attribution columns last, in a fixed order', () => {
-    expect(HEADERS.slice(-6)).toEqual(['landing_page', 'source', 'medium', 'campaign', 'referrer', 'netlify_id']);
+    expect(HEADERS.slice(-6)).toEqual(['landing_page', 'source', 'medium', 'campaign', 'referrer_url', 'netlify_id']);
   });
 
   it('maps attribution fields from the submission', () => {
     const row = toRow({ name: 'contact' }, submission({
-      name: 'Jane', email: 'j@x.com', landing_page: '/manhasset', source: 'instagram', medium: 'social', campaign: 'spring', referrer: 'https://www.instagram.com/',
+      name: 'Jane', email: 'j@x.com', landing_page: '/manhasset', source: 'instagram', medium: 'social', campaign: 'spring', referrer_url: 'https://www.instagram.com/',
     }));
-    expect(row).toMatchObject({ form: 'contact', name: 'Jane', landing_page: '/manhasset', source: 'instagram', medium: 'social', campaign: 'spring', referrer: 'https://www.instagram.com/', netlify_id: 'sub_1' });
+    expect(row).toMatchObject({ form: 'contact', name: 'Jane', landing_page: '/manhasset', source: 'instagram', medium: 'social', campaign: 'spring', referrer_url: 'https://www.instagram.com/', netlify_id: 'sub_1' });
   });
 
   it('leaves attribution empty for legacy submissions', () => {
     const row = toRow({ name: 'contact' }, submission({ name: 'Jane' }));
-    expect(row).toMatchObject({ landing_page: '', source: '', medium: '', campaign: '', referrer: '' });
+    expect(row).toMatchObject({ landing_page: '', source: '', medium: '', campaign: '', referrer_url: '' });
   });
 
   it('every header has a value in the row', () => {

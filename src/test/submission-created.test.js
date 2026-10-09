@@ -26,7 +26,7 @@ describe('submission-created attribution block', () => {
   it('renders the five attribution fields in the text and html email', async () => {
     const mail = await run(payload({
       name: 'Jane Doe', email: 'jane@example.com',
-      landing_page: '/manhasset', source: 'instagram', medium: 'social', campaign: 'spring', referrer: 'https://www.instagram.com/',
+      landing_page: '/manhasset', source: 'instagram', medium: 'social', campaign: 'spring', referrer_url: 'https://www.instagram.com/',
     }));
     expect(mail.text).toContain('Attribution');
     expect(mail.text).toMatch(/Landing page: \/manhasset/);
@@ -38,7 +38,7 @@ describe('submission-created attribution block', () => {
   });
 
   it('keeps attribution out of the form-field list', async () => {
-    const mail = await run(payload({ name: 'Jane Doe', landing_page: '/', source: 'direct', medium: 'none', campaign: '', referrer: '' }));
+    const mail = await run(payload({ name: 'Jane Doe', landing_page: '/', source: 'direct', medium: 'none', campaign: '', referrer_url: '' }));
     const fieldSection = mail.text.split('Attribution')[0];
     expect(fieldSection).not.toMatch(/landing_page|source:/i);
   });

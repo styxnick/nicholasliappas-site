@@ -87,7 +87,7 @@ and store:
 | `source`       | `utm_source` if present; else referrer host mapped: `instagram.com`→`instagram`, `l.instagram.com`→`instagram`, `google.*`→`google`, `facebook.com`/`l.facebook.com`→`facebook`, `linkedin.com`/`lnkd.in`→`linkedin`, `t.co`/`x.com`→`x`, `compass.com`→`compass`, same host→ignored, empty→`direct`, anything else→bare host |
 | `medium`       | `utm_medium` if present; else `social`, `organic`, `referral`, or `none` by the same mapping |
 | `campaign`     | `utm_campaign` or `""` |
-| `referrer`     | `document.referrer` or `""` |
+| `referrer_url` | `document.referrer` or `""` (named `referrer_url` because Netlify Forms reserves `referrer` for the HTTP Referer) |
 
 `first_source` on every event is `source` from this record. If
 `sessionStorage` throws (private mode, blocked), the record is held in
@@ -105,7 +105,7 @@ The three hidden mirror forms in `index.html` (`contact`, `home-valuation`,
 <input type="hidden" name="source" />
 <input type="hidden" name="medium" />
 <input type="hidden" name="campaign" />
-<input type="hidden" name="referrer" />
+<input type="hidden" name="referrer_url" />
 ```
 
 `netlify/functions/submission-created.js` renders an "Attribution" block

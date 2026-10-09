@@ -24,14 +24,14 @@ beforeEach(() => {
 describe('first-touch attribution', () => {
   it('is empty strings before init', async () => {
     const m = await load();
-    expect(m.getAttribution()).toEqual({ landing_page: '', source: '', medium: '', campaign: '', referrer: '' });
+    expect(m.getAttribution()).toEqual({ landing_page: '', source: '', medium: '', campaign: '', referrer_url: '' });
   });
 
   it('is derived on init and exposed by getAttribution', async () => {
     const m = await load();
     m.initAnalytics(at(`${PROD}/port-washington?utm_campaign=fall`, 'https://www.instagram.com/'));
     expect(m.getAttribution()).toEqual({
-      landing_page: '/port-washington', source: 'instagram', medium: 'social', campaign: 'fall', referrer: 'https://www.instagram.com/',
+      landing_page: '/port-washington', source: 'instagram', medium: 'social', campaign: 'fall', referrer_url: 'https://www.instagram.com/',
     });
   });
 
