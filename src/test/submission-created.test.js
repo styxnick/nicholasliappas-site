@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import handler from './submission-created.js';
+import handler from '../../netlify/functions/submission-created.js';
 
 const payload = (data, extra = {}) => ({
   form_name: 'contact',
