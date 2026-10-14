@@ -1,14 +1,14 @@
-// Generates public/sitemap.xml from the route table + src/data/towns.js.
+// Generates public/sitemap.xml from scripts/site-paths.mjs.
 // Runs automatically before `npm run build` (see package.json "prebuild").
 import { writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
-import { towns } from '../src/data/towns.js';
+import { sitePaths } from './site-paths.mjs';
 
 const SITE_URL = 'https://nicholasliappas.com';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const paths = ['/', '/home-valuation', '/privacy', '/terms', ...Object.values(towns).map((t) => `/${t.slug}`)];
+const paths = sitePaths();
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

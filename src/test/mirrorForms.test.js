@@ -11,7 +11,7 @@ const forms = [...new JSDOM(html).window.document.querySelectorAll('form[netlify
 
 describe('hidden Netlify mirror forms', () => {
   it('exist for every form the site submits', () => {
-    expect(forms.map((f) => f.getAttribute('name')).sort()).toEqual(['contact', 'home-valuation']);
+    expect(forms.map((f) => f.getAttribute('name')).sort()).toEqual(['commercial', 'contact', 'home-valuation']);
   });
 
   it.each(forms.map((f) => [f.getAttribute('name'), f]))('%s declares every attribution field', (_, form) => {

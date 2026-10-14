@@ -58,6 +58,7 @@
         <option value="valuation">Home Valuation</option>
         <option value="investing">Investment Properties</option>
         <option value="relocation">Relocation Services</option>
+        <option value="commercial">Commercial Property</option>
       </select>
       <!-- First-touch attribution, filled by src/lib/netlifyForms.jsx -->
       <input type="hidden" name="landing_page" />
@@ -75,6 +76,26 @@
       <input type="text" name="name" />
       <input type="email" name="email" />
       <input type="tel" name="phone" />
+      <!-- First-touch attribution, filled by src/lib/netlifyForms.jsx -->
+      <input type="hidden" name="landing_page" />
+      <input type="hidden" name="source" />
+      <input type="hidden" name="medium" />
+      <input type="hidden" name="campaign" />
+      <input type="hidden" name="referrer_url" />
+    </form>
+
+    <!-- Hidden form for Commercial inquiries (/commercial) -->
+    <form name="commercial" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="role" />
+      <input type="text" name="propertyType" />
+      <input type="text" name="location" />
+      <input type="text" name="size" />
+      <input type="text" name="timeline" />
+      <textarea name="message"></textarea>
       <!-- First-touch attribution, filled by src/lib/netlifyForms.jsx -->
       <input type="hidden" name="landing_page" />
       <input type="hidden" name="source" />

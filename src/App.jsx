@@ -6,6 +6,7 @@ import ScrollManager from './components/ScrollManager';
 import Home from './pages/Home';
 import TownPage from './pages/TownPage';
 import HomeValuation from './pages/HomeValuation';
+import Commercial from './pages/Commercial';
 import NotFound from './pages/NotFound';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Terms from './pages/Terms';
@@ -32,6 +33,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home track={track} />} />
         <Route path="/home-valuation" element={<HomeValuation track={track} />} />
+        <Route path="/commercial" element={<Commercial track={track} />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/:slug" element={<TownPage track={track} />} />

@@ -228,6 +228,7 @@ export default function Nav({ track }) {
               <Link key={town.slug} to={`/${town.slug}`} style={menuSubLink}>{town.name}</Link>
             ))}
             <Link to="/home-valuation" style={{ ...menuLink, marginTop: '8px' }}>Home Valuation</Link>
+            <Link to="/commercial" style={menuLink}>Commercial</Link>
             <Link to="/#contact" style={menuLink}>Contact</Link>
 
             <div style={{ display: 'flex', gap: '32px', margin: '32px 0' }}>
@@ -323,6 +324,7 @@ export default function Nav({ track }) {
             </div>
           )}
         </div>
+        <Link to="/commercial" style={styles.navLink}>Commercial</Link>
         <Link to="/#contact" style={styles.navLink}>Contact</Link>
       </div>
 

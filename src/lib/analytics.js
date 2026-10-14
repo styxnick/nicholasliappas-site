@@ -11,6 +11,8 @@
 //   reserves `referrer` for the HTTP Referer); netlifyForms spreads it
 //   into every lead so the lead email and CSV show where it came from.
 //
+// page_type values: home, town, buyers_guide, valuation, commercial, legal, not_found
+//
 // Event vocabulary (see docs/superpowers/specs/2026-10-09-analytics-design.md):
 //   generate_lead { form_name, interest }
 //   phone_click   { placement }
@@ -41,6 +43,7 @@ export function pageContext(pathname) {
   const path = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname;
   if (path === '/') return { page_type: 'home', town: '' };
   if (path === '/home-valuation') return { page_type: 'valuation', town: '' };
+  if (path === '/commercial') return { page_type: 'commercial', town: '' };
   if (LEGAL_PATHS.has(path)) return { page_type: 'legal', town: '' };
   const [, slug, rest] = path.split('/');
   if (!towns[slug]) return { page_type: 'not_found', town: '' };

@@ -144,6 +144,7 @@ export default function ContactForm({ track, formName = 'contact' }) {
               <option value="valuation">Home Valuation</option>
               <option value="investing">Investment Properties</option>
               <option value="relocation">Relocation Services</option>
+              <option value="commercial">Commercial Property</option>
             </select>
 
             <button type="submit" disabled={submitting} style={{ ...styles.btnPrimary, width: '100%', marginTop: '12px', opacity: submitting ? 0.7 : 1 }}>

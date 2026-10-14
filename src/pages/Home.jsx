@@ -636,18 +636,26 @@ export default function Home({ track }) {
               {
                 title: 'Commercial & Development',
                 description: 'Specialized expertise in commercial real estate sales to developers. From land assemblage to mixed-use properties, I connect sellers with qualified developers for maximum returns.',
-                icon: '◆'
+                icon: '◆',
+                to: '/commercial',
+                cta: 'Commercial services →'
               },
               {
                 title: 'Relocation & Consulting',
                 description: 'Whether you\'re moving to Long Island or exploring investment opportunities, I provide comprehensive market analysis and timely guidance.',
                 icon: '◇'
               },
-            ].map((service, i) => (
-              <div key={i} style={{
+            ].map((service, i) => {
+              const Card = service.to ? Link : 'div';
+              const linkProps = service.to ? { to: service.to, onClick: () => track('cta_click', { cta: 'commercial', placement: 'services' }), 'aria-label': `${service.title}: ${service.cta}` } : {};
+              return (
+              <Card key={i} {...linkProps} style={{
                 padding: '40px',
                 background: '#fafafa',
-                transition: 'all 0.4s ease'
+                transition: 'all 0.4s ease',
+                textDecoration: 'none',
+                color: '#1a1a1a',
+                display: 'block'
               }}>
                 <span style={{ fontSize: '32px', display: 'block', marginBottom: '24px' }}>{service.icon}</span>
                 <h3 style={{
@@ -662,8 +670,12 @@ export default function Home({ track }) {
                   lineHeight: 1.9,
                   color: '#666'
                 }}>{service.description}</p>
-              </div>
-            ))}
+                {service.cta && (
+                  <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '12px', letterSpacing: '2px', textTransform: 'uppercase', color: '#1a1a1a', fontWeight: 500, display: 'inline-block', marginTop: '20px' }}>{service.cta}</span>
+                )}
+              </Card>
+              );
+            })}
           </div>
         </div>
       </section>
