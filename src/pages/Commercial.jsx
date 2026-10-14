@@ -177,8 +177,8 @@ export default function Commercial({ track }) {
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
               {visibleTransactions.map((t) => (
-                <article key={t.address + (t.town || '')} style={{ background: '#fafafa' }}>
-                  <Photo src={t.image ? `/commercial/transactions/${t.image}` : ''} alt={t.address} style={{ aspectRatio: '3 / 2', width: '100%' }} />
+                <article key={t.slug || t.address} style={{ background: '#fafafa' }}>
+                  <Photo src={t.slug ? `/commercial/transactions/${t.slug}` : ''} alt={t.address} style={{ aspectRatio: '3 / 2', width: '100%' }} />
                   <div style={{ padding: '24px 24px 28px' }}>
                     <h3 style={{ fontSize: '22px', fontWeight: 400, letterSpacing: '0.5px', marginBottom: '4px' }}>{t.address}</h3>
                     {t.town && <p style={{ fontFamily: MONT, fontSize: '12px', letterSpacing: '1px', color: '#707070', marginBottom: '14px' }}>{t.town}</p>}

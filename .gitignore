@@ -35,3 +35,4 @@ Thumbs.db
 
 # Raw hero video sources (only the web-encoded loop + poster live in public/video)
 Splash Video/
+incoming-assets/

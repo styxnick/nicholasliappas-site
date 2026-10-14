@@ -6,6 +6,7 @@ import { pageContext } from '../lib/analytics';
 import { commercialListings } from '../data/commercialListings';
 import { commercialTransactions } from '../data/commercialTransactions';
 import { propertyTypes, faqs } from '../data/commercial';
+import { existsSync } from 'node:fs';
 
 describe('/commercial route context', () => {
   it('classifies /commercial as its own page type', () => {
@@ -43,12 +44,21 @@ describe('commercial data', () => {
   });
 
   it('transactions have the fields the cards render and no prices', () => {
-    expect(Array.isArray(commercialTransactions)).toBe(true);
+    expect(commercialTransactions).toHaveLength(11);
     for (const t of commercialTransactions) {
       expect(t.address, JSON.stringify(t)).toBeTruthy();
-      expect(['Sale', 'Lease']).toContain(t.dealType);
+      expect(t.dealType, t.address).toMatch(/^(Sale|Lease)/);
+      expect(typeof t.slug).toBe('string');
       expect(Object.keys(t)).not.toContain('price');
     }
+  });
+
+  it('every transaction and property-type image exists as webp + jpg', () => {
+    const slugs = new Set([...commercialTransactions.map((t) => t.slug), ...propertyTypes.map((p) => p.image)]);
+    for (const slug of slugs) {
+      for (const ext of ['webp', 'jpg']) expect(existsSync(resolve(process.cwd(), `public/commercial/transactions/${slug}.${ext}`)), `${slug}.${ext}`).toBe(true);
+    }
+    for (const ext of ['webp', 'jpg']) expect(existsSync(resolve(process.cwd(), `public/commercial/hero.${ext}`))).toBe(true);
   });
 
   it('has eight property types, each mapped to an image slug', () => {
