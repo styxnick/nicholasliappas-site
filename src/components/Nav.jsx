@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { getStyles } from './styles';
+import { getStyles, FONT_SANS } from './styles';
 import { towns } from '../data/towns';
 import { useMediaQuery } from '../lib/useMediaQuery';
 
@@ -159,10 +159,10 @@ export default function Nav({ track }) {
       transition: 'all 0.3s ease'
     };
     const menuLink = {
-      fontFamily: "'Montserrat', sans-serif",
+      fontFamily: FONT_SANS,
       fontSize: '14px',
       fontWeight: 400,
-      letterSpacing: '3px',
+      letterSpacing: '2px',
       textTransform: 'uppercase',
       color: '#fff',
       textDecoration: 'none',
@@ -277,7 +277,7 @@ export default function Nav({ track }) {
               fontFamily: 'inherit',
               fontSize: '11px',
               fontWeight: 400,
-              letterSpacing: '2px',
+              letterSpacing: '1.5px',
               textTransform: 'uppercase'
             }}
           >
@@ -306,7 +306,7 @@ export default function Nav({ track }) {
                     padding: '12px 24px',
                     color: '#1a1a1a',
                     textDecoration: 'none',
-                    fontFamily: "'Montserrat', sans-serif",
+                    fontFamily: FONT_SANS,
                     fontSize: '12px',
                     fontWeight: 400,
                     letterSpacing: '1px',
@@ -332,10 +332,10 @@ export default function Nav({ track }) {
         {socialIcons(textColor)}
         <Link to="/#contact" style={{
           ...styles.navLink,
-          fontFamily: "'Montserrat', sans-serif",
+          fontFamily: FONT_SANS,
           fontSize: '11px',
           fontWeight: 400,
-          letterSpacing: '2px',
+          letterSpacing: '1.5px',
           textTransform: 'uppercase',
           padding: '12px 28px',
           border: `1px solid ${textColor}`

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getStyles } from '../components/styles';
+import { getStyles, FONT_SANS, FONT_SERIF } from '../components/styles';
 import ContactForm from '../components/ContactForm';
 import { useSeo, SITE_URL } from '../lib/seo';
 import { GOOGLE_REVIEWS_URL } from '../data/site';
@@ -120,10 +120,10 @@ export default function Home({ track }) {
 
         <div style={styles.heroContent}>
           <p style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: FONT_SANS,
             fontSize: '11px',
             fontWeight: 400,
-            letterSpacing: smallScreen ? '3px' : '6px',
+            letterSpacing: smallScreen ? '2px' : '4px',
             textTransform: 'uppercase',
             marginBottom: '24px',
             opacity: 0.7
@@ -142,10 +142,10 @@ export default function Home({ track }) {
           </h1>
 
           <p style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: FONT_SANS,
             fontSize: 'clamp(14px, 2vw, 18px)',
             fontWeight: 500,
-            letterSpacing: smallScreen ? '3px' : '8px',
+            letterSpacing: smallScreen ? '2px' : '5px',
             textTransform: 'uppercase',
             marginBottom: '40px',
             opacity: 0.9
@@ -154,9 +154,9 @@ export default function Home({ track }) {
           </p>
 
           <p style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: FONT_SANS,
             fontSize: '13px',
-            fontWeight: 300,
+            fontWeight: 400,
             letterSpacing: '1px',
             maxWidth: '600px',
             margin: '0 auto 48px',
@@ -189,7 +189,7 @@ export default function Home({ track }) {
           gap: '12px'
         }}>
           <span style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: FONT_SANS,
             fontSize: '10px',
             letterSpacing: '3px',
             color: '#fff',
@@ -218,7 +218,7 @@ export default function Home({ track }) {
             <p style={styles.sectionSubtitle}>Let's Connect</p>
             <h2 style={styles.sectionTitle}>Your Real Estate<br />Journey Starts Here</h2>
             <p style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: FONT_SANS,
               fontSize: '14px',
               lineHeight: 2,
               color: '#666',
@@ -238,7 +238,7 @@ export default function Home({ track }) {
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                   <span style={{ color: '#1a1a1a', fontSize: '8px' }}>◆</span>
                   <span style={{
-                    fontFamily: "'Montserrat', sans-serif",
+                    fontFamily: FONT_SANS,
                     fontSize: '13px',
                     letterSpacing: '0.5px'
                   }}>{item}</span>
@@ -256,7 +256,7 @@ export default function Home({ track }) {
               <a href="tel:516-214-7761"
                  onClick={() => track('phone_click', { placement: 'contact' })}
                  style={{
-                   fontFamily: "'Montserrat', sans-serif",
+                   fontFamily: FONT_SANS,
                    fontSize: '14px',
                    color: '#1a1a1a',
                    textDecoration: 'none',
@@ -267,7 +267,7 @@ export default function Home({ track }) {
               <a href="mailto:nicholas.liappas@compass.com"
                  onClick={() => track('email_click', { placement: 'contact' })}
                  style={{
-                   fontFamily: "'Montserrat', sans-serif",
+                   fontFamily: FONT_SANS,
                    fontSize: '14px',
                    color: '#1a1a1a',
                    textDecoration: 'none'
@@ -277,7 +277,7 @@ export default function Home({ track }) {
               <a href="https://instagram.com/nicholasliappas" target="_blank" rel="noopener noreferrer"
                  onClick={() => track('social_click', { network: 'instagram', placement: 'contact' })}
                  style={{
-                   fontFamily: "'Montserrat', sans-serif",
+                   fontFamily: FONT_SANS,
                    fontSize: '14px',
                    color: '#1a1a1a',
                    textDecoration: 'none',
@@ -296,7 +296,7 @@ export default function Home({ track }) {
               <a href="https://www.linkedin.com/in/nicholas-liappas-73482128/" target="_blank" rel="noopener noreferrer"
                  onClick={() => track('social_click', { network: 'linkedin', placement: 'contact' })}
                  style={{
-                   fontFamily: "'Montserrat', sans-serif",
+                   fontFamily: FONT_SANS,
                    fontSize: '14px',
                    color: '#1a1a1a',
                    textDecoration: 'none',
@@ -315,7 +315,7 @@ export default function Home({ track }) {
               <a href="https://x.com/nickliappas" target="_blank" rel="noopener noreferrer"
                  onClick={() => track('social_click', { network: 'x', placement: 'contact' })}
                  style={{
-                   fontFamily: "'Montserrat', sans-serif",
+                   fontFamily: FONT_SANS,
                    fontSize: '14px',
                    color: '#1a1a1a',
                    textDecoration: 'none',
@@ -380,9 +380,9 @@ export default function Home({ track }) {
               padding: '32px'
             }}>
               <span style={{
-                fontFamily: "'Montserrat', sans-serif",
+                fontFamily: FONT_SANS,
                 fontSize: '11px',
-                letterSpacing: '3px',
+                letterSpacing: '2px',
                 textTransform: 'uppercase',
                 opacity: 0.7,
                 display: 'block',
@@ -396,7 +396,7 @@ export default function Home({ track }) {
             <p style={styles.sectionSubtitle}>Meet Nicholas</p>
             <h2 style={styles.sectionTitle}>Your Trusted North Shore Real Estate Team</h2>
             <p style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: FONT_SANS,
               fontSize: '14px',
               lineHeight: 2,
               color: '#666',
@@ -405,7 +405,7 @@ export default function Home({ track }) {
               As a native of the North Shore and co-principal of The Liappas Team at Compass, I bring a unique combination of deep local knowledge and hands-on construction expertise to every transaction.
             </p>
             <p style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: FONT_SANS,
               fontSize: '14px',
               lineHeight: 2,
               color: '#666',
@@ -414,7 +414,7 @@ export default function Home({ track }) {
               My background in construction allows me to identify critical issues that may impact your real estate investment, while helping you visualize a home's true potential through cost-effective modifications and strategic upgrades.
             </p>
             <p style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: FONT_SANS,
               fontSize: '14px',
               lineHeight: 2,
               color: '#666',
@@ -432,9 +432,9 @@ export default function Home({ track }) {
             }}>
               {['Buyer\'s Agent', 'Listing Agent', 'Commercial', 'Relocation', 'Consulting'].map((spec, i) => (
                 <span key={i} style={{
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: FONT_SANS,
                   fontSize: '10px',
-                  letterSpacing: '2px',
+                  letterSpacing: '1.5px',
                   textTransform: 'uppercase',
                   padding: '10px 20px',
                   background: '#fff',
@@ -444,10 +444,10 @@ export default function Home({ track }) {
             </div>
 
             <div style={{ marginTop: '24px' }}>
-              <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '12px', color: '#707070', marginBottom: '8px' }}>
+              <p style={{ fontFamily: FONT_SANS, fontSize: '12px', color: '#707070', marginBottom: '8px' }}>
                 Languages: English & Greek
               </p>
-              <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '12px', color: '#707070' }}>
+              <p style={{ fontFamily: FONT_SANS, fontSize: '12px', color: '#707070' }}>
                 Education: Stony Brook University, B.A. Philosophy
               </p>
             </div>
@@ -469,7 +469,7 @@ export default function Home({ track }) {
             <p style={styles.sectionSubtitle}>The Liappas Team</p>
             <h2 style={styles.sectionTitle}>Full-Service Real Estate Solutions</h2>
             <p style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: FONT_SANS,
               fontSize: '14px',
               lineHeight: 2,
               color: '#666',
@@ -478,7 +478,7 @@ export default function Home({ track }) {
               The Liappas Team is a premier real estate group at Compass, combining decades of collective experience with an unwavering commitment to client success. Our team approach ensures you always have a knowledgeable professional available to assist you.
             </p>
             <p style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: FONT_SANS,
               fontSize: '14px',
               lineHeight: 2,
               color: '#666',
@@ -487,7 +487,7 @@ export default function Home({ track }) {
               From first-time homebuyers to seasoned investors, from residential sales to commercial development deals, our diverse expertise covers every aspect of real estate across Long Island's North Shore, Queens, and the North Fork.
             </p>
             <p style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: FONT_SANS,
               fontSize: '14px',
               lineHeight: 2,
               color: '#666',
@@ -505,48 +505,48 @@ export default function Home({ track }) {
             }}>
               <div>
                 <span style={{
-                  fontFamily: "'Cormorant Garamond', serif",
+                  fontFamily: FONT_SERIF,
                   fontSize: '36px',
                   fontWeight: 300,
                   display: 'block',
                   marginBottom: '4px'
                 }}>$150M+</span>
                 <span style={{
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: FONT_SANS,
                   fontSize: '10px',
-                  letterSpacing: '2px',
+                  letterSpacing: '1.5px',
                   textTransform: 'uppercase',
                   color: '#707070'
                 }}>In Sales Volume</span>
               </div>
               <div>
                 <span style={{
-                  fontFamily: "'Cormorant Garamond', serif",
+                  fontFamily: FONT_SERIF,
                   fontSize: '36px',
                   fontWeight: 300,
                   display: 'block',
                   marginBottom: '4px'
                 }}>200+</span>
                 <span style={{
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: FONT_SANS,
                   fontSize: '10px',
-                  letterSpacing: '2px',
+                  letterSpacing: '1.5px',
                   textTransform: 'uppercase',
                   color: '#707070'
                 }}>Transactions Closed</span>
               </div>
               <div>
                 <span style={{
-                  fontFamily: "'Cormorant Garamond', serif",
+                  fontFamily: FONT_SERIF,
                   fontSize: '36px',
                   fontWeight: 300,
                   display: 'block',
                   marginBottom: '4px'
                 }}>15+</span>
                 <span style={{
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: FONT_SANS,
                   fontSize: '10px',
-                  letterSpacing: '2px',
+                  letterSpacing: '1.5px',
                   textTransform: 'uppercase',
                   color: '#707070'
                 }}>Years Experience</span>
@@ -588,9 +588,9 @@ export default function Home({ track }) {
               padding: '32px'
             }}>
               <span style={{
-                fontFamily: "'Montserrat', sans-serif",
+                fontFamily: FONT_SANS,
                 fontSize: '11px',
-                letterSpacing: '3px',
+                letterSpacing: '2px',
                 textTransform: 'uppercase',
                 opacity: 0.7,
                 display: 'block',
@@ -665,13 +665,13 @@ export default function Home({ track }) {
                   letterSpacing: '1px'
                 }}>{service.title}</h3>
                 <p style={{
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: FONT_SANS,
                   fontSize: '13px',
                   lineHeight: 1.9,
                   color: '#666'
                 }}>{service.description}</p>
                 {service.cta && (
-                  <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '12px', letterSpacing: '2px', textTransform: 'uppercase', color: '#1a1a1a', fontWeight: 500, display: 'inline-block', marginTop: '20px' }}>{service.cta}</span>
+                  <span style={{ fontFamily: FONT_SANS, fontSize: '12px', letterSpacing: '1.5px', textTransform: 'uppercase', color: '#1a1a1a', fontWeight: 500, display: 'inline-block', marginTop: '20px' }}>{service.cta}</span>
                 )}
               </Card>
               );
@@ -712,16 +712,16 @@ export default function Home({ track }) {
                 </p>
                 <div style={{ marginTop: '32px' }}>
                   <span style={{
-                    fontFamily: "'Montserrat', sans-serif",
+                    fontFamily: FONT_SANS,
                     fontSize: '11px',
                     fontWeight: 500,
-                    letterSpacing: '3px',
+                    letterSpacing: '2px',
                     textTransform: 'uppercase',
                     display: 'block',
                     marginBottom: '4px'
                   }}>{testimonial.name}</span>
                   <span style={{
-                    fontFamily: "'Montserrat', sans-serif",
+                    fontFamily: FONT_SANS,
                     fontSize: '11px',
                     color: '#707070',
                     letterSpacing: '1px'
@@ -753,9 +753,9 @@ export default function Home({ track }) {
              style={{
                display: 'inline-block',
                marginTop: '40px',
-               fontFamily: "'Montserrat', sans-serif",
+               fontFamily: FONT_SANS,
                fontSize: '12px',
-               letterSpacing: '2px',
+               letterSpacing: '1.5px',
                textTransform: 'uppercase',
                color: '#1a1a1a',
                textDecoration: 'none',
@@ -778,9 +778,9 @@ export default function Home({ track }) {
             <circle cx="18" cy="6" r="1.5" fill="currentColor" />
           </svg>
           <p style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: FONT_SANS,
             fontSize: '11px',
-            letterSpacing: '4px',
+            letterSpacing: '3px',
             textTransform: 'uppercase',
             marginBottom: '12px',
             color: '#707070'
@@ -807,7 +807,7 @@ export default function Home({ track }) {
             Ready to Make Your Move?
           </h2>
           <p style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: FONT_SANS,
             fontSize: '14px',
             color: 'rgba(255,255,255,0.7)',
             marginBottom: '40px',

@@ -1,5 +1,5 @@
 import { useState, useId } from 'react';
-import { getStyles } from './styles';
+import { getStyles, FONT_SANS } from './styles';
 import { submitNetlifyForm, HoneypotField, HONEYPOT_FIELD } from '../lib/netlifyForms';
 import { roles, formPropertyTypes, timelines } from '../data/commercial';
 
@@ -35,7 +35,7 @@ export default function CommercialForm({ track }) {
 
   const selectStyle = (v) => ({ ...styles.input, color: v ? '#1a1a1a' : '#707070' });
   const label = (htmlFor, text) => <label htmlFor={htmlFor} style={styles.srOnly}>{text}</label>;
-  const small = { fontFamily: "'Montserrat', sans-serif", fontSize: '12px', color: '#888', lineHeight: 1.8 };
+  const small = { fontFamily: FONT_SANS, fontSize: '12px', color: '#888', lineHeight: 1.8 };
 
   return (
     <div style={{ background: '#fafafa', padding: 'clamp(32px, 5vw, 60px)', position: 'relative' }}>
@@ -44,7 +44,7 @@ export default function CommercialForm({ track }) {
         <div style={{ textAlign: 'center', padding: '60px 20px' }}>
           <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: '#1a1a1a', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px', fontSize: '24px' }}>✓</div>
           <h3 style={{ fontSize: '28px', fontWeight: 400, marginBottom: '12px' }}>Thank You</h3>
-          <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '14px', color: '#666' }}>I'll be in touch within one business day.</p>
+          <p style={{ fontFamily: FONT_SANS, fontSize: '14px', color: '#666' }}>I'll be in touch within one business day.</p>
         </div>
       ) : (
         <form name="commercial" method="POST" data-netlify="true" data-netlify-honeypot={HONEYPOT_FIELD} onSubmit={handleSubmit} aria-label="Commercial inquiry form"
@@ -83,7 +83,7 @@ export default function CommercialForm({ track }) {
           </select>
 
           {label(`${id}-message`, 'Anything else I should know')}
-          <textarea id={`${id}-message`} name="message" placeholder="Anything else I should know" rows={4} value={data.message} onChange={set('message')} style={{ ...styles.input, gridColumn: '1 / -1', resize: 'vertical', fontFamily: "'Montserrat', sans-serif" }} />
+          <textarea id={`${id}-message`} name="message" placeholder="Anything else I should know" rows={4} value={data.message} onChange={set('message')} style={{ ...styles.input, gridColumn: '1 / -1', resize: 'vertical', fontFamily: FONT_SANS }} />
 
           <div style={{ gridColumn: '1 / -1' }}>
             <button type="submit" disabled={submitting} style={{ ...styles.btnPrimary, width: '100%', opacity: submitting ? 0.7 : 1 }}>
