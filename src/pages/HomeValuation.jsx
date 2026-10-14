@@ -10,7 +10,7 @@ const STEP_FIELDS = {
   2: ['name', 'email']
 };
 
-export default function HomeValuation({ trackEvent }) {
+export default function HomeValuation({ track }) {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     address: '',
@@ -73,7 +73,7 @@ export default function HomeValuation({ trackEvent }) {
 
     try {
       await submitNetlifyForm('home-valuation', formData);
-      trackEvent('form_submit', 'Lead_Generation', 'Home_Valuation');
+      track('generate_lead', { form_name: 'home-valuation', interest: 'valuation' });
       setSubmitted(true);
     } catch (error) {
       console.error('Form submission error:', error);
@@ -616,7 +616,7 @@ export default function HomeValuation({ trackEvent }) {
           </div>
 
           <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer"
-             onClick={() => trackEvent('click', 'Social', 'Google_Reviews_Valuation')}
+             onClick={() => track('social_click', { network: 'google_reviews', placement: 'valuation' })}
              style={{
                display: 'inline-block',
                marginTop: '40px',

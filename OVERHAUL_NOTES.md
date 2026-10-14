@@ -112,8 +112,10 @@ Both submit through `src/lib/netlifyForms.jsx`.
 
 ### Google Analytics
 - GA4 tracking maintained
-- `trackEvent()` function passes events to GA4
-- Tracks: form submissions, CTA clicks, social clicks, contact clicks
+- `track(name, params)` sends named events (generate_lead, phone_click, email_click,
+  cta_click, social_click) with page_type / town / first_source context
+- First-touch attribution is stamped on every form lead; owner traffic is flagged
+  internal via `?internal=1`. Full details and GA4 setup record in README.md.
 
 ### Facebook Pixel
 - Disabled until `FB_PIXEL_ID` in `src/lib/analytics.js` is set

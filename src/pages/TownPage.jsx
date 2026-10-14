@@ -5,7 +5,7 @@ import ContactForm from '../components/ContactForm';
 import NotFound from './NotFound';
 import { useSeo, pageMeta, SITE_URL } from '../lib/seo';
 
-export default function TownPage({ trackEvent }) {
+export default function TownPage({ track }) {
   const { slug } = useParams();
   const town = towns[slug];
   const styles = getStyles(false);
@@ -115,11 +115,11 @@ export default function TownPage({ trackEvent }) {
           </p>
 
           <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to={`/${town.slug}#contact`} onClick={() => trackEvent('click', 'CTA', `Schedule_${town.slug}`)} style={styles.btnPrimary}>
+            <Link to={`/${town.slug}#contact`} onClick={() => track('cta_click', { cta: 'schedule', placement: 'hero' })} style={styles.btnPrimary}>
               Schedule Consultation
             </Link>
             <a href="tel:516-214-7761"
-               onClick={() => trackEvent('click', 'Contact', `Phone_${town.slug}`)}
+               onClick={() => track('phone_click', { placement: 'hero' })}
                style={styles.btnOutline}>
               Call 516-214-7761
             </a>
@@ -293,7 +293,7 @@ export default function TownPage({ trackEvent }) {
               gap: '12px'
             }}>
               <a href="tel:516-214-7761"
-                 onClick={() => trackEvent('click', 'Contact', 'Phone_Mobile')}
+                 onClick={() => track('phone_click', { placement: 'contact' })}
                  style={{
                    fontFamily: "'Montserrat', sans-serif",
                    fontSize: '14px',
@@ -304,7 +304,7 @@ export default function TownPage({ trackEvent }) {
                 M: 516-214-7761
               </a>
               <a href="mailto:nicholas.liappas@compass.com"
-                 onClick={() => trackEvent('click', 'Contact', 'Email')}
+                 onClick={() => track('email_click', { placement: 'contact' })}
                  style={{
                    fontFamily: "'Montserrat', sans-serif",
                    fontSize: '14px',
@@ -316,7 +316,7 @@ export default function TownPage({ trackEvent }) {
             </div>
           </div>
 
-          <ContactForm trackEvent={trackEvent} formName="contact" />
+          <ContactForm track={track} formName="contact" />
         </div>
       </section>
 

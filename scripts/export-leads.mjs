@@ -7,6 +7,7 @@ import { execFileSync } from 'node:child_process';
 import { writeFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
+import { HEADERS, toRow } from './lead-row.mjs';
 
 const SITE_ID = '1bb10d34-4eb0-41e0-bd36-4a6cd3fde292';
 const args = process.argv.slice(2);
@@ -26,19 +27,7 @@ for (const form of forms) {
     for (const s of batch) {
       const created = new Date(s.created_at);
       if (since && created < since) continue;
-      const f = Object.fromEntries((s.ordered_human_fields || []).map((x) => [x.name, x.value]));
-      rows.push({
-        form: form.name,
-        submitted_at: created.toLocaleString('en-US', { timeZone: 'America/New_York' }),
-        name: f.name ?? s.name ?? '',
-        email: f.email ?? s.email ?? '',
-        phone: f.phone ?? '',
-        interest: f.interest ?? '',
-        address: f.address ?? '',
-        zip: f.zipCode ?? '',
-        referrer: s.data?.referrer ?? '',
-        netlify_id: s.id
-      });
+      rows.push(toRow(form, s));
     }
     if (batch.length < 100) break;
     page += 1;
@@ -46,8 +35,7 @@ for (const form of forms) {
 }
 rows.sort((a, b) => new Date(b.submitted_at) - new Date(a.submitted_at));
 
-const headers = ['form', 'submitted_at', 'name', 'email', 'phone', 'interest', 'address', 'zip', 'referrer', 'netlify_id'];
 const q = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
-const csv = [headers.join(','), ...rows.map((r) => headers.map((h) => q(r[h])).join(','))].join('\n') + '\n';
+const csv = [HEADERS.join(','), ...rows.map((r) => HEADERS.map((h) => q(r[h])).join(','))].join('\n') + '\n';
 writeFileSync(out, csv);
 console.log(`wrote ${rows.length} lead(s) from ${forms.length} form(s) to ${out}`);

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { towns } from '../data/towns';
 
-export default function Footer({ trackEvent }) {
+export default function Footer({ track }) {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -36,7 +36,7 @@ export default function Footer({ trackEvent }) {
             </p>
             <div style={{ display: 'flex', gap: '16px', marginTop: '20px' }}>
               <a href="https://instagram.com/nicholasliappas" target="_blank" rel="noopener noreferrer"
-                 onClick={() => trackEvent('click', 'Social', 'Instagram_Footer')}
+                 onClick={() => track('social_click', { network: 'instagram', placement: 'footer' })}
                  aria-label="Follow Nicholas Liappas on Instagram"
                  style={{ color: '#fff', textDecoration: 'none' }}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -46,7 +46,7 @@ export default function Footer({ trackEvent }) {
                 </svg>
               </a>
               <a href="https://www.linkedin.com/in/nicholas-liappas-73482128/" target="_blank" rel="noopener noreferrer"
-                 onClick={() => trackEvent('click', 'Social', 'LinkedIn_Footer')}
+                 onClick={() => track('social_click', { network: 'linkedin', placement: 'footer' })}
                  aria-label="Connect with Nicholas Liappas on LinkedIn"
                  style={{ color: '#fff', textDecoration: 'none' }}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -56,7 +56,7 @@ export default function Footer({ trackEvent }) {
                 </svg>
               </a>
               <a href="https://x.com/nickliappas" target="_blank" rel="noopener noreferrer"
-                 onClick={() => trackEvent('click', 'Social', 'X_Twitter_Footer')}
+                 onClick={() => track('social_click', { network: 'x', placement: 'footer' })}
                  aria-label="Follow Nicholas Liappas on X"
                  style={{ color: '#fff', textDecoration: 'none' }}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -140,7 +140,7 @@ export default function Footer({ trackEvent }) {
             }}>Contact</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <a href="tel:516-214-7761"
-                 onClick={() => trackEvent('click', 'Contact', 'Phone_Footer')}
+                 onClick={() => track('phone_click', { placement: 'footer' })}
                  style={{
                    fontFamily: "'Montserrat', sans-serif",
                    fontSize: '13px',
@@ -150,7 +150,7 @@ export default function Footer({ trackEvent }) {
                 516-214-7761
               </a>
               <a href="mailto:nicholas.liappas@compass.com"
-                 onClick={() => trackEvent('click', 'Contact', 'Email_Footer')}
+                 onClick={() => track('email_click', { placement: 'footer' })}
                  style={{
                    fontFamily: "'Montserrat', sans-serif",
                    fontSize: '13px',
