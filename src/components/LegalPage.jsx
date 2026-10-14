@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import { getStyles } from './styles';
+import { getStyles, FONT_SANS } from './styles';
 
 // Shared layout for Privacy Policy and Terms of Service.
 export default function LegalPage({ eyebrow, title, updated, children }) {
   const styles = getStyles(false);
-  const body = { fontFamily: "'Montserrat', sans-serif", fontSize: '14px', lineHeight: 2, color: '#444', marginBottom: '20px' };
+  const body = { fontFamily: FONT_SANS, fontSize: '14px', lineHeight: 2, color: '#444', marginBottom: '20px' };
   return (
     <div style={styles.container}>
       <section style={{
@@ -16,9 +16,9 @@ export default function LegalPage({ eyebrow, title, updated, children }) {
         textAlign: 'center'
       }}>
         <div style={styles.heroContent}>
-          <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '11px', letterSpacing: '6px', textTransform: 'uppercase', marginBottom: '24px', opacity: 0.7 }}>{eyebrow}</p>
+          <p style={{ fontFamily: FONT_SANS, fontSize: '11px', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '24px', opacity: 0.7 }}>{eyebrow}</p>
           <h1 style={{ fontSize: 'clamp(36px, 6vw, 64px)', fontWeight: 300, letterSpacing: '3px', lineHeight: 1.1, marginBottom: '16px' }}>{title}</h1>
-          <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '12px', letterSpacing: '1px', opacity: 0.7 }}>Last updated {updated}</p>
+          <p style={{ fontFamily: FONT_SANS, fontSize: '12px', letterSpacing: '1px', opacity: 0.7 }}>Last updated {updated}</p>
         </div>
       </section>
       <section style={{ padding: '80px 5% 120px', background: '#fff' }}>
@@ -35,6 +35,6 @@ export default function LegalPage({ eyebrow, title, updated, children }) {
 
 export const legalStyles = {
   h2: { fontSize: '26px', fontWeight: 400, letterSpacing: '1px', margin: '40px 0 16px' },
-  p: { fontFamily: "'Montserrat', sans-serif", fontSize: '14px', lineHeight: 2, color: '#444', marginBottom: '20px' },
-  ul: { fontFamily: "'Montserrat', sans-serif", fontSize: '14px', lineHeight: 2, color: '#444', margin: '0 0 20px 20px', padding: 0 },
+  p: { fontFamily: FONT_SANS, fontSize: '14px', lineHeight: 2, color: '#444', marginBottom: '20px' },
+  ul: { fontFamily: FONT_SANS, fontSize: '14px', lineHeight: 2, color: '#444', margin: '0 0 20px 20px', padding: 0 },
 };

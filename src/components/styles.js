@@ -1,6 +1,11 @@
+// Font tokens: the only place a font family is spelled out. Inter carries
+// everything except the big display headings, which stay in Cormorant Garamond.
+export const FONT_SANS = "'Inter', 'Helvetica Neue', Arial, sans-serif";
+export const FONT_SERIF = "'Cormorant Garamond', Georgia, serif";
+
 export const getStyles = (isScrolled) => ({
   container: {
-    fontFamily: "'Cormorant Garamond', Georgia, serif",
+    fontFamily: FONT_SERIF,
     color: '#1a1a1a',
     background: '#fefefe',
     minHeight: '100vh',
@@ -22,7 +27,7 @@ export const getStyles = (isScrolled) => ({
     borderBottom: isScrolled ? '1px solid rgba(0,0,0,0.05)' : 'none'
   },
   logo: {
-    fontFamily: "'Montserrat', sans-serif",
+    fontFamily: FONT_SANS,
     fontWeight: 500,
     fontSize: '12px',
     letterSpacing: '4px',
@@ -34,10 +39,10 @@ export const getStyles = (isScrolled) => ({
   navLinks: {
     display: 'flex',
     gap: '48px',
-    fontFamily: "'Montserrat', sans-serif",
+    fontFamily: FONT_SANS,
     fontSize: '11px',
     fontWeight: 400,
-    letterSpacing: '2px',
+    letterSpacing: '1.5px',
     textTransform: 'uppercase'
   },
   navLink: {
@@ -65,10 +70,10 @@ export const getStyles = (isScrolled) => ({
     maxWidth: '1000px'
   },
   sectionSubtitle: {
-    fontFamily: "'Montserrat', sans-serif",
+    fontFamily: FONT_SANS,
     fontSize: '11px',
     fontWeight: 500,
-    letterSpacing: '4px',
+    letterSpacing: '3px',
     textTransform: 'uppercase',
     color: '#707070',
     marginBottom: '16px'
@@ -85,10 +90,10 @@ export const getStyles = (isScrolled) => ({
     color: '#fff',
     border: 'none',
     padding: '18px 48px',
-    fontFamily: "'Montserrat', sans-serif",
+    fontFamily: FONT_SANS,
     fontSize: '11px',
     fontWeight: 500,
-    letterSpacing: '3px',
+    letterSpacing: '2px',
     textTransform: 'uppercase',
     cursor: 'pointer',
     transition: 'all 0.3s ease',
@@ -100,10 +105,10 @@ export const getStyles = (isScrolled) => ({
     color: '#fff',
     border: '1px solid rgba(255,255,255,0.5)',
     padding: '18px 48px',
-    fontFamily: "'Montserrat', sans-serif",
+    fontFamily: FONT_SANS,
     fontSize: '11px',
     fontWeight: 500,
-    letterSpacing: '3px',
+    letterSpacing: '2px',
     textTransform: 'uppercase',
     cursor: 'pointer',
     transition: 'all 0.3s ease',
@@ -114,7 +119,7 @@ export const getStyles = (isScrolled) => ({
     width: '100%',
     padding: '16px 20px',
     border: '1px solid #e0e0e0',
-    fontFamily: "'Montserrat', sans-serif",
+    fontFamily: FONT_SANS,
     fontSize: '14px',
     transition: 'all 0.3s ease',
     background: '#fff'

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useId } from 'react';
-import { getStyles } from './styles';
+import { getStyles, FONT_SANS } from './styles';
 import { submitNetlifyForm, HoneypotField, HONEYPOT_FIELD } from '../lib/netlifyForms';
 
 const emptyForm = { name: '', email: '', phone: '', interest: '', [HONEYPOT_FIELD]: '' };
@@ -68,7 +68,7 @@ export default function ContactForm({ track, formName = 'contact' }) {
           }}>✓</div>
           <h3 style={{ fontSize: '28px', fontWeight: 400, marginBottom: '12px' }}>Thank You</h3>
           <p style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: FONT_SANS,
             fontSize: '14px',
             color: '#666'
           }}>I'll be in touch within 24 hours.</p>
@@ -153,7 +153,7 @@ export default function ContactForm({ track, formName = 'contact' }) {
 
             {submitError && (
               <p role="alert" style={{
-                fontFamily: "'Montserrat', sans-serif",
+                fontFamily: FONT_SANS,
                 fontSize: '13px',
                 color: '#b00020',
                 textAlign: 'center',
@@ -166,7 +166,7 @@ export default function ContactForm({ track, formName = 'contact' }) {
             )}
 
             <p style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: FONT_SANS,
               fontSize: '11px',
               color: '#707070',
               textAlign: 'center',

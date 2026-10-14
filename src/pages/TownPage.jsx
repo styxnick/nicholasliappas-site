@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { towns } from '../data/towns';
-import { getStyles } from '../components/styles';
+import { getStyles, FONT_SANS } from '../components/styles';
 import ContactForm from '../components/ContactForm';
 import NotFound from './NotFound';
 import { useSeo, pageMeta, SITE_URL } from '../lib/seo';
@@ -78,10 +78,10 @@ export default function TownPage({ track }) {
       }}>
         <div style={styles.heroContent}>
           <p style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: FONT_SANS,
             fontSize: '11px',
             fontWeight: 400,
-            letterSpacing: '6px',
+            letterSpacing: '4px',
             textTransform: 'uppercase',
             marginBottom: '24px',
             opacity: 0.7,
@@ -102,10 +102,10 @@ export default function TownPage({ track }) {
           </h1>
 
           <p style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: FONT_SANS,
             fontSize: 'clamp(14px, 2vw, 18px)',
             fontWeight: 500,
-            letterSpacing: '2px',
+            letterSpacing: '1.5px',
             textTransform: 'uppercase',
             marginBottom: '40px',
             opacity: 0.9,
@@ -132,7 +132,7 @@ export default function TownPage({ track }) {
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           <h2 style={styles.sectionTitle}>{town.name} Real Estate</h2>
           <p style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: FONT_SANS,
             fontSize: '16px',
             lineHeight: 2,
             color: '#666',
@@ -143,7 +143,7 @@ export default function TownPage({ track }) {
 
           <div style={{ marginBottom: '60px' }}>
             <h3 style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: FONT_SANS,
               fontSize: '18px',
               fontWeight: 500,
               marginBottom: '24px',
@@ -154,7 +154,7 @@ export default function TownPage({ track }) {
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               {town.highlights.map((highlight, i) => (
                 <li key={i} style={{
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: FONT_SANS,
                   fontSize: '14px',
                   lineHeight: 2,
                   color: '#666',
@@ -193,9 +193,9 @@ export default function TownPage({ track }) {
               borderRadius: '4px'
             }}>
               <p style={{
-                fontFamily: "'Montserrat', sans-serif",
+                fontFamily: FONT_SANS,
                 fontSize: '12px',
-                letterSpacing: '2px',
+                letterSpacing: '1.5px',
                 textTransform: 'uppercase',
                 color: '#707070',
                 marginBottom: '12px'
@@ -217,9 +217,9 @@ export default function TownPage({ track }) {
               borderRadius: '4px'
             }}>
               <p style={{
-                fontFamily: "'Montserrat', sans-serif",
+                fontFamily: FONT_SANS,
                 fontSize: '12px',
-                letterSpacing: '2px',
+                letterSpacing: '1.5px',
                 textTransform: 'uppercase',
                 color: '#707070',
                 marginBottom: '12px'
@@ -241,9 +241,9 @@ export default function TownPage({ track }) {
               borderRadius: '4px'
             }}>
               <p style={{
-                fontFamily: "'Montserrat', sans-serif",
+                fontFamily: FONT_SANS,
                 fontSize: '12px',
-                letterSpacing: '2px',
+                letterSpacing: '1.5px',
                 textTransform: 'uppercase',
                 color: '#707070',
                 marginBottom: '12px'
@@ -276,7 +276,7 @@ export default function TownPage({ track }) {
             <p style={styles.sectionSubtitle}>Ready to Explore?</p>
             <h2 style={styles.sectionTitle}>Find Your {town.name} Home</h2>
             <p style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: FONT_SANS,
               fontSize: '14px',
               lineHeight: 2,
               color: '#666',
@@ -295,7 +295,7 @@ export default function TownPage({ track }) {
               <a href="tel:516-214-7761"
                  onClick={() => track('phone_click', { placement: 'contact' })}
                  style={{
-                   fontFamily: "'Montserrat', sans-serif",
+                   fontFamily: FONT_SANS,
                    fontSize: '14px',
                    color: '#1a1a1a',
                    textDecoration: 'none',
@@ -306,7 +306,7 @@ export default function TownPage({ track }) {
               <a href="mailto:nicholas.liappas@compass.com"
                  onClick={() => track('email_click', { placement: 'contact' })}
                  style={{
-                   fontFamily: "'Montserrat', sans-serif",
+                   fontFamily: FONT_SANS,
                    fontSize: '14px',
                    color: '#1a1a1a',
                    textDecoration: 'none'
@@ -364,7 +364,7 @@ export default function TownPage({ track }) {
                   {t.name}
                 </h3>
                 <p style={{
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: FONT_SANS,
                   fontSize: '13px',
                   color: '#707070',
                   marginBottom: '16px',
@@ -373,9 +373,9 @@ export default function TownPage({ track }) {
                   {t.description.substring(0, 120)}...
                 </p>
                 <span style={{
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: FONT_SANS,
                   fontSize: '12px',
-                  letterSpacing: '2px',
+                  letterSpacing: '1.5px',
                   textTransform: 'uppercase',
                   color: '#1a1a1a',
                   fontWeight: 500

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { towns } from '../data/towns';
+import { FONT_SANS } from './styles';
 
 export default function Footer({ track }) {
   const currentYear = new Date().getFullYear();
@@ -18,15 +19,15 @@ export default function Footer({ track }) {
           {/* About */}
           <div>
             <h2 style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: FONT_SANS,
               fontSize: '12px',
               fontWeight: 600,
-              letterSpacing: '3px',
+              letterSpacing: '2px',
               textTransform: 'uppercase',
               marginBottom: '24px'
             }}>About</h2>
             <p style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: FONT_SANS,
               fontSize: '13px',
               lineHeight: 2,
               color: '#ccc',
@@ -69,10 +70,10 @@ export default function Footer({ track }) {
           {/* Communities */}
           <div>
             <h2 style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: FONT_SANS,
               fontSize: '12px',
               fontWeight: 600,
-              letterSpacing: '3px',
+              letterSpacing: '2px',
               textTransform: 'uppercase',
               marginBottom: '24px'
             }}>Communities</h2>
@@ -81,7 +82,7 @@ export default function Footer({ track }) {
                 <li key={town.slug} style={{ marginBottom: '12px' }}>
                   <Link to={`/${town.slug}`}
                     style={{
-                      fontFamily: "'Montserrat', sans-serif",
+                      fontFamily: FONT_SANS,
                       fontSize: '13px',
                       color: '#ccc',
                       textDecoration: 'none',
@@ -100,10 +101,10 @@ export default function Footer({ track }) {
           {/* Services */}
           <div>
             <h2 style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: FONT_SANS,
               fontSize: '12px',
               fontWeight: 600,
-              letterSpacing: '3px',
+              letterSpacing: '2px',
               textTransform: 'uppercase',
               marginBottom: '24px'
             }}>Services</h2>
@@ -112,7 +113,7 @@ export default function Footer({ track }) {
                 <li key={service} style={{ marginBottom: '12px' }}>
                   <Link to="/#services"
                     style={{
-                      fontFamily: "'Montserrat', sans-serif",
+                      fontFamily: FONT_SANS,
                       fontSize: '13px',
                       color: '#ccc',
                       textDecoration: 'none',
@@ -131,10 +132,10 @@ export default function Footer({ track }) {
           {/* Contact */}
           <div>
             <h2 style={{
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: FONT_SANS,
               fontSize: '12px',
               fontWeight: 600,
-              letterSpacing: '3px',
+              letterSpacing: '2px',
               textTransform: 'uppercase',
               marginBottom: '24px'
             }}>Contact</h2>
@@ -142,7 +143,7 @@ export default function Footer({ track }) {
               <a href="tel:516-214-7761"
                  onClick={() => track('phone_click', { placement: 'footer' })}
                  style={{
-                   fontFamily: "'Montserrat', sans-serif",
+                   fontFamily: FONT_SANS,
                    fontSize: '13px',
                    color: '#ccc',
                    textDecoration: 'none'
@@ -152,7 +153,7 @@ export default function Footer({ track }) {
               <a href="mailto:nicholas.liappas@compass.com"
                  onClick={() => track('email_click', { placement: 'footer' })}
                  style={{
-                   fontFamily: "'Montserrat', sans-serif",
+                   fontFamily: FONT_SANS,
                    fontSize: '13px',
                    color: '#ccc',
                    textDecoration: 'none'
@@ -161,7 +162,7 @@ export default function Footer({ track }) {
               </a>
               <Link to="/home-valuation"
                 style={{
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: FONT_SANS,
                   fontSize: '13px',
                   color: '#ccc',
                   textDecoration: 'none',
@@ -181,7 +182,7 @@ export default function Footer({ track }) {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          fontFamily: "'Montserrat', sans-serif",
+          fontFamily: FONT_SANS,
           fontSize: '12px',
           color: '#888',
           paddingTop: '20px',

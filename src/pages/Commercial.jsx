@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getStyles } from '../components/styles';
+import { getStyles, FONT_SANS } from '../components/styles';
 import CommercialForm from '../components/CommercialForm';
 import { useSeo, pageMeta, SITE_URL } from '../lib/seo';
 import { useMediaQuery } from '../lib/useMediaQuery';
@@ -8,7 +8,6 @@ import { propertyTypes, whoIRepresent, walkthroughChecks, howItWorks, markets, g
 import { commercialTransactions } from '../data/commercialTransactions';
 import { commercialListings } from '../data/commercialListings';
 
-const MONT = "'Montserrat', sans-serif";
 const PHONE = '516-214-7761';
 const FALLBACK = 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 40%, #1a1a1a 100%)';
 
@@ -31,15 +30,15 @@ function Photo({ src, alt, style, eager = false }) {
 }
 
 const Eyebrow = ({ children, light }) => (
-  <p style={{ fontFamily: MONT, fontSize: '11px', fontWeight: 500, letterSpacing: '4px', textTransform: 'uppercase', color: light ? 'rgba(255,255,255,0.7)' : '#707070', marginBottom: '16px' }}>{children}</p>
+  <p style={{ fontFamily: FONT_SANS, fontSize: '11px', fontWeight: 500, letterSpacing: '3px', textTransform: 'uppercase', color: light ? 'rgba(255,255,255,0.7)' : '#707070', marginBottom: '16px' }}>{children}</p>
 );
 
 const Body = ({ children, style }) => (
-  <p style={{ fontFamily: MONT, fontSize: '15px', lineHeight: 2, color: '#666', ...style }}>{children}</p>
+  <p style={{ fontFamily: FONT_SANS, fontSize: '15px', lineHeight: 2, color: '#666', ...style }}>{children}</p>
 );
 
 const Tag = ({ children, dark }) => (
-  <span style={{ fontFamily: MONT, fontSize: '10px', letterSpacing: '2px', textTransform: 'uppercase', padding: '6px 10px', border: `1px solid ${dark ? '#1a1a1a' : '#ddd'}`, color: '#1a1a1a', background: '#fff' }}>{children}</span>
+  <span style={{ fontFamily: FONT_SANS, fontSize: '10px', letterSpacing: '1.5px', textTransform: 'uppercase', padding: '6px 10px', border: `1px solid ${dark ? '#1a1a1a' : '#ddd'}`, color: '#1a1a1a', background: '#fff' }}>{children}</span>
 );
 
 export default function Commercial({ track }) {
@@ -114,13 +113,13 @@ export default function Commercial({ track }) {
         <Photo src="/commercial/hero" alt="" eager style={{ position: 'absolute', inset: 0, zIndex: 0 }} />
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'rgba(10,10,10,0.45)', zIndex: 1 }} />
         <div style={{ ...styles.heroContent, maxWidth: '900px' }}>
-          <p style={{ fontFamily: MONT, fontSize: '11px', letterSpacing: small ? '3px' : '6px', textTransform: 'uppercase', marginBottom: '24px', opacity: 0.75 }}>
+          <p style={{ fontFamily: FONT_SANS, fontSize: '11px', letterSpacing: small ? '2px' : '4px', textTransform: 'uppercase', marginBottom: '24px', opacity: 0.75 }}>
             Commercial Real Estate · The Liappas Team at Compass
           </p>
           <h1 style={{ fontSize: 'clamp(40px, 7vw, 76px)', fontWeight: 300, letterSpacing: '3px', lineHeight: 1.05, marginBottom: '28px' }}>
             Commercial Property, Seen Clearly.
           </h1>
-          <p style={{ fontFamily: MONT, fontSize: '14px', fontWeight: 300, lineHeight: 2, maxWidth: '680px', margin: '0 auto 44px', opacity: 0.9, textShadow: '0 1px 14px rgba(0,0,0,0.7)' }}>
+          <p style={{ fontFamily: FONT_SANS, fontSize: '14px', fontWeight: 400, lineHeight: 2, maxWidth: '680px', margin: '0 auto 44px', opacity: 0.9, textShadow: '0 1px 14px rgba(0,0,0,0.7)' }}>
             Sales and leasing for land, retail, office, medical, mixed-use and industrial property across the North Shore, Queens and the North Fork. I represent owners, buyers, landlords and tenants, and I can see what a building really needs because I've built them.
           </p>
           <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -157,7 +156,7 @@ export default function Commercial({ track }) {
                 <Photo src={p.image ? `/commercial/transactions/${p.image}` : ''} alt="" style={{ aspectRatio: '3 / 2', width: '100%' }} />
                 <div style={{ padding: '28px 28px 32px', display: 'flex', flexDirection: 'column', gap: '14px', flex: 1 }}>
                   <h3 style={{ fontSize: '24px', fontWeight: 400, letterSpacing: '1px', lineHeight: 1.2 }}>{p.title}</h3>
-                  <p style={{ fontFamily: MONT, fontSize: '13px', lineHeight: 1.9, color: '#666', flex: 1 }}>{p.text}</p>
+                  <p style={{ fontFamily: FONT_SANS, fontSize: '13px', lineHeight: 1.9, color: '#666', flex: 1 }}>{p.text}</p>
                   <div style={{ display: 'flex', gap: '8px' }}>{p.tags.map((t) => <Tag key={t}>{t}</Tag>)}</div>
                 </div>
               </article>
@@ -181,11 +180,11 @@ export default function Commercial({ track }) {
                   <Photo src={t.slug ? `/commercial/transactions/${t.slug}` : ''} alt={t.address} style={{ aspectRatio: '3 / 2', width: '100%' }} />
                   <div style={{ padding: '24px 24px 28px' }}>
                     <h3 style={{ fontSize: '22px', fontWeight: 400, letterSpacing: '0.5px', marginBottom: '4px' }}>{t.address}</h3>
-                    {t.town && <p style={{ fontFamily: MONT, fontSize: '12px', letterSpacing: '1px', color: '#707070', marginBottom: '14px' }}>{t.town}</p>}
+                    {t.town && <p style={{ fontFamily: FONT_SANS, fontSize: '12px', letterSpacing: '1px', color: '#707070', marginBottom: '14px' }}>{t.town}</p>}
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', alignItems: 'center' }}>
                       {t.type && <Tag>{t.type}</Tag>}
                       {(t.dealType || t.role) && (
-                        <span style={{ fontFamily: MONT, fontSize: '12px', color: '#444' }}>{[t.dealType, t.role].filter(Boolean).join(' · ')}</span>
+                        <span style={{ fontFamily: FONT_SANS, fontSize: '12px', color: '#444' }}>{[t.dealType, t.role].filter(Boolean).join(' · ')}</span>
                       )}
                     </div>
                   </div>
@@ -197,7 +196,7 @@ export default function Commercial({ track }) {
                 <button type="button" onClick={() => setShowAll(true)} style={{ ...styles.btnOutline, color: '#1a1a1a', borderColor: '#1a1a1a' }}>View All</button>
               </div>
             )}
-            <p style={{ fontFamily: MONT, fontSize: '12px', color: '#888', textAlign: 'center', marginTop: '32px', fontStyle: 'italic' }}>Transactions by The Liappas Team at Compass.</p>
+            <p style={{ fontFamily: FONT_SANS, fontSize: '12px', color: '#888', textAlign: 'center', marginTop: '32px', fontStyle: 'italic' }}>Transactions by The Liappas Team at Compass.</p>
           </div>
         </section>
       )}
@@ -213,7 +212,7 @@ export default function Commercial({ track }) {
             {whoIRepresent.map((w) => (
               <div key={w.title} style={{ background: '#fff', padding: '32px', borderTop: '1px solid #1a1a1a' }}>
                 <h3 style={{ fontSize: '22px', fontWeight: 400, letterSpacing: '1px', marginBottom: '10px' }}>{w.title}</h3>
-                <p style={{ fontFamily: MONT, fontSize: '13px', lineHeight: 1.9, color: '#666' }}>{w.text}</p>
+                <p style={{ fontFamily: FONT_SANS, fontSize: '13px', lineHeight: 1.9, color: '#666' }}>{w.text}</p>
               </div>
             ))}
           </div>
@@ -225,12 +224,12 @@ export default function Commercial({ track }) {
         <div style={inner(1100)}>
           <Eyebrow light>The Construction Edge</Eyebrow>
           <h2 style={{ ...h2, color: '#fff' }}>What I Look For That Others Miss</h2>
-          <p style={{ fontFamily: MONT, fontSize: '15px', lineHeight: 2, color: 'rgba(255,255,255,0.8)', maxWidth: '720px', marginBottom: '48px' }}>
+          <p style={{ fontFamily: FONT_SANS, fontSize: '15px', lineHeight: 2, color: 'rgba(255,255,255,0.8)', maxWidth: '720px', marginBottom: '48px' }}>
             Before you buy, lease or price a property, I walk it with a builder's eye. Here's what I'm checking:
           </p>
           <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gridTemplateColumns: small ? '1fr' : '1fr 1fr', gap: '14px 48px' }}>
             {walkthroughChecks.map((c) => (
-              <li key={c} style={{ fontFamily: MONT, fontSize: '14px', lineHeight: 1.8, color: 'rgba(255,255,255,0.9)', display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
+              <li key={c} style={{ fontFamily: FONT_SANS, fontSize: '14px', lineHeight: 1.8, color: 'rgba(255,255,255,0.9)', display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
                 <span aria-hidden="true" style={{ fontSize: '8px', marginTop: '9px', flexShrink: 0 }}>◆</span>{c}
               </li>
             ))}
@@ -251,7 +250,7 @@ export default function Commercial({ track }) {
           <div role="tablist" aria-label="Sales or leasing" style={{ display: 'flex', justifyContent: 'center', gap: '0', marginBottom: '48px', flexWrap: 'wrap' }}>
             {Object.entries(howItWorks).map(([key, v]) => (
               <button key={key} role="tab" type="button" aria-selected={tab === key} id={`tab-${key}`} aria-controls={`panel-${key}`} onClick={() => setTab(key)}
-                      style={{ fontFamily: MONT, fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase', padding: '16px 28px', cursor: 'pointer', border: '1px solid #1a1a1a', background: tab === key ? '#1a1a1a' : '#fff', color: tab === key ? '#fff' : '#1a1a1a' }}>
+                      style={{ fontFamily: FONT_SANS, fontSize: '11px', letterSpacing: '1.5px', textTransform: 'uppercase', padding: '16px 28px', cursor: 'pointer', border: '1px solid #1a1a1a', background: tab === key ? '#1a1a1a' : '#fff', color: tab === key ? '#fff' : '#1a1a1a' }}>
                 {key === 'sales' ? 'Sales' : 'Leasing'}
               </button>
             ))}
@@ -263,8 +262,8 @@ export default function Commercial({ track }) {
                 <li key={name} style={{ display: 'grid', gridTemplateColumns: '56px 1fr', gap: '20px', alignItems: 'start', padding: '24px 0', borderTop: '1px solid #e8e8e8' }}>
                   <span style={{ fontSize: '32px', fontWeight: 300, color: '#bbb', lineHeight: 1 }}>{String(i + 1).padStart(2, '0')}</span>
                   <div>
-                    <h4 style={{ fontFamily: MONT, fontSize: '14px', fontWeight: 500, letterSpacing: '1px', marginBottom: '6px' }}>{name}</h4>
-                    <p style={{ fontFamily: MONT, fontSize: '14px', lineHeight: 1.9, color: '#666' }}>{text}</p>
+                    <h4 style={{ fontFamily: FONT_SANS, fontSize: '14px', fontWeight: 500, letterSpacing: '1px', marginBottom: '6px' }}>{name}</h4>
+                    <p style={{ fontFamily: FONT_SANS, fontSize: '14px', lineHeight: 1.9, color: '#666' }}>{text}</p>
                   </div>
                 </li>
               ))}
@@ -282,11 +281,11 @@ export default function Commercial({ track }) {
             {markets.map((m) => (
               <div key={m.name} style={{ background: '#fff', padding: '32px' }}>
                 <h3 style={{ fontSize: '24px', fontWeight: 400, letterSpacing: '1px', marginBottom: '12px' }}>{m.name}</h3>
-                <p style={{ fontFamily: MONT, fontSize: '13px', lineHeight: 1.9, color: '#666' }}>{m.text}</p>
+                <p style={{ fontFamily: FONT_SANS, fontSize: '13px', lineHeight: 1.9, color: '#666' }}>{m.text}</p>
               </div>
             ))}
           </div>
-          <p style={{ fontFamily: MONT, fontSize: '13px', lineHeight: 1.9, color: '#666', fontStyle: 'italic', marginTop: '32px' }}>{greekLine}</p>
+          <p style={{ fontFamily: FONT_SANS, fontSize: '13px', lineHeight: 1.9, color: '#666', fontStyle: 'italic', marginTop: '32px' }}>{greekLine}</p>
         </div>
       </section>
 
@@ -305,8 +304,8 @@ export default function Commercial({ track }) {
                   <div style={{ padding: '24px' }}>
                     <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}><Tag>{l.type}</Tag><Tag dark>{l.dealType}</Tag></div>
                     <h3 style={{ fontSize: '22px', fontWeight: 400, marginBottom: '4px' }}>{l.title}</h3>
-                    <p style={{ fontFamily: MONT, fontSize: '12px', letterSpacing: '1px', color: '#707070', marginBottom: '12px' }}>{[l.town, l.size, l.price].filter(Boolean).join(' · ')}</p>
-                    {l.compassUrl && <a href={l.compassUrl} target="_blank" rel="noopener noreferrer" onClick={() => track('cta_click', { cta: 'view_listing', placement: 'commercial_listings' })} style={{ fontFamily: MONT, fontSize: '12px', letterSpacing: '2px', textTransform: 'uppercase', color: '#1a1a1a', textDecoration: 'none', fontWeight: 500 }}>View Details →</a>}
+                    <p style={{ fontFamily: FONT_SANS, fontSize: '12px', letterSpacing: '1px', color: '#707070', marginBottom: '12px' }}>{[l.town, l.size, l.price].filter(Boolean).join(' · ')}</p>
+                    {l.compassUrl && <a href={l.compassUrl} target="_blank" rel="noopener noreferrer" onClick={() => track('cta_click', { cta: 'view_listing', placement: 'commercial_listings' })} style={{ fontFamily: FONT_SANS, fontSize: '12px', letterSpacing: '1.5px', textTransform: 'uppercase', color: '#1a1a1a', textDecoration: 'none', fontWeight: 500 }}>View Details →</a>}
                   </div>
                 </article>
               ))}
@@ -323,8 +322,8 @@ export default function Commercial({ track }) {
             <h2 style={h2}>Tell Me About the Property or the Space You Need</h2>
             <Body style={{ marginBottom: '40px' }}>I'll get back to you within one business day.</Body>
             <div style={{ paddingTop: '32px', borderTop: '1px solid #e8e8e8', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <a href={`tel:${PHONE}`} onClick={() => track('phone_click', { placement: 'contact' })} style={{ fontFamily: MONT, fontSize: '14px', color: '#1a1a1a', textDecoration: 'none', letterSpacing: '1px' }}>M: {PHONE}</a>
-              <a href="mailto:nicholas.liappas@compass.com" onClick={() => track('email_click', { placement: 'contact' })} style={{ fontFamily: MONT, fontSize: '14px', color: '#1a1a1a', textDecoration: 'none' }}>nicholas.liappas@compass.com</a>
+              <a href={`tel:${PHONE}`} onClick={() => track('phone_click', { placement: 'contact' })} style={{ fontFamily: FONT_SANS, fontSize: '14px', color: '#1a1a1a', textDecoration: 'none', letterSpacing: '1px' }}>M: {PHONE}</a>
+              <a href="mailto:nicholas.liappas@compass.com" onClick={() => track('email_click', { placement: 'contact' })} style={{ fontFamily: FONT_SANS, fontSize: '14px', color: '#1a1a1a', textDecoration: 'none' }}>nicholas.liappas@compass.com</a>
             </div>
           </div>
           <CommercialForm track={track} />
@@ -341,9 +340,9 @@ export default function Commercial({ track }) {
           {faqs.map((f) => (
             <details key={f.q} style={{ background: '#fff', padding: '4px 28px', marginBottom: '12px' }}>
               <summary style={{ fontSize: '21px', fontWeight: 400, letterSpacing: '0.5px', padding: '20px 0', cursor: 'pointer', listStyle: 'none', display: 'flex', justifyContent: 'space-between', gap: '16px' }}>
-                {f.q}<span aria-hidden="true" style={{ fontFamily: MONT, color: '#888' }}>+</span>
+                {f.q}<span aria-hidden="true" style={{ fontFamily: FONT_SANS, color: '#888' }}>+</span>
               </summary>
-              <p style={{ fontFamily: MONT, fontSize: '14px', lineHeight: 1.9, color: '#666', padding: '0 0 24px' }}>{f.a}</p>
+              <p style={{ fontFamily: FONT_SANS, fontSize: '14px', lineHeight: 1.9, color: '#666', padding: '0 0 24px' }}>{f.a}</p>
             </details>
           ))}
         </div>
@@ -353,12 +352,12 @@ export default function Commercial({ track }) {
       <section style={{ ...section('#1a1a1a'), color: '#fff', textAlign: 'center' }}>
         <div style={inner(800)}>
           <h2 style={{ ...h2, color: '#fff' }}>Have a Property or a Space in Mind?</h2>
-          <p style={{ fontFamily: MONT, fontSize: '15px', lineHeight: 2, color: 'rgba(255,255,255,0.8)', marginBottom: '44px' }}>A ten-minute call is usually enough to know whether it makes sense.</p>
+          <p style={{ fontFamily: FONT_SANS, fontSize: '15px', lineHeight: 2, color: 'rgba(255,255,255,0.8)', marginBottom: '44px' }}>A ten-minute call is usually enough to know whether it makes sense.</p>
           <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/commercial#inquiry" onClick={() => track('cta_click', { cta: 'schedule', placement: 'bottom_cta' })} style={{ ...styles.btnPrimary, background: '#fff', color: '#1a1a1a' }}>Schedule a Call</Link>
             {phoneBtn('bottom_cta')}
           </div>
-          <p style={{ fontFamily: MONT, fontSize: '11px', lineHeight: 1.9, color: 'rgba(255,255,255,0.5)', marginTop: '64px', letterSpacing: '0.5px' }}>{complianceLine}</p>
+          <p style={{ fontFamily: FONT_SANS, fontSize: '11px', lineHeight: 1.9, color: 'rgba(255,255,255,0.5)', marginTop: '64px', letterSpacing: '0.5px' }}>{complianceLine}</p>
         </div>
       </section>
     </div>

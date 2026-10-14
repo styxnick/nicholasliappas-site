@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { getStyles } from '../components/styles';
+import { getStyles, FONT_SANS } from '../components/styles';
 import { towns } from '../data/towns';
 import { useSeo } from '../lib/seo';
 
@@ -21,10 +21,10 @@ export default function NotFound() {
       }}>
         <div style={styles.heroContent}>
           <p style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: FONT_SANS,
             fontSize: '11px',
             fontWeight: 400,
-            letterSpacing: '6px',
+            letterSpacing: '4px',
             textTransform: 'uppercase',
             marginBottom: '24px',
             opacity: 0.7
@@ -41,9 +41,9 @@ export default function NotFound() {
             Page Not Found
           </h1>
           <p style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: FONT_SANS,
             fontSize: '14px',
-            fontWeight: 300,
+            fontWeight: 400,
             letterSpacing: '1px',
             maxWidth: '520px',
             margin: '0 auto 40px',
@@ -55,9 +55,9 @@ export default function NotFound() {
           <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '40px' }}>
             {Object.values(towns).map((town) => (
               <Link key={town.slug} to={`/${town.slug}`} style={{
-                fontFamily: "'Montserrat', sans-serif",
+                fontFamily: FONT_SANS,
                 fontSize: '11px',
-                letterSpacing: '2px',
+                letterSpacing: '1.5px',
                 textTransform: 'uppercase',
                 color: '#fff',
                 textDecoration: 'none',

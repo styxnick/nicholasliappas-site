@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { getStyles } from '../components/styles';
+import { getStyles, FONT_SANS } from '../components/styles';
 import { submitNetlifyForm, HoneypotField, HONEYPOT_FIELD } from '../lib/netlifyForms';
 import { useSeo, pageMeta } from '../lib/seo';
 import { GOOGLE_REVIEWS_URL } from '../data/site';
@@ -85,7 +85,7 @@ export default function HomeValuation({ track }) {
 
   const stepErrorMessage = stepError && (
     <p role="alert" style={{
-      fontFamily: "'Montserrat', sans-serif",
+      fontFamily: FONT_SANS,
       fontSize: '13px',
       color: '#b00020',
       lineHeight: 1.6,
@@ -118,10 +118,10 @@ export default function HomeValuation({ track }) {
           </h1>
 
           <p style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: FONT_SANS,
             fontSize: 'clamp(14px, 2vw, 18px)',
             fontWeight: 500,
-            letterSpacing: '2px',
+            letterSpacing: '1.5px',
             textTransform: 'uppercase',
             marginBottom: '40px',
             opacity: 0.9,
@@ -131,7 +131,7 @@ export default function HomeValuation({ track }) {
           </p>
 
           <p style={{
-            fontFamily: "'Montserrat', sans-serif",
+            fontFamily: FONT_SANS,
             fontSize: '14px',
             color: 'rgba(255,255,255,0.8)',
             maxWidth: '600px',
@@ -167,7 +167,7 @@ export default function HomeValuation({ track }) {
                 letterSpacing: '1px'
               }}>Thank You</h2>
               <p style={{
-                fontFamily: "'Montserrat', sans-serif",
+                fontFamily: FONT_SANS,
                 fontSize: '14px',
                 color: '#666',
                 marginBottom: '24px',
@@ -217,7 +217,7 @@ export default function HomeValuation({ track }) {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      fontFamily: "'Montserrat', sans-serif",
+                      fontFamily: FONT_SANS,
                       fontSize: '14px',
                       fontWeight: 600,
                       transition: 'all 0.3s ease'
@@ -247,7 +247,7 @@ export default function HomeValuation({ track }) {
                     letterSpacing: '1px'
                   }}>Property Details</h2>
                   <p style={{
-                    fontFamily: "'Montserrat', sans-serif",
+                    fontFamily: FONT_SANS,
                     fontSize: '14px',
                     color: '#666',
                     marginBottom: '40px'
@@ -302,7 +302,7 @@ export default function HomeValuation({ track }) {
                     letterSpacing: '1px'
                   }}>Your Information</h2>
                   <p style={{
-                    fontFamily: "'Montserrat', sans-serif",
+                    fontFamily: FONT_SANS,
                     fontSize: '14px',
                     color: '#666',
                     marginBottom: '40px'
@@ -379,7 +379,7 @@ export default function HomeValuation({ track }) {
                     letterSpacing: '1px'
                   }}>Review Your Information</h2>
                   <p style={{
-                    fontFamily: "'Montserrat', sans-serif",
+                    fontFamily: FONT_SANS,
                     fontSize: '14px',
                     color: '#666',
                     marginBottom: '40px'
@@ -395,9 +395,9 @@ export default function HomeValuation({ track }) {
                   }}>
                     <div style={{ marginBottom: '24px' }}>
                       <p style={{
-                        fontFamily: "'Montserrat', sans-serif",
+                        fontFamily: FONT_SANS,
                         fontSize: '11px',
-                        letterSpacing: '2px',
+                        letterSpacing: '1.5px',
                         textTransform: 'uppercase',
                         color: '#707070',
                         marginBottom: '8px'
@@ -411,9 +411,9 @@ export default function HomeValuation({ track }) {
 
                     <div style={{ marginBottom: '24px' }}>
                       <p style={{
-                        fontFamily: "'Montserrat', sans-serif",
+                        fontFamily: FONT_SANS,
                         fontSize: '11px',
-                        letterSpacing: '2px',
+                        letterSpacing: '1.5px',
                         textTransform: 'uppercase',
                         color: '#707070',
                         marginBottom: '8px'
@@ -427,9 +427,9 @@ export default function HomeValuation({ track }) {
 
                     <div style={{ marginBottom: '24px' }}>
                       <p style={{
-                        fontFamily: "'Montserrat', sans-serif",
+                        fontFamily: FONT_SANS,
                         fontSize: '11px',
-                        letterSpacing: '2px',
+                        letterSpacing: '1.5px',
                         textTransform: 'uppercase',
                         color: '#707070',
                         marginBottom: '8px'
@@ -443,9 +443,9 @@ export default function HomeValuation({ track }) {
 
                     <div style={{ marginBottom: '0' }}>
                       <p style={{
-                        fontFamily: "'Montserrat', sans-serif",
+                        fontFamily: FONT_SANS,
                         fontSize: '11px',
-                        letterSpacing: '2px',
+                        letterSpacing: '1.5px',
                         textTransform: 'uppercase',
                         color: '#707070',
                         marginBottom: '8px'
@@ -459,7 +459,7 @@ export default function HomeValuation({ track }) {
                   </div>
 
                   <p style={{
-                    fontFamily: "'Montserrat', sans-serif",
+                    fontFamily: FONT_SANS,
                     fontSize: '13px',
                     color: '#666',
                     marginBottom: '32px',
@@ -487,7 +487,7 @@ export default function HomeValuation({ track }) {
                   </div>
                   {submitError && (
                     <p role="alert" style={{
-                      fontFamily: "'Montserrat', sans-serif",
+                      fontFamily: FONT_SANS,
                       fontSize: '13px',
                       color: '#b00020',
                       textAlign: 'center',
@@ -548,7 +548,7 @@ export default function HomeValuation({ track }) {
                   {item.title}
                 </h3>
                 <p style={{
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: FONT_SANS,
                   fontSize: '14px',
                   lineHeight: 1.9,
                   color: '#666'
@@ -603,7 +603,7 @@ export default function HomeValuation({ track }) {
                   "{testimonial.text}"
                 </p>
                 <p style={{
-                  fontFamily: "'Montserrat', sans-serif",
+                  fontFamily: FONT_SANS,
                   fontSize: '12px',
                   fontWeight: 600,
                   letterSpacing: '1px',
@@ -620,9 +620,9 @@ export default function HomeValuation({ track }) {
              style={{
                display: 'inline-block',
                marginTop: '40px',
-               fontFamily: "'Montserrat', sans-serif",
+               fontFamily: FONT_SANS,
                fontSize: '12px',
-               letterSpacing: '2px',
+               letterSpacing: '1.5px',
                textTransform: 'uppercase',
                color: '#1a1a1a',
                textDecoration: 'none',
