@@ -7,18 +7,28 @@ import { propertyTypes, whoIRepresent, walkthroughChecks, howItWorks, markets, g
 import { commercialTransactions } from '../data/commercialTransactions';
 import { commercialListings } from '../data/commercialListings';
 
+// Property-type cards reuse transaction photos; describe what the picture shows.
+const transactionBySlug = Object.fromEntries(commercialTransactions.map((t) => [t.slug, t]));
+const photoAlt = (p) => {
+  const t = p.image && transactionBySlug[p.image];
+  return t ? `${p.title}: ${t.address}, ${t.town}` : p.title;
+};
+
 const PHONE = '516-214-7761';
 const FALLBACK = 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 40%, #1a1a1a 100%)';
 
 // <picture> with webp + jpg sources that degrades to a dark gradient when the
 // file is missing or fails to load. `src` is the path without extension.
-function Photo({ src, alt, style, eager = false }) {
+// `small` (optional) is a phone-sized variant of the same photo, served below 768px.
+function Photo({ src, alt, style, eager = false, small = null }) {
   const [failed, setFailed] = useState(!src);
   const box = { position: 'relative', overflow: 'hidden', background: FALLBACK, ...style };
   if (failed) return <div aria-hidden="true" style={box} />;
   return (
     <div style={box}>
       <picture>
+        {small && <source media="(max-width: 768px)" srcSet={`${small}.webp`} type="image/webp" />}
+        {small && <source media="(max-width: 768px)" srcSet={`${small}.jpg`} />}
         <source srcSet={`${src}.webp`} type="image/webp" />
         <img src={`${src}.jpg`} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async"
              onError={() => setFailed(true)}
@@ -108,7 +118,7 @@ export default function Commercial({ track }) {
     <div style={styles.container}>
       {/* Hero */}
       <section style={{ ...styles.hero, minHeight: '640px', height: 'auto', padding: '200px 0 120px' }}>
-        <Photo src="/commercial/hero" alt="" eager style={{ position: 'absolute', inset: 0, zIndex: 0 }} />
+        <Photo src="/commercial/hero" small="/commercial/hero-960" alt="" eager style={{ position: 'absolute', inset: 0, zIndex: 0 }} />
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'rgba(10,10,10,0.45)', zIndex: 1 }} />
         <div style={{ ...styles.heroContent, maxWidth: '900px' }}>
           <p className="eyebrow-sm" style={{ fontFamily: FONT_SANS, fontSize: '11px', textTransform: 'uppercase', marginBottom: '24px', opacity: 0.75 }}>
@@ -151,7 +161,7 @@ export default function Commercial({ track }) {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))', gap: '24px' }}>
             {propertyTypes.map((p) => (
               <article key={p.title} style={{ background: '#fff', display: 'flex', flexDirection: 'column' }}>
-                <Photo src={p.image ? `/commercial/transactions/${p.image}` : ''} alt="" style={{ aspectRatio: '3 / 2', width: '100%' }} />
+                <Photo src={p.image ? `/commercial/transactions/${p.image}` : ''} alt={photoAlt(p)} style={{ aspectRatio: '3 / 2', width: '100%' }} />
                 <div style={{ padding: '28px 28px 32px', display: 'flex', flexDirection: 'column', gap: '14px', flex: 1 }}>
                   <h3 style={{ fontSize: '24px', fontWeight: 400, letterSpacing: '1px', lineHeight: 1.2 }}>{p.title}</h3>
                   <p style={{ fontFamily: FONT_SANS, fontSize: '13px', lineHeight: 1.9, color: '#666', flex: 1 }}>{p.text}</p>
@@ -194,7 +204,7 @@ export default function Commercial({ track }) {
                 <button type="button" onClick={() => setShowAll(true)} style={{ ...styles.btnOutline, color: '#1a1a1a', borderColor: '#1a1a1a' }}>View All</button>
               </div>
             )}
-            <p style={{ fontFamily: FONT_SANS, fontSize: '12px', color: '#888', textAlign: 'center', marginTop: '32px', fontStyle: 'italic' }}>Transactions by The Liappas Team at Compass.</p>
+            <p style={{ fontFamily: FONT_SANS, fontSize: '12px', color: '#6b6b6b', textAlign: 'center', marginTop: '32px', fontStyle: 'italic' }}>Transactions by The Liappas Team at Compass.</p>
           </div>
         </section>
       )}
@@ -258,7 +268,7 @@ export default function Commercial({ track }) {
             <ol style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '20px' }}>
               {howItWorks[tab].steps.map(([name, text], i) => (
                 <li key={name} style={{ display: 'grid', gridTemplateColumns: '56px 1fr', gap: '20px', alignItems: 'start', padding: '24px 0', borderTop: '1px solid #e8e8e8' }}>
-                  <span style={{ fontSize: '32px', fontWeight: 300, color: '#bbb', lineHeight: 1 }}>{String(i + 1).padStart(2, '0')}</span>
+                  <span style={{ fontSize: '32px', fontWeight: 300, color: '#8c8c8c', lineHeight: 1 }}>{String(i + 1).padStart(2, '0')}</span>
                   <div>
                     <h4 style={{ fontFamily: FONT_SANS, fontSize: '14px', fontWeight: 500, letterSpacing: '1px', marginBottom: '6px' }}>{name}</h4>
                     <p style={{ fontFamily: FONT_SANS, fontSize: '14px', lineHeight: 1.9, color: '#666' }}>{text}</p>

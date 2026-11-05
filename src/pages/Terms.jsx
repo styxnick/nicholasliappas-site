@@ -4,7 +4,7 @@ import { useSeo, pageMeta } from '../lib/seo';
 export default function Terms() {
   useSeo(pageMeta({
     title: 'Terms of Service | Nicholas Liappas',
-    description: 'Terms governing your use of nicholasliappas.com.',
+    description: 'Terms of service for nicholasliappas.com, the site of Nicholas Liappas, Licensed Associate Real Estate Broker at Compass: permitted use, listings and liability.',
     path: '/terms'
   }));
 

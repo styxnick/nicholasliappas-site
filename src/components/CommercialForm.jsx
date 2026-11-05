@@ -35,7 +35,7 @@ export default function CommercialForm({ track }) {
 
   const selectStyle = (v) => ({ ...styles.input, color: v ? '#1a1a1a' : '#707070' });
   const label = (htmlFor, text) => <label htmlFor={htmlFor} style={styles.srOnly}>{text}</label>;
-  const small = { fontFamily: FONT_SANS, fontSize: '12px', color: '#888', lineHeight: 1.8 };
+  const small = { fontFamily: FONT_SANS, fontSize: '12px', color: '#6b6b6b', lineHeight: 1.8 };
 
   return (
     <div style={{ background: '#fafafa', padding: 'clamp(32px, 5vw, 60px)', position: 'relative' }}>
