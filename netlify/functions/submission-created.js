@@ -1,18 +1,26 @@
 // Netlify event function: runs on every verified Netlify Forms submission
-// (the file name "submission-created" is what wires it up). Sends the lead to
-// Nicholas via Resend from leads@nicholasliappas.com. Netlify Forms keeps
-// every submission as the backup log regardless of what happens here.
+// (the file name "submission-created" is what wires it up). Netlify Forms
+// keeps every submission as the backup log regardless of what happens here.
 //
-// Env: RESEND_API_KEY (required), LEAD_TO (optional override of recipient).
+// 1. Alerts Nicholas by email (Resend, from leads@nicholasliappas.com).
+// 2. Sends the lead a personalised confirmation (from nicholas@nicholasliappas.com,
+//    replies go to Nicholas's Compass inbox).
+// 3. Optionally pushes a short notification to a phone via ntfy.sh.
+//
+// Env: RESEND_API_KEY (required)
+//      LEAD_TO        optional override of the alert recipient
+//      LEAD_ALERT_TO  optional extra alert recipients, comma-separated
+//                     (a second inbox, or a carrier email-to-SMS address)
+//      NTFY_TOPIC     optional ntfy.sh topic for instant phone push (first name + form only)
+import { leadFromPayload, buildAlert, buildConfirmation, alertSubject } from '../lib/lead-emails.js';
 
-const FROM = 'Nicholas Liappas Website <leads@nicholasliappas.com>';
 const DEFAULT_TO = 'nicholas.liappas@compass.com';
-const SITE_ID = '1bb10d34-4eb0-41e0-bd36-4a6cd3fde292';
 
-// First-touch attribution stamped on every submission by src/lib/netlifyForms.jsx.
-const ATTRIBUTION_FIELDS = ['landing_page', 'source', 'medium', 'campaign', 'referrer_url'];
-
-const escapeHtml = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const sendEmail = (apiKey, message) => fetch('https://api.resend.com/emails', {
+  method: 'POST',
+  headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+  body: JSON.stringify(message),
+});
 
 export default async (request) => {
   const apiKey = process.env.RESEND_API_KEY;
@@ -22,69 +30,48 @@ export default async (request) => {
   }
 
   const { payload } = await request.json();
-  const formName = payload.form_name || 'unknown';
-  const data = payload.data || {};
-  const hidden = new Set(['ip', 'user_agent', 'bot-field', ...ATTRIBUTION_FIELDS]);
-  const fields = payload.ordered_human_fields?.length
-    ? payload.ordered_human_fields.filter((f) => !hidden.has(f.name)).map((f) => [f.title, f.value])
-    : Object.entries(data).filter(([k]) => !hidden.has(k));
-  const dash = (v) => v || '—';
-  const attribution = [
-    ['Landing page', dash(data.landing_page)],
-    ['Source', data.source ? `${data.source} (${data.medium || 'none'})` : '—'],
-    ['Campaign', dash(data.campaign)],
-    ['Referrer', dash(data.referrer_url)],
-  ];
-  const leadName = payload.name || payload.data?.name || 'Unknown';
-  const leadEmail = payload.email || payload.data?.email || '';
-  const when = new Date(payload.created_at || Date.now()).toLocaleString('en-US', { timeZone: 'America/New_York', dateStyle: 'medium', timeStyle: 'short' });
-  const dashboard = `https://app.netlify.com/projects/nicholaswebsite/forms/${payload.form_id || ''}`;
+  const lead = leadFromPayload(payload);
+  const recipients = [process.env.LEAD_TO || DEFAULT_TO, ...(process.env.LEAD_ALERT_TO || '').split(',').map((s) => s.trim()).filter(Boolean)];
 
-  const text = [
-    `New website lead — ${formName}`,
-    `Received ${when} ET`,
-    '',
-    ...fields.map(([k, v]) => `${k}: ${v || '—'}`),
-    '',
-    'Attribution',
-    ...attribution.map(([k, v]) => `${k}: ${v}`),
-    '',
-    `All submissions: ${dashboard}`
-  ].join('\n');
-
-  const html = `
-    <div style="font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;color:#1a1a1a">
-      <p style="margin:0 0 4px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#707070">New website lead · ${escapeHtml(formName)}</p>
-      <p style="margin:0 0 20px;color:#707070">Received ${escapeHtml(when)} ET</p>
-      <table cellpadding="0" cellspacing="0" style="border-collapse:collapse">
-        ${fields.map(([k, v]) => `<tr><td style="padding:6px 16px 6px 0;color:#707070;vertical-align:top">${escapeHtml(k)}</td><td style="padding:6px 0;font-weight:600">${escapeHtml(v || '—')}</td></tr>`).join('')}
-      </table>
-      <p style="margin:24px 0 4px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#707070">Attribution</p>
-      <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;font-size:13px">
-        ${attribution.map(([k, v]) => `<tr><td style="padding:4px 16px 4px 0;color:#707070;vertical-align:top">${escapeHtml(k)}</td><td style="padding:4px 0">${escapeHtml(v)}</td></tr>`).join('')}
-      </table>
-      <p style="margin:24px 0 0;font-size:13px;color:#707070">Reply to this email to answer ${escapeHtml(leadName)} directly.<br><a href="${dashboard}" style="color:#1a1a1a">All submissions in Netlify</a></p>
-    </div>`;
-
-  const res = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      from: FROM,
-      to: [process.env.LEAD_TO || DEFAULT_TO],
-      reply_to: leadEmail || undefined,
-      subject: `New website lead: ${formName} — ${leadName}`,
-      text,
-      html,
-      tags: [{ name: 'form', value: formName.replace(/[^a-z0-9_-]/gi, '_') }]
-    })
-  });
-
+  // 1. Alert Nicholas. This is the one that must succeed.
+  const alert = buildAlert(lead, recipients);
+  const res = await sendEmail(apiKey, alert);
   const body = await res.text();
   if (!res.ok) {
     console.error(`submission-created: Resend ${res.status}: ${body}`);
     return new Response(body, { status: 502 });
   }
-  console.log(`submission-created: sent lead "${leadName}" (${formName}) via Resend: ${body}`);
+  console.log(`submission-created: sent lead "${lead.name}" (${lead.formName}) via Resend: ${body}`);
+
+  // 2. Confirmation to the lead. Failure here must not fail the alert.
+  const confirmation = buildConfirmation(lead);
+  if (confirmation) {
+    try {
+      const r = await sendEmail(apiKey, confirmation);
+      const b = await r.text();
+      if (!r.ok) console.error(`submission-created: confirmation to ${lead.email} failed ${r.status}: ${b}`);
+      else console.log(`submission-created: confirmation sent to ${lead.email}: ${b}`);
+    } catch (err) {
+      console.error(`submission-created: confirmation to ${lead.email} threw: ${err}`);
+    }
+  } else {
+    console.log('submission-created: no usable email on the lead; confirmation skipped');
+  }
+
+  // 3. Optional phone push. Keeps PII to a first name.
+  const topic = process.env.NTFY_TOPIC;
+  if (topic) {
+    try {
+      const r = await fetch(`https://ntfy.sh/${encodeURIComponent(topic)}`, {
+        method: 'POST',
+        headers: { Title: 'New website lead', Priority: 'high', Tags: 'house', Click: lead.dashboard },
+        body: alertSubject({ ...lead, name: lead.firstName }),
+      });
+      if (!r.ok) console.error(`submission-created: ntfy push failed ${r.status}`);
+    } catch (err) {
+      console.error(`submission-created: ntfy push threw: ${err}`);
+    }
+  }
+
   return new Response(body, { status: 200 });
 };
