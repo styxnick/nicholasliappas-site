@@ -102,3 +102,25 @@ describe('submission-created sends', () => {
     expect(push[1].body).not.toContain('Doe');
   });
 });
+
+describe('submission-created canary routing', () => {
+  it('sends both emails to the canary inbox, records the Resend ids, and skips the push', async () => {
+    const blobs = new Map();
+    vi.resetModules();
+    vi.doMock('@netlify/blobs', () => ({ getStore: () => ({ setJSON: async (k, v) => { blobs.set(k, v); } }) }));
+    process.env.NTFY_TOPIC = 'should-not-fire';
+    let n = 0;
+    vi.stubGlobal('fetch', vi.fn(async () => ({ ok: true, text: async () => JSON.stringify({ id: `id-${++n}` }) })));
+    const { default: h } = await import('../../netlify/functions/submission-created.js');
+    const res = await h({ json: async () => ({ payload: payload({ name: 'Canary Check 2026-11-10T12:00Z', email: 'nliappas+canary@gmail.com', phone: '5162147761', interest: 'buying', landing_page: '/canary', source: 'canary', medium: 'monitor', campaign: 'weekly-check', referrer_url: '' }, { email: 'nliappas+canary@gmail.com' }) }) });
+    delete process.env.NTFY_TOPIC;
+    expect(res.status).toBe(200);
+    const bodies = fetch.mock.calls.map(([u, i]) => [String(u), i?.body ? JSON.parse(i.body) : null]);
+    expect(bodies).toHaveLength(2);
+    expect(bodies[0][1].to).toEqual(['nliappas+canary@gmail.com']);
+    expect(bodies[1][1].to).toEqual(['nliappas+canary@gmail.com']);
+    expect(bodies.some(([u]) => u.startsWith('https://ntfy.sh/'))).toBe(false);
+    expect(blobs.get('latest')).toMatchObject({ alertId: 'id-1', confirmationId: 'id-2' });
+    expect(blobs.get('latest').processedAt).toBeTruthy();
+  });
+});

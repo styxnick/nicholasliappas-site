@@ -6,6 +6,8 @@
 // 2. Sends the lead a personalised confirmation (from nicholas@nicholasliappas.com,
 //    replies go to Nicholas's Compass inbox).
 // 3. Optionally pushes a short notification to a phone via ntfy.sh.
+// A weekly canary submission (netlify/lib/canary.js) takes the same path but is
+// routed to the canary inbox and recorded in Netlify Blobs for canary-check.
 //
 // Env: RESEND_API_KEY (required)
 //      LEAD_TO        optional override of the alert recipient
@@ -13,8 +15,11 @@
 //                     (a second inbox, or a carrier email-to-SMS address)
 //      NTFY_TOPIC     optional ntfy.sh topic for instant phone push (first name + form only)
 import { leadFromPayload, buildAlert, buildConfirmation, alertSubject } from '../lib/lead-emails.js';
+import { isCanary, STORE_NAME } from '../lib/canary.js';
 
 const DEFAULT_TO = 'nicholas.liappas@compass.com';
+
+const parseId = (body) => { try { return JSON.parse(body).id || null; } catch { return null; } };
 
 const sendEmail = (apiKey, message) => fetch('https://api.resend.com/emails', {
   method: 'POST',
@@ -31,7 +36,13 @@ export default async (request) => {
 
   const { payload } = await request.json();
   const lead = leadFromPayload(payload);
-  const recipients = [process.env.LEAD_TO || DEFAULT_TO, ...(process.env.LEAD_ALERT_TO || '').split(',').map((s) => s.trim()).filter(Boolean)];
+  // Weekly canary (netlify/lib/canary.js): exercise the full path, but send both
+  // emails to the canary inbox so Nicholas only hears about it if it fails.
+  const canary = isCanary(lead);
+  const recipients = canary
+    ? [lead.email]
+    : [process.env.LEAD_TO || DEFAULT_TO, ...(process.env.LEAD_ALERT_TO || '').split(',').map((s) => s.trim()).filter(Boolean)];
+  const ids = { alertId: null, confirmationId: null };
 
   // 1. Alert Nicholas. This is the one that must succeed.
   const alert = buildAlert(lead, recipients);
@@ -42,6 +53,7 @@ export default async (request) => {
     return new Response(body, { status: 502 });
   }
   console.log(`submission-created: sent lead "${lead.name}" (${lead.formName}) via Resend: ${body}`);
+  ids.alertId = parseId(body);
 
   // 2. Confirmation to the lead. Failure here must not fail the alert.
   const confirmation = buildConfirmation(lead);
@@ -50,12 +62,23 @@ export default async (request) => {
       const r = await sendEmail(apiKey, confirmation);
       const b = await r.text();
       if (!r.ok) console.error(`submission-created: confirmation to ${lead.email} failed ${r.status}: ${b}`);
-      else console.log(`submission-created: confirmation sent to ${lead.email}: ${b}`);
+      else { console.log(`submission-created: confirmation sent to ${lead.email}: ${b}`); ids.confirmationId = parseId(b); }
     } catch (err) {
       console.error(`submission-created: confirmation to ${lead.email} threw: ${err}`);
     }
   } else {
     console.log('submission-created: no usable email on the lead; confirmation skipped');
+  }
+
+  if (canary) {
+    try {
+      const { getStore } = await import('@netlify/blobs');
+      await getStore(STORE_NAME).setJSON('latest', { submittedAt: payload.created_at || null, processedAt: new Date().toISOString(), ...ids });
+      console.log('submission-created: canary record written');
+    } catch (err) {
+      console.error(`submission-created: could not write canary record: ${err}`);
+    }
+    return new Response(body, { status: 200 });
   }
 
   // 3. Optional phone push. Keeps PII to a first name.
