@@ -204,7 +204,7 @@ export default function Commercial({ track }) {
                 <button type="button" onClick={() => setShowAll(true)} style={{ ...styles.btnOutline, color: '#1a1a1a', borderColor: '#1a1a1a' }}>View All</button>
               </div>
             )}
-            <p style={{ fontFamily: FONT_SANS, fontSize: '12px', color: '#888', textAlign: 'center', marginTop: '32px', fontStyle: 'italic' }}>Transactions by The Liappas Team at Compass.</p>
+            <p style={{ fontFamily: FONT_SANS, fontSize: '12px', color: '#6b6b6b', textAlign: 'center', marginTop: '32px', fontStyle: 'italic' }}>Transactions by The Liappas Team at Compass.</p>
           </div>
         </section>
       )}
@@ -268,7 +268,7 @@ export default function Commercial({ track }) {
             <ol style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '20px' }}>
               {howItWorks[tab].steps.map(([name, text], i) => (
                 <li key={name} style={{ display: 'grid', gridTemplateColumns: '56px 1fr', gap: '20px', alignItems: 'start', padding: '24px 0', borderTop: '1px solid #e8e8e8' }}>
-                  <span style={{ fontSize: '32px', fontWeight: 300, color: '#bbb', lineHeight: 1 }}>{String(i + 1).padStart(2, '0')}</span>
+                  <span style={{ fontSize: '32px', fontWeight: 300, color: '#8c8c8c', lineHeight: 1 }}>{String(i + 1).padStart(2, '0')}</span>
                   <div>
                     <h4 style={{ fontFamily: FONT_SANS, fontSize: '14px', fontWeight: 500, letterSpacing: '1px', marginBottom: '6px' }}>{name}</h4>
                     <p style={{ fontFamily: FONT_SANS, fontSize: '14px', lineHeight: 1.9, color: '#666' }}>{text}</p>
