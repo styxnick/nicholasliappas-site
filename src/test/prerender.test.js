@@ -65,8 +65,9 @@ describe('buildDocument', () => {
     expect(out).toContain('<meta name="description" content="d &amp; &quot;e&quot;" />');
   });
 
-  it('maps routes to directory index files', () => {
+  it('maps routes to flat html files so Netlify serves them without a trailing slash', () => {
     expect(outputPath('/d', '/')).toBe('/d/index.html');
-    expect(outputPath('/d', '/manhasset')).toBe('/d/manhasset/index.html');
+    expect(outputPath('/d', '/manhasset')).toBe('/d/manhasset.html');
+    expect(outputPath('/d', '/home-valuation')).toBe('/d/home-valuation.html');
   });
 });

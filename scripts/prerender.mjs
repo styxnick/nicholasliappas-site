@@ -1,6 +1,6 @@
 // Build-time prerender. Runs after `vite build` (see package.json "build"):
 // renders every route in scripts/site-paths.mjs through src/entry-server.jsx
-// and writes dist/<route>/index.html with the page markup in #root and the
+// and writes dist/<route>.html with the page markup in #root and the
 // route's title/meta/canonical/JSON-LD in <head>. Unknown URLs get dist/404.html
 // (served with a real 404 by netlify.toml).
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs';
@@ -69,8 +69,12 @@ export function buildDocument(template, html, seoConfigs) {
   return out;
 }
 
+// Flat files (dist/manhasset.html), not directories: with Netlify's pretty
+// URLs a directory index is served at /manhasset/ and the bare /manhasset
+// 301s to it, which would fight the trailing-slash-free canonicals. A flat
+// file is served at /manhasset and /manhasset/ redirects to it.
 export function outputPath(dist, route) {
-  return route === '/' ? join(dist, 'index.html') : join(dist, route.replace(/^\//, ''), 'index.html');
+  return route === '/' ? join(dist, 'index.html') : join(dist, `${route.replace(/^\//, '')}.html`);
 }
 
 async function main() {
