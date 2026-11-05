@@ -651,7 +651,7 @@ export default function Home({ track }) {
               },
             ].map((service, i) => {
               const Card = service.to ? Link : 'div';
-              const linkProps = service.to ? { to: service.to, onClick: () => track('cta_click', { cta: 'commercial', placement: 'services' }), 'aria-label': `${service.title}: ${service.cta}` } : {};
+              const linkProps = service.to ? { to: service.to, onClick: () => track('cta_click', { cta: 'commercial', placement: 'services' }) } : {};
               return (
               <Card key={i} {...linkProps} style={{
                 padding: '40px',
