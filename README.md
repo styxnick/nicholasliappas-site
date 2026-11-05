@@ -133,7 +133,14 @@ Tests: `npm test` (Vitest + jsdom).
 ## Adding a community
 
 1. Add an entry to `src/data/towns.js`.
-2. That's it: the route, nav dropdown, mobile menu, footer, 404 links and sitemap all derive from it.
+2. That's it: the route, nav dropdown, mobile menu, footer, 404 links, sitemap and prerender all derive from it.
+
+## Buyer's guides
+
+`src/data/guides.js` holds one entry per town that has a guide (Manhasset so far). Each entry
+renders at `/<slug>/buyers-guide` (prerendered, in the sitemap) and adds a request section to
+that town's page. Requests post to the `buyers-guide` Netlify form; `submission-created`
+emails the lead the guide link and alerts Nicholas like any other lead.
 
 ## Deploy
 
