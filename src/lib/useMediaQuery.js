@@ -1,18 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useSyncExternalStore } from 'react';
 
 // Subscribe to a CSS media query. Used because all styling is inline
 // (no stylesheet media queries), e.g. to switch the nav to a mobile menu.
+//
+// Server snapshot is always `false`, so prerendered HTML (scripts/prerender.mjs)
+// and the first hydration pass agree; React then re-renders with the real value.
+// Anything that must look right *before* hydration (the nav bar, the
+// commercial grids) uses the CSS media queries in index.html instead.
 export function useMediaQuery(query) {
-  const getMatch = () => typeof window !== 'undefined' && window.matchMedia(query).matches;
-  const [matches, setMatches] = useState(getMatch);
-
-  useEffect(() => {
+  const subscribe = useCallback((onChange) => {
     const mql = window.matchMedia(query);
-    const onChange = (e) => setMatches(e.matches);
-    setMatches(mql.matches);
     mql.addEventListener('change', onChange);
     return () => mql.removeEventListener('change', onChange);
   }, [query]);
-
-  return matches;
+  const getSnapshot = () => window.matchMedia(query).matches;
+  const getServerSnapshot = () => false;
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }

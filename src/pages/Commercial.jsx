@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { getStyles, FONT_SANS } from '../components/styles';
 import CommercialForm from '../components/CommercialForm';
 import { useSeo, pageMeta, SITE_URL } from '../lib/seo';
-import { useMediaQuery } from '../lib/useMediaQuery';
 import { propertyTypes, whoIRepresent, walkthroughChecks, howItWorks, markets, greekLine, faqs, seo, complianceLine } from '../data/commercial';
 import { commercialTransactions } from '../data/commercialTransactions';
 import { commercialListings } from '../data/commercialListings';
@@ -43,7 +42,6 @@ const Tag = ({ children, dark }) => (
 
 export default function Commercial({ track }) {
   const styles = getStyles(false);
-  const small = useMediaQuery('(max-width: 640px)');
   const [tab, setTab] = useState('sales');
   const [showAll, setShowAll] = useState(false);
 
@@ -113,7 +111,7 @@ export default function Commercial({ track }) {
         <Photo src="/commercial/hero" alt="" eager style={{ position: 'absolute', inset: 0, zIndex: 0 }} />
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'rgba(10,10,10,0.45)', zIndex: 1 }} />
         <div style={{ ...styles.heroContent, maxWidth: '900px' }}>
-          <p style={{ fontFamily: FONT_SANS, fontSize: '11px', letterSpacing: small ? '2px' : '4px', textTransform: 'uppercase', marginBottom: '24px', opacity: 0.75 }}>
+          <p className="eyebrow-sm" style={{ fontFamily: FONT_SANS, fontSize: '11px', textTransform: 'uppercase', marginBottom: '24px', opacity: 0.75 }}>
             Commercial Real Estate · The Liappas Team at Compass
           </p>
           <h1 style={{ fontSize: 'clamp(40px, 7vw, 76px)', fontWeight: 300, letterSpacing: '3px', lineHeight: 1.05, marginBottom: '28px' }}>
@@ -131,7 +129,7 @@ export default function Commercial({ track }) {
 
       {/* Intro */}
       <section style={section('#fff')}>
-        <div style={{ ...inner(1100), display: 'grid', gridTemplateColumns: small ? '1fr' : '1fr 1.4fr', gap: 'clamp(32px, 6vw, 80px)', alignItems: 'start' }}>
+        <div className="split-a" style={{ ...inner(1100), display: 'grid', gap: 'clamp(32px, 6vw, 80px)', alignItems: 'start' }}>
           <div>
             <Eyebrow>Built Different</Eyebrow>
             <h2 style={h2}>A Broker Who Reads the Building</h2>
@@ -227,7 +225,7 @@ export default function Commercial({ track }) {
           <p style={{ fontFamily: FONT_SANS, fontSize: '15px', lineHeight: 2, color: 'rgba(255,255,255,0.8)', maxWidth: '720px', marginBottom: '48px' }}>
             Before you buy, lease or price a property, I walk it with a builder's eye. Here's what I'm checking:
           </p>
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gridTemplateColumns: small ? '1fr' : '1fr 1fr', gap: '14px 48px' }}>
+          <ul className="split-b" style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '14px 48px' }}>
             {walkthroughChecks.map((c) => (
               <li key={c} style={{ fontFamily: FONT_SANS, fontSize: '14px', lineHeight: 1.8, color: 'rgba(255,255,255,0.9)', display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
                 <span aria-hidden="true" style={{ fontSize: '8px', marginTop: '9px', flexShrink: 0 }}>◆</span>{c}
@@ -316,7 +314,7 @@ export default function Commercial({ track }) {
 
       {/* Inquiry form */}
       <section id="inquiry" style={{ ...section('#fff'), scrollMarginTop: '72px' }} aria-label="Commercial inquiry">
-        <div style={{ ...inner(), display: 'grid', gridTemplateColumns: small ? '1fr' : '1fr 1.3fr', gap: 'clamp(32px, 6vw, 80px)', alignItems: 'start' }}>
+        <div className="split-c" style={{ ...inner(), display: 'grid', gap: 'clamp(32px, 6vw, 80px)', alignItems: 'start' }}>
           <div>
             <Eyebrow>Start a Conversation</Eyebrow>
             <h2 style={h2}>Tell Me About the Property or the Space You Need</h2>

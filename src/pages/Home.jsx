@@ -13,7 +13,11 @@ export default function Home({ track }) {
   // (saves data) and for users who prefer reduced motion.
   const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
   const smallScreen = useMediaQuery('(max-width: 768px)');
-  const showHeroVideo = !reducedMotion && !smallScreen;
+  // Only after mount: the prerendered HTML must not carry the <video> (phones
+  // would start fetching it before React can take it out).
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+  const showHeroVideo = mounted && !reducedMotion && !smallScreen;
   // Tighter tracking on phones so the hero lines don't wrap or orphan a word.
   const heroButtonMobile = smallScreen ? { letterSpacing: '1.5px', padding: '18px 28px', whiteSpace: 'nowrap' } : {};
 

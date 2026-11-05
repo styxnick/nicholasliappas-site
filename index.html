@@ -43,6 +43,16 @@
       /* Global focus ring: visible on both light and dark backgrounds. All other styling is inline (src/components/styles.js). */
       :focus-visible { outline: 2px solid #1a1a1a; outline-offset: 2px; box-shadow: 0 0 0 4px #fff; }
       @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
+      /* Breakpoints that must be right before React hydrates the prerendered HTML
+         (src/components/Nav.jsx, src/pages/Commercial.jsx). Keep in sync with their comments. */
+      .nav-desktop { display: contents; }
+      .nav-mobile { display: none; }
+      @media (max-width: 1100px) { .nav-desktop { display: none; } .nav-mobile { display: flex; } }
+      .eyebrow-sm { letter-spacing: 4px; }
+      .split-a { grid-template-columns: 1fr 1.4fr; }
+      .split-b { grid-template-columns: 1fr 1fr; }
+      .split-c { grid-template-columns: 1fr 1.3fr; }
+      @media (max-width: 640px) { .eyebrow-sm { letter-spacing: 2px; } .split-a, .split-b, .split-c { grid-template-columns: 1fr; } }
     </style>
 
     <meta name="theme-color" content="#1a1a1a" />

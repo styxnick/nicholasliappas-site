@@ -3,6 +3,7 @@ node_modules/
 
 # Build output
 dist/
+dist-ssr/
 dist-deploy/
 build-latest/
 deploy/

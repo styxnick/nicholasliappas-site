@@ -149,200 +149,199 @@ export default function Nav({ track }) {
     </a>
   ));
 
-  if (isMobile) {
-    const menuId = 'mobile-menu';
-    const barStyle = {
-      display: 'block',
-      width: '22px',
-      height: '2px',
-      background: menuOpen ? '#fff' : textColor,
-      transition: 'all 0.3s ease'
-    };
-    const menuLink = {
-      fontFamily: FONT_SANS,
-      fontSize: '14px',
-      fontWeight: 400,
-      letterSpacing: '2px',
-      textTransform: 'uppercase',
-      color: '#fff',
-      textDecoration: 'none',
-      display: 'block',
-      padding: '14px 0'
-    };
-    const menuSubLink = {
-      ...menuLink,
-      fontSize: '13px',
-      letterSpacing: '1px',
-      textTransform: 'none',
-      color: '#ccc',
-      padding: '10px 0 10px 20px'
-    };
+  const menuId = 'mobile-menu';
+  const barStyle = {
+    display: 'block',
+    width: '22px',
+    height: '2px',
+    background: menuOpen ? '#fff' : textColor,
+    transition: 'all 0.3s ease'
+  };
+  const menuLink = {
+    fontFamily: FONT_SANS,
+    fontSize: '14px',
+    fontWeight: 400,
+    letterSpacing: '2px',
+    textTransform: 'uppercase',
+    color: '#fff',
+    textDecoration: 'none',
+    display: 'block',
+    padding: '14px 0'
+  };
+  const menuSubLink = {
+    ...menuLink,
+    fontSize: '13px',
+    letterSpacing: '1px',
+    textTransform: 'none',
+    color: '#ccc',
+    padding: '10px 0 10px 20px'
+  };
 
-    return (
-      <nav aria-label="Main navigation" style={{ ...styles.nav, zIndex: 1002 }}>
-        {renderLogo(isScrolled && !menuOpen)}
-        <button
-          ref={menuButtonRef}
-          type="button"
-          onClick={() => setMenuOpen((o) => !o)}
-          aria-expanded={menuOpen}
-          aria-controls={menuId}
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+  // Both the desktop link row (.nav-desktop) and the mobile hamburger
+  // (.nav-mobile) are always in the DOM; the media query in index.html shows
+  // one of them. That keeps the prerendered HTML correct on every screen
+  // before React hydrates, and makes server and client markup identical.
+  return (
+    <nav aria-label="Main navigation" style={{ ...styles.nav, zIndex: 1002 }}>
+      {renderLogo(isScrolled && !menuOpen)}
+
+      <div className="nav-desktop">
+        <div style={styles.navLinks}>
+          <Link to="/" style={styles.navLink}>Home</Link>
+          <Link to="/#about" style={styles.navLink}>About</Link>
+          <Link to="/#services" style={styles.navLink}>Services</Link>
+          <div
+            ref={dropdownRef}
+            style={{ position: 'relative' }}
+            onMouseEnter={() => setDropdownOpen(true)}
+            onMouseLeave={() => setDropdownOpen(false)}
+            onKeyDown={handleDropdownKeyDown}
+            onBlur={handleDropdownBlur}
+          >
+            <button
+              type="button"
+              onClick={() => setDropdownOpen((o) => !o)}
+              aria-expanded={dropdownOpen}
+              aria-haspopup="true"
+              aria-controls="communities-menu"
+              style={{
+                ...styles.navLink,
+                background: 'none',
+                border: 'none',
+                padding: 0,
+                cursor: 'pointer',
+                fontFamily: 'inherit',
+                fontSize: '11px',
+                fontWeight: 400,
+                letterSpacing: '1.5px',
+                textTransform: 'uppercase'
+              }}
+            >
+              Communities
+            </button>
+            {dropdownOpen && (
+              <div id="communities-menu" style={{
+                position: 'absolute',
+                top: '100%',
+                left: 0,
+                background: isScrolled ? '#fff' : 'rgba(255,255,255,0.95)',
+                backdropFilter: 'blur(20px)',
+                borderRadius: '4px',
+                minWidth: '220px',
+                zIndex: 1001,
+                padding: '12px 0',
+                marginTop: '12px',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
+              }}>
+                {townList.map((town) => (
+                  <Link
+                    key={town.slug}
+                    to={`/${town.slug}`}
+                    style={{
+                      display: 'block',
+                      padding: '12px 24px',
+                      color: '#1a1a1a',
+                      textDecoration: 'none',
+                      fontFamily: FONT_SANS,
+                      fontSize: '12px',
+                      fontWeight: 400,
+                      letterSpacing: '1px',
+                      transition: 'background 0.2s',
+                      cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.background = '#f5f5f5'}
+                    onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                    onFocus={(e) => e.currentTarget.style.background = '#f5f5f5'}
+                    onBlur={(e) => e.currentTarget.style.background = 'transparent'}
+                  >
+                    {town.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+          <Link to="/commercial" style={styles.navLink}>Commercial</Link>
+          <Link to="/#contact" style={styles.navLink}>Contact</Link>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+          {socialIcons(textColor)}
+          <Link to="/#contact" style={{
+            ...styles.navLink,
+            fontFamily: FONT_SANS,
+            fontSize: '11px',
+            fontWeight: 400,
+            letterSpacing: '1.5px',
+            textTransform: 'uppercase',
+            padding: '12px 28px',
+            border: `1px solid ${textColor}`
+          }} onClick={() => track('cta_click', { cta: 'connect', placement: 'nav' })}>
+            LET'S CONNECT
+          </Link>
+        </div>
+      </div>
+
+      <button
+        ref={menuButtonRef}
+        className="nav-mobile"
+        type="button"
+        onClick={() => setMenuOpen((o) => !o)}
+        aria-expanded={menuOpen}
+        aria-controls={menuId}
+        aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+        style={{
+          background: 'none',
+          border: 'none',
+          padding: '12px',
+          margin: '-12px',
+          cursor: 'pointer',
+          flexDirection: 'column',
+          gap: '5px',
+          position: 'relative',
+          zIndex: 1003
+        }}
+      >
+        <span style={{ ...barStyle, transform: menuOpen ? 'translateY(7px) rotate(45deg)' : 'none' }} />
+        <span style={{ ...barStyle, opacity: menuOpen ? 0 : 1 }} />
+        <span style={{ ...barStyle, transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none' }} />
+      </button>
+
+      {menuOpen && (
+        <div
+          id={menuId}
+          ref={menuRef}
           style={{
-            background: 'none',
-            border: 'none',
-            padding: '12px',
-            margin: '-12px',
-            cursor: 'pointer',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '5px',
-            position: 'relative',
-            zIndex: 1003
+            position: 'fixed',
+            inset: 0,
+            background: '#1a1a1a',
+            color: '#fff',
+            zIndex: 1002,
+            overflowY: 'auto',
+            padding: '110px 8% 48px'
           }}
         >
-          <span style={{ ...barStyle, transform: menuOpen ? 'translateY(7px) rotate(45deg)' : 'none' }} />
-          <span style={{ ...barStyle, opacity: menuOpen ? 0 : 1 }} />
-          <span style={{ ...barStyle, transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none' }} />
-        </button>
+          <Link to="/" style={menuLink}>Home</Link>
+          <Link to="/#about" style={menuLink}>About</Link>
+          <Link to="/#services" style={menuLink}>Services</Link>
+          <div style={{ ...menuLink, color: '#888', fontSize: '11px', paddingBottom: '4px' }}>Communities</div>
+          {townList.map((town) => (
+            <Link key={town.slug} to={`/${town.slug}`} style={menuSubLink}>{town.name}</Link>
+          ))}
+          <Link to="/home-valuation" style={{ ...menuLink, marginTop: '8px' }}>Home Valuation</Link>
+          <Link to="/commercial" style={menuLink}>Commercial</Link>
+          <Link to="/#contact" style={menuLink}>Contact</Link>
 
-        {menuOpen && (
-          <div
-            id={menuId}
-            ref={menuRef}
-            style={{
-              position: 'fixed',
-              inset: 0,
-              background: '#1a1a1a',
-              color: '#fff',
-              zIndex: 1002,
-              overflowY: 'auto',
-              padding: '110px 8% 48px'
-            }}
-          >
-            <Link to="/" style={menuLink}>Home</Link>
-            <Link to="/#about" style={menuLink}>About</Link>
-            <Link to="/#services" style={menuLink}>Services</Link>
-            <div style={{ ...menuLink, color: '#888', fontSize: '11px', paddingBottom: '4px' }}>Communities</div>
-            {townList.map((town) => (
-              <Link key={town.slug} to={`/${town.slug}`} style={menuSubLink}>{town.name}</Link>
-            ))}
-            <Link to="/home-valuation" style={{ ...menuLink, marginTop: '8px' }}>Home Valuation</Link>
-            <Link to="/commercial" style={menuLink}>Commercial</Link>
-            <Link to="/#contact" style={menuLink}>Contact</Link>
-
-            <div style={{ display: 'flex', gap: '32px', margin: '32px 0' }}>
-              {socialIcons('#fff')}
-            </div>
-
-            <Link to="/#contact"
-              onClick={() => track('cta_click', { cta: 'connect', placement: 'nav' })}
-              style={{ ...styles.btnOutline, display: 'block', textAlign: 'center' }}>
-              LET'S CONNECT
-            </Link>
+          <div style={{ display: 'flex', gap: '32px', margin: '32px 0' }}>
+            {socialIcons('#fff')}
           </div>
-        )}
-      </nav>
-    );
-  }
 
-  return (
-    <nav aria-label="Main navigation" style={styles.nav}>
-      {renderLogo(isScrolled)}
-
-      <div style={styles.navLinks}>
-        <Link to="/" style={styles.navLink}>Home</Link>
-        <Link to="/#about" style={styles.navLink}>About</Link>
-        <Link to="/#services" style={styles.navLink}>Services</Link>
-        <div
-          ref={dropdownRef}
-          style={{ position: 'relative' }}
-          onMouseEnter={() => setDropdownOpen(true)}
-          onMouseLeave={() => setDropdownOpen(false)}
-          onKeyDown={handleDropdownKeyDown}
-          onBlur={handleDropdownBlur}
-        >
-          <button
-            type="button"
-            onClick={() => setDropdownOpen((o) => !o)}
-            aria-expanded={dropdownOpen}
-            aria-haspopup="true"
-            aria-controls="communities-menu"
-            style={{
-              ...styles.navLink,
-              background: 'none',
-              border: 'none',
-              padding: 0,
-              cursor: 'pointer',
-              fontFamily: 'inherit',
-              fontSize: '11px',
-              fontWeight: 400,
-              letterSpacing: '1.5px',
-              textTransform: 'uppercase'
-            }}
-          >
-            Communities
-          </button>
-          {dropdownOpen && (
-            <div id="communities-menu" style={{
-              position: 'absolute',
-              top: '100%',
-              left: 0,
-              background: isScrolled ? '#fff' : 'rgba(255,255,255,0.95)',
-              backdropFilter: 'blur(20px)',
-              borderRadius: '4px',
-              minWidth: '220px',
-              zIndex: 1001,
-              padding: '12px 0',
-              marginTop: '12px',
-              boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
-            }}>
-              {townList.map((town) => (
-                <Link
-                  key={town.slug}
-                  to={`/${town.slug}`}
-                  style={{
-                    display: 'block',
-                    padding: '12px 24px',
-                    color: '#1a1a1a',
-                    textDecoration: 'none',
-                    fontFamily: FONT_SANS,
-                    fontSize: '12px',
-                    fontWeight: 400,
-                    letterSpacing: '1px',
-                    transition: 'background 0.2s',
-                    cursor: 'pointer'
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.background = '#f5f5f5'}
-                  onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
-                  onFocus={(e) => e.currentTarget.style.background = '#f5f5f5'}
-                  onBlur={(e) => e.currentTarget.style.background = 'transparent'}
-                >
-                  {town.name}
-                </Link>
-              ))}
-            </div>
-          )}
+          <Link to="/#contact"
+            onClick={() => track('cta_click', { cta: 'connect', placement: 'nav' })}
+            style={{ ...styles.btnOutline, display: 'block', textAlign: 'center' }}>
+            LET'S CONNECT
+          </Link>
         </div>
-        <Link to="/commercial" style={styles.navLink}>Commercial</Link>
-        <Link to="/#contact" style={styles.navLink}>Contact</Link>
-      </div>
-
-      <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-        {socialIcons(textColor)}
-        <Link to="/#contact" style={{
-          ...styles.navLink,
-          fontFamily: FONT_SANS,
-          fontSize: '11px',
-          fontWeight: 400,
-          letterSpacing: '1.5px',
-          textTransform: 'uppercase',
-          padding: '12px 28px',
-          border: `1px solid ${textColor}`
-        }} onClick={() => track('cta_click', { cta: 'connect', placement: 'nav' })}>
-          LET'S CONNECT
-        </Link>
-      </div>
+      )}
     </nav>
   );
 }
