@@ -77,8 +77,6 @@ export default function ContactForm({ track, formName = 'contact' }) {
         <form
           name={formName}
           method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
           onSubmit={handleSubmit}
           aria-label="Request consultation form"
         >

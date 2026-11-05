@@ -47,7 +47,7 @@ export default function CommercialForm({ track }) {
           <p style={{ fontFamily: FONT_SANS, fontSize: '14px', color: '#666' }}>I'll be in touch within one business day.</p>
         </div>
       ) : (
-        <form name="commercial" method="POST" data-netlify="true" data-netlify-honeypot={HONEYPOT_FIELD} onSubmit={handleSubmit} aria-label="Commercial inquiry form"
+        <form name="commercial" method="POST" onSubmit={handleSubmit} aria-label="Commercial inquiry form"
               style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
           <input type="hidden" name="form-name" value="commercial" />
           <HoneypotField value={data[HONEYPOT_FIELD]} onChange={set(HONEYPOT_FIELD)} />

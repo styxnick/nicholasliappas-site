@@ -14,13 +14,33 @@ const MANAGED_ATTR = 'data-seo';
 //     links: [{ rel: 'canonical', href: '...' }],
 //     schemas: [{ '@context': 'https://schema.org', ... }],
 //   });
+// Build-time prerender support (src/entry-server.jsx): while `fn` renders,
+// every useSeo call pushes its config here so scripts/prerender.mjs can write
+// the same tags into the static HTML.
+let collector = null;
+export function collectSeo(into, fn) {
+  collector = into;
+  try { return fn(); } finally { collector = null; }
+}
+
+const SSR_ATTR = 'data-seo-ssr';
+let ssrHeadCleared = false;
+
 export function useSeo(config) {
   const key = JSON.stringify(config);
+  if (collector) collector.push(config);
 
   useEffect(() => {
     const { title, meta = [], links = [], schemas = [] } = JSON.parse(key);
     const head = document.head;
     const restore = [];
+
+    // First run in the browser: drop the tags the prerender added so the hook
+    // owns <head> from here on (otherwise JSON-LD would be duplicated).
+    if (!ssrHeadCleared) {
+      ssrHeadCleared = true;
+      head.querySelectorAll(`[${SSR_ATTR}]`).forEach((el) => el.remove());
+    }
 
     if (title) {
       const previous = document.title;

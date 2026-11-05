@@ -187,8 +187,6 @@ export default function HomeValuation({ track }) {
               ref={formRef}
               name="home-valuation"
               method="POST"
-              data-netlify="true"
-              netlify-honeypot="bot-field"
               onSubmit={handleSubmit}
               aria-label="Home valuation form"
             >
