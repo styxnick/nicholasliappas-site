@@ -58,4 +58,4 @@ export default async () => {
   return new Response('failed', { status: 500 });
 };
 
-export const config = { schedule: '40 19 * * *' }; // TEMPORARY first-run schedule; weekly schedule follows in the next commit
+export const config = { schedule: '30 12 * * 1' }; // 30 min after canary-submit
