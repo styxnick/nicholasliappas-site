@@ -32,11 +32,19 @@ describe('font tokens', () => {
     expect(hits).toEqual([]);
   });
 
-  it('index.html loads Inter 400-700 and Cormorant Garamond with display=swap', () => {
-    const link = indexHtml.match(/https:\/\/fonts\.googleapis\.com\/css2\?[^"]+/)[0];
-    expect(link).toContain('family=Inter:wght@400;500;600;700');
-    expect(link).toContain('family=Cormorant+Garamond:wght@300;400;500;600');
-    expect(link).toContain('display=swap');
-    expect(indexHtml).toContain('rel="preconnect" href="https://fonts.gstatic.com"');
+  it('index.html self-hosts Inter and Cormorant Garamond (no Google Fonts request)', () => {
+    expect(indexHtml).not.toMatch(/fonts\.googleapis\.com|fonts\.gstatic\.com/);
+    for (const file of ['cormorant-garamond-latin.woff2', 'inter-latin.woff2']) {
+      expect(statSync(resolve(root, 'public/fonts', file)).size).toBeGreaterThan(10_000);
+      expect(indexHtml).toContain(`url('/fonts/${file}') format('woff2')`);
+    }
+    const faces = indexHtml.match(/@font-face \{[^}]+\}/g) || [];
+    expect(faces).toHaveLength(2);
+    for (const face of faces) expect(face).toContain('font-display: swap');
+    expect(faces.filter((f) => f.includes("'Cormorant Garamond'"))).toHaveLength(1);
+    expect(faces.filter((f) => f.includes("'Inter'"))).toHaveLength(1);
+    // Both faces are above the fold on every page, so both are preloaded.
+    expect(indexHtml).toContain('<link rel="preload" as="font" type="font/woff2" href="/fonts/cormorant-garamond-latin.woff2" crossorigin />');
+    expect(indexHtml).toContain('<link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin />');
   });
 });
