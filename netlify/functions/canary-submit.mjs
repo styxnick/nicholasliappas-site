@@ -27,4 +27,4 @@ export default async () => {
   return new Response('ok');
 };
 
-export const config = { schedule: '30 19 * * *' }; // TEMPORARY first-run schedule; weekly schedule follows in the next commit
+export const config = { schedule: '0 12 * * 1' }; // Mondays 12:00 UTC (7 AM ET winter / 8 AM EDT)
