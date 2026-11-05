@@ -10,6 +10,7 @@ import Commercial from './pages/Commercial';
 import NotFound from './pages/NotFound';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Terms from './pages/Terms';
+import BuyersGuide from './pages/BuyersGuide';
 import { getStyles } from './components/styles';
 import { initAnalytics, trackPageView, track } from './lib/analytics';
 
@@ -37,6 +38,7 @@ export default function App() {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/:slug" element={<TownPage track={track} />} />
+        <Route path="/:slug/buyers-guide" element={<BuyersGuide track={track} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer track={track} />

@@ -120,3 +120,21 @@ describe('buildAlert', () => {
     expect(a.html).toContain('mailto:p@x.y');
   });
 });
+
+describe('buyers-guide emails', () => {
+  const lead = mk('buyers-guide', { name: 'Jane Doe', email: 'jane@example.com', phone: '', town: 'Manhasset', guide: '/manhasset/buyers-guide' });
+
+  it('confirms with a link to the guide and the usual signature', () => {
+    const c = buildConfirmation(lead);
+    expect(c.subject).toBe('Your Manhasset Buyer’s Guide');
+    expect(c.html).toContain('href="https://nicholasliappas.com/manhasset/buyers-guide"');
+    expect(c.html).toContain('>Read the guide<');
+    expect(c.text).toContain('Read it here: https://nicholasliappas.com/manhasset/buyers-guide');
+    expect(c.html).toContain('Licensed Associate Real Estate Broker');
+  });
+
+  it('labels the alert and the fields', () => {
+    expect(alertSubject(lead)).toBe('New lead · Jane Doe · Manhasset Buyer’s Guide');
+    expect(lead.fields.map(([k]) => k)).toEqual(['Name', 'Email', 'Phone', 'Town', 'Guide']);
+  });
+});

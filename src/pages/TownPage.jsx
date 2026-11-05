@@ -3,6 +3,8 @@ import { towns } from '../data/towns';
 import { getStyles, FONT_SANS } from '../components/styles';
 import ContactForm from '../components/ContactForm';
 import NotFound from './NotFound';
+import GuideForm from '../components/GuideForm';
+import { guides } from '../data/guides';
 import { useSeo, pageMeta, SITE_URL } from '../lib/seo';
 
 export default function TownPage({ track }) {
@@ -171,6 +173,32 @@ export default function TownPage({ track }) {
           </div>
         </div>
       </section>
+
+      {/* Buyer's Guide (towns that have one in src/data/guides.js) */}
+      {guides[slug] && (
+        <section id="buyers-guide" aria-label={`${town.name} Buyer's Guide`} style={{ padding: '120px 5%', background: '#fff', scrollMarginTop: '72px' }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '80px', alignItems: 'center' }}>
+            <div>
+              <p style={styles.sectionSubtitle}>Buying in {town.name}?</p>
+              <h2 style={styles.sectionTitle}>Start With the Buyer’s Guide</h2>
+              <p style={{ fontFamily: FONT_SANS, fontSize: '15px', lineHeight: 1.9, color: '#555', marginBottom: '28px', maxWidth: '500px' }}>
+                {guides[slug].intro}
+              </p>
+              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px' }}>
+                {guides[slug].sections.slice(0, 6).map((sec) => (
+                  <li key={sec.id} style={{ fontFamily: FONT_SANS, fontSize: '13px', lineHeight: 2, color: '#444', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <span aria-hidden="true" style={{ color: '#1a1a1a', fontSize: '8px' }}>◆</span>{sec.heading}
+                  </li>
+                ))}
+              </ul>
+              <Link to={`/${town.slug}/buyers-guide`} onClick={() => track('cta_click', { cta: 'read_guide', placement: 'town' })} style={{ fontFamily: FONT_SANS, fontSize: '12px', letterSpacing: '2px', textTransform: 'uppercase', color: '#1a1a1a', textDecoration: 'none', borderBottom: '1px solid #1a1a1a', paddingBottom: '4px' }}>
+                Read it online →
+              </Link>
+            </div>
+            <GuideForm track={track} guide={guides[slug]} />
+          </div>
+        </section>
+      )}
 
       {/* Market Snapshot */}
       <section style={{ padding: '120px 5%', background: '#f8f8f8' }}>

@@ -134,6 +134,22 @@
       <input type="hidden" name="referrer_url" />
     </form>
 
+    <!-- Hidden form for Buyer's Guide requests (src/components/GuideForm.jsx) -->
+    <form name="buyers-guide" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="town" />
+      <input type="text" name="guide" />
+      <!-- First-touch attribution, filled by src/lib/netlifyForms.jsx -->
+      <input type="text" name="landing_page" />
+      <input type="text" name="source" />
+      <input type="text" name="medium" />
+      <input type="text" name="campaign" />
+      <input type="text" name="referrer_url" />
+    </form>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

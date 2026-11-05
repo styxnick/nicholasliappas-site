@@ -32,6 +32,7 @@ export const INTEREST_LABELS = {
 const FIELD_TITLES = {
   name: 'Name', email: 'Email', phone: 'Phone', interest: 'Interest', address: 'Property address', zipCode: 'ZIP code',
   role: 'Role', propertyType: 'Property type', location: 'Location', size: 'Size', timeline: 'Timeline', message: 'Message',
+  town: 'Town', guide: 'Guide',
 };
 
 export const escapeHtml = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -122,6 +123,25 @@ const para = (html) => `<p style="margin:0 0 18px;font-family:${SANS};font-size:
 function confirmationCopy(lead) {
   const { formName, data, interest } = lead;
   const e = escapeHtml;
+  if (formName === 'buyers-guide') {
+    const town = data.town || 'North Shore';
+    const url = `${SITE_URL}${String(data.guide || '').startsWith('/') ? data.guide : '/manhasset/buyers-guide'}`;
+    return {
+      subject: `Your ${town} Buyer\u2019s Guide`,
+      preheader: `The ${town} Buyer\u2019s Guide: villages and school zoning, housing stock, taxes, the commute, and how buying in New York works.`,
+      heading: 'Your guide is ready.',
+      primary: { href: url, label: 'Read the guide' },
+      paragraphs: [
+        `Thank you for requesting the <strong>${e(town)} Buyer\u2019s Guide</strong>. It covers the villages and school zoning, housing stock, taxes and carrying costs, the commute, and how buying in New York actually works, written from growing up here and selling here.`,
+        `When you are ready to look at homes, or if you want a market report on specific streets, reply to this email and I will put it together.`,
+      ],
+      text: [
+        `Thank you for requesting the ${town} Buyer\u2019s Guide. It covers the villages and school zoning, housing stock, taxes and carrying costs, the commute, and how buying in New York actually works, written from growing up here and selling here.`,
+        `Read it here: ${url}`,
+        'When you are ready to look at homes, or if you want a market report on specific streets, reply to this email and I will put it together.',
+      ],
+    };
+  }
   if (formName === 'home-valuation') {
     const where = [data.address, data.zipCode].filter(Boolean).join(', ');
     return {
@@ -234,7 +254,7 @@ export function buildConfirmation(lead) {
         ${para(`In the meantime, the fastest way to reach me is my cell. Call or text <a href="tel:${PHONE_E164}" style="color:${INK};">${PHONE_DISPLAY}</a> any time.`)}
       </td></tr>
       <tr><td style="padding:6px 40px 20px;">
-        ${button(`tel:${PHONE_E164}`, `Call ${PHONE_DISPLAY}`, true)}${button(`sms:${PHONE_E164}`, 'Text Nicholas', false)}
+        ${copy.primary ? button(copy.primary.href, copy.primary.label, true) + button(`tel:${PHONE_E164}`, `Call ${PHONE_DISPLAY}`, false) : button(`tel:${PHONE_E164}`, `Call ${PHONE_DISPLAY}`, true) + button(`sms:${PHONE_E164}`, 'Text Nicholas', false)}
       </td></tr>
       ${signature()}`,
   });
@@ -275,6 +295,7 @@ export function alertSubject(lead) {
   const what =
     formName === 'home-valuation' ? `Valuation · ${dash(data.address)}` :
     formName === 'commercial' ? [data.propertyType, data.location].filter(Boolean).join(' in ') || 'Commercial' :
+    formName === 'buyers-guide' ? `${data.town || ''} Buyer\u2019s Guide`.trim() :
     lead.interestLabel || 'Contact';
   return `New lead · ${lead.name} · ${what}`;
 }
