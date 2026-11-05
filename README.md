@@ -56,8 +56,42 @@ hidden mirror forms in `index.html` (`contact`: name, email, phone, interest;
 `netlifyForms.jsx` also appends five attribution fields to every submission
 (`landing_page`, `source`, `medium`, `campaign`, `referrer_url`; not `referrer`, which Netlify reserves for the HTTP Referer), which each mirror form
 declares as hidden inputs; `src/test/mirrorForms.test.js` enforces this.
-If you add a field, add it in both places. Email notifications are configured in the
-Netlify dashboard.
+If you add a field, add it in both places.
+
+### What happens after a submission
+
+`netlify/functions/submission-created.js` runs on every verified submission:
+
+1. **Alert to Nicholas** via Resend (from `leads@nicholasliappas.com`), subject
+   `New lead · Name · What`, with one-tap Call / Text / Email buttons.
+2. **Confirmation to the lead** from `nicholas@nicholasliappas.com` (replies go to the
+   Compass inbox), with copy specific to the form and interest. Builders live in
+   `netlify/lib/lead-emails.js`; preview by rendering them in a test.
+3. Optional phone push via ntfy.sh.
+
+Env vars (Netlify → Site configuration → Environment variables):
+
+| Var | Required | Purpose |
+|---|---|---|
+| `RESEND_API_KEY` | yes | Resend API key for `nicholasliappas.com` |
+| `LEAD_TO` | no | Override the alert recipient (default `nicholas.liappas@compass.com`) |
+| `LEAD_ALERT_TO` | no | Extra alert recipients, comma-separated (second inbox, carrier SMS gateway) |
+| `NTFY_TOPIC` | no | ntfy.sh topic for an instant phone push (first name + form only) |
+
+### Weekly pipeline check (canary)
+
+Two scheduled functions prove the whole path still works, every Monday:
+
+- `canary-submit` (12:00 UTC) POSTs a lead named `Canary Check …` from
+  `nliappas+canary@gmail.com` through the real form endpoint.
+- `submission-created` recognises that address, sends both emails to the canary
+  inbox instead of Nicholas, and records the Resend message ids in Netlify Blobs.
+- `canary-check` (12:30 UTC) confirms the submission reached the function and that
+  Resend reports both emails **delivered**. It emails Nicholas **only on failure**.
+
+Logic is in `netlify/lib/canary.js` (tested in `src/test/canary.test.js`). The canary
+records show up in Netlify Forms like any other submission; filter Gmail on
+`to:nliappas+canary@gmail.com` to archive the weekly pair.
 
 ## Analytics
 
