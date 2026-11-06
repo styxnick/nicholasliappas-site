@@ -3,7 +3,7 @@ export const towns = {
     name: "Manhasset",
     slug: "manhasset",
     title: "Manhasset Real Estate | Homes for Sale | Nicholas Liappas",
-    metaDescription: "Find homes for sale in Manhasset, NY with Nicholas Liappas at Compass. Expert local knowledge, construction expertise, and record-breaking results on the North Shore.",
+    metaDescription: "Find homes for sale in Manhasset, NY with Nicholas Liappas at Compass. Local knowledge, construction expertise and record-breaking results on the North Shore.",
     h1: "Manhasset Real Estate",
     subtitle: "Your North Shore Expert in Manhasset",
     description: "Manhasset is one of Long Island's most coveted communities, known for its top-rated schools, proximity to Manhattan, and stunning residential neighborhoods. As a North Shore native and Licensed Associate Real Estate Broker at Compass, I bring deep local knowledge and construction expertise to every Manhasset transaction.",

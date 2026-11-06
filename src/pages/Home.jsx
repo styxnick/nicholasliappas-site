@@ -56,9 +56,9 @@ export default function Home({ track }) {
   ];
 
   useSeo({
-    title: 'Nicholas Liappas | Real Estate Broker | North Shore, Queens & North Fork NY',
+    title: 'Nicholas Liappas | North Shore, Queens & North Fork Real Estate',
     meta: [
-      { name: 'description', content: 'Nicholas Liappas – Licensed Associate Real Estate Broker at Compass. Serving Manhasset, Port Washington, Roslyn, East Hills, Glen Head, Glenwood Landing, Great Neck, Bayside & North Fork. Record-breaking sales, construction expertise, 8 years experience. Call 516-214-7761.' },
+      { name: 'description', content: 'Licensed Associate Real Estate Broker at Compass. Residential, commercial and development sales on the North Shore, in Queens and on the North Fork.' },
       { name: 'keywords', content: 'Nicholas Liappas, Nicholas Liappas realtor, Nicholas Liappas Compass, Liappas Team, real estate agent Manhasset NY, real estate agent Port Washington NY, real estate agent Roslyn NY, real estate agent East Hills NY, real estate agent Glen Head NY, real estate agent Glenwood Landing NY, real estate agent Great Neck NY, real estate agent Bayside Queens, real estate agent North Fork NY, real estate broker North Shore Long Island, luxury homes North Shore Long Island, homes for sale Manhasset, homes for sale Port Washington, homes for sale Roslyn, homes for sale East Hills, homes for sale Glen Head, homes for sale Glenwood Landing, homes for sale Great Neck, Compass real estate Long Island, buy home Long Island, sell home Long Island, commercial real estate Long Island, developer sales Long Island, Nassau County realtor, Suffolk County realtor, North Fork luxury homes' },
       { name: 'author', content: 'Nicholas Liappas' },
       { name: 'robots', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' },
@@ -630,7 +630,10 @@ export default function Home({ track }) {
               {
                 title: 'Buyer Representation',
                 description: 'With deep understanding of design, construction, and renovation, I help you visualize potential and identify issues before they become problems.',
-                icon: '⌂'
+                icon: '⌂',
+                to: '/manhasset/buyers-guide',
+                cta: 'Read the Manhasset Buyer’s Guide →',
+                ctaKey: 'buyers_guide'
               },
               {
                 title: 'Seller Services',
@@ -651,7 +654,7 @@ export default function Home({ track }) {
               },
             ].map((service, i) => {
               const Card = service.to ? Link : 'div';
-              const linkProps = service.to ? { to: service.to, onClick: () => track('cta_click', { cta: 'commercial', placement: 'services' }) } : {};
+              const linkProps = service.to ? { to: service.to, onClick: () => track('cta_click', { cta: service.ctaKey || 'commercial', placement: 'services' }) } : {};
               return (
               <Card key={i} {...linkProps} style={{
                 padding: '40px',

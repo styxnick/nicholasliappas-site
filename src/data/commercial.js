@@ -96,8 +96,8 @@ export const faqs = [
 ];
 
 export const seo = {
-  title: 'Commercial Real Estate Broker | North Shore, Queens & North Fork | Nicholas Liappas, Compass',
-  description: 'Commercial sales and leasing for land, retail, office, medical, mixed-use and industrial property across Long Island\'s North Shore, Queens and the North Fork. Nicholas Liappas, Licensed Associate Real Estate Broker at Compass.',
+  title: 'North Shore & Queens Commercial Real Estate | Nicholas Liappas',
+  description: 'Commercial sales and leasing: land, retail, office, medical, mixed-use and industrial property on Long Island’s North Shore, in Queens and the North Fork.',
 };
 
 export const complianceLine = 'Nicholas Liappas, Licensed Associate Real Estate Broker · The Liappas Team at Compass · Compass is a licensed real estate broker. Information is deemed reliable but not guaranteed.';

@@ -29,7 +29,7 @@ export default function HomeValuation({ track }) {
 
   const seo = pageMeta({
     title: 'Free Home Valuation | Nicholas Liappas | Compass Real Estate',
-    description: 'Get a free, no-obligation home valuation for your North Shore property. Nicholas Liappas at Compass provides personalized Comparative Market Analysis (CMA) for Manhasset, Port Washington, Roslyn, and more.',
+    description: 'Free, no-obligation North Shore home valuation. Nicholas Liappas at Compass prepares a personal market analysis for Manhasset, Port Washington and Roslyn.',
     path: '/home-valuation'
   });
   useSeo({
