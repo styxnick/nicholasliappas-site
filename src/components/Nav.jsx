@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { getStyles, FONT_SANS } from './styles';
 import { towns } from '../data/towns';
+import { guides } from '../data/guides';
 import { useMediaQuery } from '../lib/useMediaQuery';
 
 const MOBILE_BREAKPOINT = '(max-width: 1100px)';
@@ -234,8 +235,8 @@ export default function Nav({ track }) {
                 boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
               }}>
                 {townList.map((town) => (
+                  <div key={town.slug}>
                   <Link
-                    key={town.slug}
                     to={`/${town.slug}`}
                     style={{
                       display: 'block',
@@ -256,6 +257,19 @@ export default function Nav({ track }) {
                   >
                     {town.name}
                   </Link>
+                  {guides[town.slug] && (
+                    <Link
+                      to={`/${town.slug}/buyers-guide`}
+                      style={{ display: 'block', padding: '0 24px 12px 40px', marginTop: '-6px', color: '#666', textDecoration: 'none', fontFamily: FONT_SANS, fontSize: '11px', letterSpacing: '1px' }}
+                      onMouseEnter={(e) => e.currentTarget.style.color = '#1a1a1a'}
+                      onMouseLeave={(e) => e.currentTarget.style.color = '#666'}
+                      onFocus={(e) => e.currentTarget.style.color = '#1a1a1a'}
+                      onBlur={(e) => e.currentTarget.style.color = '#666'}
+                    >
+                      {town.name} Buyer’s Guide →
+                    </Link>
+                  )}
+                  </div>
                 ))}
               </div>
             )}
@@ -325,7 +339,12 @@ export default function Nav({ track }) {
           <Link to="/#services" style={menuLink}>Services</Link>
           <div style={{ ...menuLink, color: '#888', fontSize: '11px', paddingBottom: '4px' }}>Communities</div>
           {townList.map((town) => (
-            <Link key={town.slug} to={`/${town.slug}`} style={menuSubLink}>{town.name}</Link>
+            <div key={town.slug}>
+              <Link to={`/${town.slug}`} style={menuSubLink}>{town.name}</Link>
+              {guides[town.slug] && (
+                <Link to={`/${town.slug}/buyers-guide`} style={{ ...menuSubLink, padding: '2px 0 10px 36px', fontSize: '12px', color: '#999' }}>{town.name} Buyer’s Guide</Link>
+              )}
+            </div>
           ))}
           <Link to="/home-valuation" style={{ ...menuLink, marginTop: '8px' }}>Home Valuation</Link>
           <Link to="/commercial" style={menuLink}>Commercial</Link>

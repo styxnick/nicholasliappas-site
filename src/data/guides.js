@@ -20,10 +20,12 @@ export const guides = {
     slug: 'manhasset',
     town: 'Manhasset',
     title: 'Manhasset Buyer’s Guide | Nicholas Liappas, Compass',
-    metaDescription: 'Nicholas Liappas’s guide to buying a home in Manhasset, NY: the villages and school zoning, housing stock, taxes and carrying costs, the LIRR commute, lifestyle, and how the New York buying process works.',
+    metaDescription: 'Nicholas Liappas’s guide to buying in Manhasset, NY: the villages and school zoning, housing stock, taxes, the LIRR commute, and how buying in New York works.',
     heading: 'Manhasset Buyer’s Guide',
     subtitle: 'What to know before you buy on the North Shore',
     updated: 'November 2026',
+    publishedAt: '2026-11-05',
+    modifiedAt: '2026-11-05',
     intro: 'Manhasset isn’t just one of the most desirable places to live in New York; it’s one of the most desirable in the country. It has a top-ranked school district, a sub-40-minute train ride to Midtown, Manhasset Bay at its doorstep, and streets lined with classic Colonial and Tudor homes. It’s a small, close-knit community, and the bar to entry is high. For those who buy here, it’s worth it.',
     sections: [
       {

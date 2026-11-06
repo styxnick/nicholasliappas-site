@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { towns } from '../data/towns';
+import { guides } from '../data/guides';
 import { FONT_SANS } from './styles';
 
 export default function Footer({ track }) {
@@ -93,6 +94,15 @@ export default function Footer({ track }) {
                   >
                     {town.name}
                   </Link>
+                  {guides[town.slug] && (
+                    <Link to={`/${town.slug}/buyers-guide`}
+                      style={{ display: 'block', marginTop: '4px', fontFamily: FONT_SANS, fontSize: '12px', color: '#999', textDecoration: 'none', transition: 'color 0.3s' }}
+                      onMouseEnter={(e) => e.target.style.color = '#fff'}
+                      onMouseLeave={(e) => e.target.style.color = '#999'}
+                    >
+                      {town.name} Buyer’s Guide
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

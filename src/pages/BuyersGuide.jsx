@@ -104,6 +104,8 @@ export default function BuyersGuide({ track }) {
         '@type': 'Article',
         headline: guide.heading,
         description: guide.metaDescription,
+        datePublished: guide.publishedAt,
+        dateModified: guide.modifiedAt || guide.publishedAt,
         url: SITE_URL + path,
         image: `${SITE_URL}/nicholas-headshot.jpg`,
         author: { '@type': 'Person', '@id': `${SITE_URL}/#person`, name: 'Nicholas Liappas' },
