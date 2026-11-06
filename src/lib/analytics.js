@@ -171,6 +171,10 @@ export function initAnalytics({ location = window.location, referrer = document.
   if (initialized || typeof window === 'undefined') return;
   initialized = true;
 
+  // Automated browsers (Puppeteer, Playwright, WebDriver-driven audits) must not
+  // count as visitors. 2026-11-05: a site audit showed up in GA4 as 137 "users".
+  if (typeof navigator !== 'undefined' && navigator.webdriver) return;
+
   attribution = resolveAttribution(location, referrer);
   internal = resolveInternal(location);
 

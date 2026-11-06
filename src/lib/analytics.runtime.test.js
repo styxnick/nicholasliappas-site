@@ -174,3 +174,20 @@ describe('trackPageView', () => {
     }]);
   });
 });
+
+describe('automated browsers', () => {
+  it('loads no analytics at all when navigator.webdriver is set', async () => {
+    Object.defineProperty(navigator, 'webdriver', { value: true, configurable: true });
+    try {
+      const m = await load();
+      m.initAnalytics(at(`${PROD}/manhasset`));
+      m.trackPageView('/manhasset');
+      m.track('generate_lead', { form_name: 'contact' });
+      expect(document.head.querySelector('script[src*="googletagmanager"]')).toBeNull();
+      expect(window.dataLayer).toBeUndefined();
+      expect(window.gtag).toBeUndefined();
+    } finally {
+      Object.defineProperty(navigator, 'webdriver', { value: false, configurable: true });
+    }
+  });
+});
