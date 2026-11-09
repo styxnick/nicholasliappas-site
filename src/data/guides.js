@@ -5,14 +5,14 @@
 // Content is Nicholas's own copy (Manhasset: PDF dated Nov 5, 2026). Each
 // section is a list of blocks the page renders:
 //   { type: 'p', text, lead? }            paragraph, optional bold lead-in
-//   { type: 'bullets', items: [{ lead?, text }] }
+//   { type: 'bullets', items: [{ lead?, text, sub?: [string] }] }
 //   { type: 'steps', items: [{ lead, text }] }   numbered
 //   { type: 'facts', rows: [[label, value]] }
 //   { type: 'table', columns: [..], rows: [[..]] }  rendered as stacked cards
 //   { type: 'faq', items: [{ q, a }] }
 //   { type: 'h3', text }
 const p = (text, lead) => (lead ? { type: 'p', lead, text } : { type: 'p', text });
-const bullets = (items) => ({ type: 'bullets', items: items.map((i) => (Array.isArray(i) ? { lead: i[0], text: i[1] } : { text: i })) });
+const bullets = (items) => ({ type: 'bullets', items: items.map((i) => (Array.isArray(i) ? { lead: i[0], text: i[1], ...(i[2] ? { sub: i[2] } : {}) } : typeof i === 'string' ? { text: i } : i)) });
 const steps = (items) => ({ type: 'steps', items: items.map(([lead, text]) => ({ lead, text })) });
 
 export const guides = {
@@ -260,6 +260,277 @@ export const guides = {
       'Manhasset Park District – Wikipedia; Manhasset Valley Park – Wikipedia',
       'Child care and private schools: childcarecenter.us, Harbor Child Care, Our Lady of Grace Montessori, St. Mary’s Elementary – Niche, St. Mary’s High School – Wikipedia, Manhasset Secondary School – Wikipedia',
       'North Hempstead Country Club – Wikipedia',
+    ],
+  },
+  'port-washington': {
+    slug: 'port-washington',
+    town: 'Port Washington',
+    title: 'Port Washington Buyer’s Guide | Nicholas Liappas, Compass',
+    metaDescription: 'Nicholas Liappas’s guide to buying in Port Washington, NY: villages, school zones, waterfront homes, taxes, the LIRR commute and how buying in New York works.',
+    heading: 'Port Washington Buyer’s Guide',
+    subtitle: 'What to know before you buy on the North Shore',
+    updated: 'November 2026',
+    publishedAt: '2026-11-09',
+    modifiedAt: '2026-11-09',
+    intro: 'Port Washington is a true waterfront town: surrounded by Manhasset Bay, Hempstead Harbor and Long Island Sound, with a lively downtown, a highly regarded school district, and its own train line into Manhattan. It offers a wider range of homes and prices than most North Shore towns, from condos near the water to estates in Sands Point, and a strong sense of community that ties it all together.',
+    sections: [
+      {
+        id: 'why-port-washington',
+        heading: 'Why Port Washington',
+        blocks: [
+          p('What Port Washington is known for:'),
+          bullets([
+            ['The water.', 'Marinas, yacht clubs, a waterfront walkway, beaches and some of the best boating on the North Shore.'],
+            ['The commute.', 'Port Washington is the first stop on its own LIRR branch, with direct service to Penn Station and Grand Central Madison.'],
+            ['Schools.', 'The Port Washington school district is well regarded across Long Island.'],
+            ['A real downtown.', 'Main Street and the streets around it are full of restaurants, shops and coffee spots you can walk to.'],
+            ['Range.', 'Condos, co-ops, starter homes, classic Colonials and waterfront estates, all in one town.'],
+          ]),
+          p('Port Washington is one of the more desirable towns on the North Shore, and well-priced homes draw strong interest. Its range of housing, though, means there are more ways in than in many neighboring towns.', 'A note on price.'),
+          p('I live in Port Washington. I know its neighborhoods, its waterfront and its people firsthand, and I can tell you what it’s actually like to live on any given street.', 'Why listen to us:'),
+        ],
+      },
+      {
+        id: 'at-a-glance',
+        heading: 'Port Washington at a glance',
+        blocks: [
+          p('Port Washington sits on the Cow Neck Peninsula on Long Island’s North Shore, about 20 miles by rail from Penn Station, with Manhasset Bay to the west and Hempstead Harbor to the east.'),
+          { type: 'facts', rows: [
+            ['Location', 'Cow Neck Peninsula, Nassau County, Town of North Hempstead'],
+            ['Train to Midtown', 'End of the line on the LIRR Port Washington Branch, with direct trains to Penn Station and Grand Central Madison'],
+            ['Population', '16,753 in the hamlet itself (2020 Census); more than 30,000 including the surrounding villages'],
+            ['Households', '5,925 in the hamlet (2020 Census)'],
+            ['School district', 'Port Washington Union Free School District'],
+          ] },
+          p('Like Manhasset, “Port Washington” is a community, not a single government. The hamlet is unincorporated and governed by the Town of North Hempstead. Around it are four incorporated villages that are entirely part of greater Port Washington: Sands Point, Baxter Estates, Manorhaven and Port Washington North. Parts of Flower Hill and Plandome Manor are too. Each village has its own government, building department and village tax. Port Washington also has its own police district, and Sands Point has its own police department.', 'How it’s governed.'),
+          p('Almost every Port Washington address is in the Port Washington school district, which serves all four villages, the hamlet, and parts of Flower Hill and Plandome Manor. It’s still worth confirming for any home near the borders with Manhasset or Roslyn.', 'School district is simpler here.'),
+        ],
+      },
+      {
+        id: 'villages',
+        heading: 'Villages and neighborhoods',
+        blocks: [
+          p('Each part of Port Washington has its own feel. Here’s a quick guide; ask us for the street-by-street detail.'),
+          { type: 'table', columns: ['Area', 'What it’s like', 'School district'], rows: [
+            ['Sands Point (village)', 'The estate section at the tip of the peninsula, and Fitzgerald’s “East Egg” in The Great Gatsby. Large lots (two-acre zoning for new subdivisions), no commercial zoning, its own police department, and home to Sands Point Preserve. About 2,700 residents.', 'Port Washington'],
+            ['Manorhaven (village)', '“The Pearl of Manhasset Bay.” A waterfront village on the bay and Sheets Creek with beach, dock and preserve parks, marinas, and a mix of single-family homes, garden apartments and condos. About 7,000 residents.', 'Port Washington'],
+            ['Baxter Estates (village)', 'A small, historic village near downtown, home to the Port Washington Public Library.', 'Port Washington'],
+            ['Port Washington North (village)', 'On Manhasset Bay along Shore Road, with Bay Walk Park and the waterfront promenade. A mix of homes, condos and apartments.', 'Port Washington'],
+            ['Flower Hill (Port Washington part)', 'The section of Flower Hill zoned for Port Washington. Traditional single-family homes.', 'Port Washington for this section'],
+            ['Plandome Manor (eastern part)', 'The eastern edge of the village, zoned for Port Washington. Larger properties near Leeds Pond and the bay.', 'Port Washington for this section'],
+            ['Beacon Hill', 'The highest point on the peninsula, with established single-family homes and water views.', 'Port Washington'],
+            ['Manhasset Bay Estates', 'A waterfront neighborhood on the bay side of the hamlet.', 'Port Washington'],
+            ['Salem', 'An established neighborhood of single-family homes around South Salem Elementary.', 'Port Washington'],
+            ['Downtown and unincorporated Port Washington', 'Walkable to Main Street and the train, with the widest variety of homes, including condos, co-ops and starter homes.', 'Port Washington'],
+          ] },
+        ],
+      },
+      {
+        id: 'schools',
+        heading: 'Schools',
+        blocks: [
+          p('The Port Washington Union Free School District is one of the most respected on Long Island. It serves about 5,000 students across five elementary schools, one middle school and one high school, and it traces its roots to a one-room schoolhouse in 1757.'),
+          { type: 'table', columns: ['School', 'Grades', 'Notes'], rows: [
+            ['Daly Elementary', 'K–5', 'Zoned by address'],
+            ['Guggenheim Elementary', 'K–5', 'On land donated by the Guggenheim Foundation, at the edge of Sands Point'],
+            ['Manorhaven Elementary', 'K–5', 'Zoned by address'],
+            ['John Philip Sousa Elementary', 'K–5', 'Zoned by address'],
+            ['South Salem Elementary', 'K–5', 'Zoned by address'],
+            ['Carrie Palmer Weber Middle School', '6–8', 'Every student in the district attends'],
+            ['Paul D. Schreiber High School', '9–12', 'Every student in the district attends'],
+          ] },
+          p('Port Washington has five elementary zones, so two homes a few blocks apart can feed different schools. We confirm the zone for every property our clients consider.', 'Which elementary school?'),
+          { type: 'h3', text: 'Schools and child care by age' },
+          p('Port Washington has options at every stage, from infant care through high school. Many programs span more than one age group; each is listed under its main one.'),
+          { type: 'table', columns: ['Stage', 'Options in Port Washington'], rows: [
+            ['Day care (infants and toddlers)', 'Imagine Early Learning Center · Sid Jacobson JCC · Port Washington Children’s Center (toddlers through preschool, plus before- and after-school) · Teach and Tumble'],
+            ['Nursery schools', 'Child’s World Nursery School (First United Methodist Church) · Community Synagogue Early Childhood Center · Temple Beth Israel Nursery School · Friends Together Nursery · North Shore Nursery School · Archangel Michael Greek Orthodox Church'],
+            ['Preschools', 'Happy Montessori School · Chabad Preschool · Florence Brownstein Preschool · My Spectrum Center'],
+            ['Elementary', 'The five public elementary schools (K–5) · Chabad Academy of Science & the Humanities (Jewish, Pre-K–7) · Greek Language Institute (K–8)'],
+            ['Middle school', 'Weber Middle School, grades 6–8 (public) · Chabad Academy (through grade 7)'],
+            ['High school', 'Schreiber High School, grades 9–12 (public) · Vincent Smith School (independent, grades 1–12)'],
+          ] },
+          p('Independent and Catholic schools in neighboring towns are also a short drive away.'),
+        ],
+      },
+      {
+        id: 'housing',
+        heading: 'Housing stock and architecture',
+        blocks: [
+          p('Port Washington has one of the most varied housing markets on the North Shore, from waterfront condos to historic estates.'),
+          bullets([
+            ['Colonials, Tudors and Capes', 'fill the established neighborhoods, many built between the 1920s and the 1960s.'],
+            ['Estates and large-lot homes', 'define Sands Point, where many homes sit on an acre or more and new subdivisions require two acres.'],
+            ['Waterfront and water-view homes', 'line Manhasset Bay, Hempstead Harbor and the Sound, from bayfront cottages to grand estates.'],
+            ['Condos, co-ops and townhomes', 'are more plentiful here than in most North Shore towns, especially near downtown, the train and the waterfront in Manorhaven and Port Washington North. A good option for downsizers and first-time buyers.'],
+            ['New construction and teardowns', 'are common in the established neighborhoods. Village and town rules on setbacks, height and lot coverage shape what you can build.'],
+          ]),
+          p('With a background in construction, I walk every showing looking at what’s behind the walls, not just the finishes. On older homes I look for aging cesspools, outdated electrical and plumbing, water in basements and unpermitted work. On waterfront homes I add bulkheads, docks and flood exposure. For any home you’re considering, I can give you a sense of what a renovation or new build would cost.', 'A builder’s eye on older homes.'),
+        ],
+      },
+      {
+        id: 'market',
+        heading: 'The market and what your budget buys',
+        blocks: [
+          p('Port Washington is a competitive market: well-priced homes move quickly and often draw multiple offers. Ask us for current numbers on the streets and price range you care about.'),
+          bullets([
+            ['Entry level:', 'condos and co-ops near downtown and the water, and smaller single-family homes in the hamlet and Manorhaven.'],
+            ['The core of the market:', 'Colonials, Tudors and updated Capes in established neighborhoods such as Salem, Beacon Hill and the Port Washington sections of Flower Hill.'],
+            ['The top of the market:', 'waterfront homes, new construction, and estates in Sands Point.'],
+          ]),
+          p('Inventory typically peaks in spring, when competition is also highest. Late fall and winter have fewer listings but fewer competing buyers, and sellers who list then are often motivated.', 'Timing.'),
+          p('Port Washington has historically held its value well through market cycles, supported by the water, the schools and the train.', 'Long-term value.'),
+        ],
+      },
+      {
+        id: 'taxes',
+        heading: 'Taxes and carrying costs',
+        blocks: [
+          p('Property taxes are the cost buyers most often underestimate, so plan for them from the start.'),
+          p('A Port Washington tax bill combines several layers: Nassau County, the Town of North Hempstead, special districts (Port Washington has its own water, sewer, police, fire, parking and library districts), and the school district, which is the largest share. Homes inside an incorporated village also pay a village tax.', 'How your tax bill is built.'),
+          p('It may reflect exemptions or a grievance reduction that won’t carry over to you. Homeowners can challenge their assessment each year through Nassau County’s Assessment Review Commission, and many use a grievance firm that works on contingency.', 'Don’t rely on the seller’s tax bill.'),
+          p('New homeowners can apply for the New York State STAR credit, which reduces school taxes for households under the income limit. Seniors, veterans and others may qualify for additional exemptions.', 'STAR and exemptions.'),
+          p('Other carrying costs to budget for:'),
+          bullets([
+            'Homeowners insurance, plus flood insurance for waterfront and low-lying homes',
+            'Bulkhead and dock maintenance on waterfront properties',
+            'Heating fuel: natural gas where lines exist; some older homes still heat with oil',
+            'Cesspool maintenance on homes without sewer service. Most of the hamlet is sewered through the Port Washington Water Pollution Control District, but confirm for every property',
+            'Parking permits and any club, marina or village fees',
+          ]),
+        ],
+      },
+      {
+        id: 'commute',
+        heading: 'Commute and transportation',
+        blocks: [
+          p('Port Washington has its own train line into Manhattan, and because it’s the end of the line, the trains start here.'),
+          bullets([
+            ['LIRR Port Washington Branch.', 'Port Washington is the first stop on the branch, so commuters board an empty train and can almost always find a seat. Trains run directly to both Penn Station and Grand Central Madison with no transfer at Jamaica, and peak express trains stop only at Plandome, Manhasset and Great Neck before running nonstop to the city.', [
+              'To Penn Station: around 38 to 44 minutes on direct rush-hour trains.',
+              'To Grand Central Madison: around 35 to 42 minutes via direct east-side service.',
+              'Peak express and limited trains make select stops at Plandome, Manhasset and Great Neck before running straight toward Queens and Manhattan.',
+            ]],
+            ['Station parking.', 'The Port Washington Parking District runs the lots at the station, and parking requires a district permit. Many homes in the hamlet, Baxter Estates and Port Washington North are within walking distance of the train, and a local shuttle and the NICE n23 bus also serve the station.'],
+            ['Driving.', 'Port Washington Boulevard (Route 101) connects to Northern Boulevard and the Long Island Expressway.', [
+              'The route: Port Washington Boulevard (Route 101) south to either Northern Boulevard (Route 25A) or the Long Island Expressway (I-495 West).',
+              'Morning rush (7:00 to 9:30 AM): expect 55 to 80 minutes on average. The heaviest traffic builds on the LIE approach to the Queens-Midtown Tunnel or the Queensboro Bridge.',
+              'Worst case: on rainy mornings or days with a major accident on the LIE, the drive can stretch well past 1 hour 40 minutes.',
+            ]],
+            ['Airports.', 'LaGuardia and JFK are both a manageable drive by Long Island standards.'],
+          ]),
+        ],
+      },
+      {
+        id: 'lifestyle',
+        heading: 'Lifestyle',
+        blocks: [
+          p('Port Washington pairs a walkable downtown with the best of the North Shore waterfront.'),
+          bullets([
+            ['Downtown.', 'Main Street and the surrounding blocks are lined with restaurants, cafes, shops and services, all within walking distance of the train. These are my favorite picks:', [
+              'Louie’s of Port Washington: steakhouse and seafood on the water',
+              'La P’tite Framboise: French bistro',
+              'Tiga: specialty sushi',
+              'Yamaguchi: traditional sushi',
+              'Finn McCool’s: modern Irish pub',
+              'Amalfi: Italian and takeout, and the best chicken parm in town',
+              'Serra Provisions: true brick-oven pizza, very casual',
+            ]],
+            ['The waterfront.', 'The Town Dock on Manhasset Bay has been the heart of the waterfront since 1908. The Manhasset BayWalk runs about 1.7 miles along the bay from the Town Dock to Manorhaven Beach Park, with Bay Walk Park, a kayak launch, piers and picnic areas along the way.'],
+            ['Parks and beaches.', 'Sands Point Preserve, with the Falaise mansion and miles of trails along the Sound; North Hempstead Beach Park on Hempstead Harbor; Manorhaven Beach Park; Sunset Park and its John Philip Sousa Memorial Bandshell; and Harbor Links, a public golf course built on the old sand mines that once supplied New York City’s skyscrapers.'],
+            ['Clubs and recreation.', 'Golf, yacht, beach and tennis clubs are spread across the peninsula, along with Harbor Links and the Port Washington Tennis Academy.', [
+              'Port Washington Yacht Club',
+              'Manhasset Bay Yacht Club',
+              'North Hempstead Country Club (golf)',
+            ]],
+            ['On the water.', 'Manhasset Bay is one of the busiest boating harbors on the North Shore, with marinas, yacht clubs and moorings in Port Washington and Manorhaven.'],
+            ['Community.', 'The Port Washington Public Library in Baxter Estates is a hub of town life. Youth sports, summer concerts, waterfront events and an active network of houses of worship make it easy to get involved.'],
+            ['Healthcare.', 'St. Francis Hospital, a nationally known heart center, is just south in Flower Hill, and North Shore University Hospital is a short drive away in Manhasset.'],
+          ]),
+        ],
+      },
+      {
+        id: 'process',
+        heading: 'Buying in Port Washington: process and strategy',
+        blocks: [
+          p('Buying in New York works differently than in most states. Attorneys negotiate the contract, and nothing is binding until both sides sign it. Here’s how it unfolds.'),
+          steps([
+            ['Get pre-approved.', 'Many Port Washington purchases need a jumbo loan, which comes with stricter requirements for down payment, reserves and documentation. Condo and co-op purchases have their own approval steps, including board review for co-ops.'],
+            ['Define your must-haves.', 'Decide early on elementary school zone, distance to the train, water access or views, lot size, and whether you’ll take on renovation.'],
+            ['Search, including off-market.', 'Some of the best Port Washington homes never hit the open market. Through Compass Private Exclusives and our local relationships, we can show you homes before other buyers see them.'],
+            ['Make an offer and negotiate.', 'Offers in New York are verbal or written but not binding. When multiple buyers are interested, sellers often call for “highest and best” offers by a deadline.'],
+            ['Attorney review and contract.', 'Once an offer is accepted, the seller’s attorney drafts the contract and your attorney reviews it and orders a title search. You sign and put down a deposit, typically 10% of the price, and the seller countersigns.'],
+            ['Inspection, appraisal and mortgage commitment.', 'The home inspection usually happens before contracts are signed. Your lender then orders an appraisal and issues the mortgage commitment.'],
+            ['Title, survey and closing.', 'Your attorney clears title and reviews the survey, and you do a final walkthrough before closing.'],
+          ]),
+          p('How we help you win without overpaying:'),
+          bullets([
+            ['Price by the comps, not by emotion.', 'We show you what comparable homes actually sold for, so you know where the ceiling is.'],
+            ['Make your offer cleaner, not just bigger.', 'A strong pre-approval, a larger down payment, a flexible closing date or a quick inspection can beat a higher price.'],
+            ['Plan for the appraisal.', 'When bidding goes above recent sales, decide in advance how much of any appraisal gap you’re willing to cover.'],
+          ]),
+        ],
+      },
+      {
+        id: 'due-diligence',
+        heading: 'Due diligence checklist',
+        blocks: [
+          p('Older homes and waterfront homes both come with their own risks. Use this list before you sign a contract.'),
+          bullets([
+            'Confirm the elementary school zone for the specific property',
+            'Sewer or cesspool: confirm the property’s sewer connection, and have any cesspool inspected',
+            'Flood zone and elevation, especially near Manhasset Bay, Hempstead Harbor and Sheets Creek',
+            'Bulkhead, dock and seawall condition on waterfront homes, and the permits behind them',
+            'Open permits and certificates of occupancy with the town or village; unpermitted work can delay a closing',
+            'Underground or abandoned oil tanks: test or confirm proper removal',
+            'Roof, foundation, drainage, and signs of water in the basement',
+            'Age of the electrical and plumbing systems in older homes',
+            'Village rules on renovations, additions, docks, tree removal and fences, if you plan changes',
+            'For condos and co-ops: building finances, reserves, upcoming assessments and board rules',
+            'The current tax bill, and whether it reflects exemptions or reductions that won’t carry over',
+          ]),
+          p('Once you have an accepted offer, schedule the engineer’s inspection right away and keep every step on schedule. If you move too slowly, the seller can lose faith and move on to a backup offer. Time kills deals.', 'The deal-breaker we see most: moving too slowly.'),
+        ],
+      },
+      {
+        id: 'why-us',
+        heading: 'Why The Liappas Team',
+        blocks: [
+          p('We live here, we know this market house by house, and we bring a builder’s eye to every showing.'),
+          bullets([
+            ['A local.', 'I live in Port Washington. I know which blocks walk to the train, which streets see water in a storm, and which homes have been well cared for.'],
+            ['A proven track record.', 'Many successful sales across Port Washington and the North Shore.'],
+            ['A builder’s eye.', 'My background in construction means I spot structural, mechanical, waterfront and permit issues during the showing, before you’ve committed.'],
+            ['The Compass advantage.', 'Early access to off-market homes through Compass Private Exclusives, real-time market data, and the reach of one of the country’s largest brokerages.'],
+          ]),
+        ],
+      },
+      {
+        id: 'faq',
+        heading: 'Frequently asked questions',
+        blocks: [
+          { type: 'faq', items: [
+            { q: 'How competitive is the Port Washington market?', a: 'Very. Well-priced homes typically sell quickly, often above asking and with multiple offers. Ask us for current numbers.' },
+            { q: 'Is every Port Washington address in the Port Washington school district?', a: 'Almost all of them. The district serves the hamlet, all four villages, and the Port Washington sections of Flower Hill and Plandome Manor. The bigger question is which of the five elementary schools a home is zoned for, and we confirm that for every property.' },
+            { q: 'Port Washington or Manhasset?', a: 'Both have top schools, a short train ride and the water. Port Washington offers more variety, including condos and co-ops, a larger downtown and more waterfront living. Manhasset is smaller, with the Miracle Mile on its doorstep. We know both towns well and can help you compare specific homes.' },
+            { q: 'What should I know about buying on the water?', a: 'Check the flood zone and elevation, the cost of flood insurance, and the condition and permits of any bulkhead or dock. A good inspection and a survey matter even more here.' },
+            { q: 'What will my property taxes be?', a: 'It depends on the home’s assessed value, whether it sits in an incorporated village, and any exemptions. Before you make an offer, we’ll pull the current tax bill and walk you through what to expect as the new owner.' },
+            { q: 'How long is the commute to Manhattan?', a: 'Port Washington is the first stop on its own LIRR branch, with direct trains to Penn Station and Grand Central Madison and faster express trains at peak hours.' },
+            { q: 'When is the best time of year to buy?', a: 'Spring brings the most listings and the most competition. Fall and winter bring fewer buyers and often more motivated sellers.' },
+          ] },
+        ],
+      },
+    ],
+    cta: {
+      heading: 'Ready to find your home in Port Washington?',
+      text: 'Let’s start with a conversation. Book a buyer consultation and we’ll review your goals, budget and timeline, and map out the right neighborhoods for you. Or ask for a custom market report on the streets and price range you care about, or a private tour of the neighborhoods and waterfront.',
+    },
+    sources: [
+      'Port Washington, New York – Wikipedia; village pages for Sands Point and Manorhaven',
+      'Port Washington Union Free School District – Wikipedia; Carrie Palmer Weber Middle School – Wikipedia',
+      'Port Washington station – Wikipedia; MTA: Port Washington Branch express trains',
+      'Bay Walk Park – Wikipedia',
+      'Child care and private schools: Port Washington Public Library – Schools, Childcare and Enrichment, childcarecenter.us, Private School Review',
     ],
   },
 };
