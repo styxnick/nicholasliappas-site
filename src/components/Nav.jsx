@@ -253,14 +253,14 @@ export default function Nav({ track }) {
                   </Link>
                   {guides[town.slug] && (
                     <Link
-                      to={`/${town.slug}/buyers-guide`}
+                      to={`/${guides[town.slug].slug}/buyers-guide`}
                       style={{ display: 'block', padding: '0 24px 12px 40px', marginTop: '-6px', color: '#000', textDecoration: 'none', fontFamily: FONT_SANS, fontSize: '11px', }}
                       onMouseEnter={(e) => e.currentTarget.style.color = '#000'}
                       onMouseLeave={(e) => e.currentTarget.style.color = '#000'}
                       onFocus={(e) => e.currentTarget.style.color = '#000'}
                       onBlur={(e) => e.currentTarget.style.color = '#000'}
                     >
-                      {town.name} Buyer’s Guide →
+                      {guides[town.slug].town} Buyer’s Guide →
                     </Link>
                   )}
                   </div>
@@ -337,7 +337,7 @@ export default function Nav({ track }) {
             <div key={town.slug}>
               <Link to={`/${town.slug}`} style={menuSubLink}>{town.name}</Link>
               {guides[town.slug] && (
-                <Link to={`/${town.slug}/buyers-guide`} style={{ ...menuSubLink, padding: '2px 0 10px 36px', fontSize: '12px' }}>{town.name} Buyer’s Guide</Link>
+                <Link to={`/${guides[town.slug].slug}/buyers-guide`} style={{ ...menuSubLink, padding: '2px 0 10px 36px', fontSize: '12px' }}>{guides[town.slug].town} Buyer’s Guide</Link>
               )}
             </div>
           ))}

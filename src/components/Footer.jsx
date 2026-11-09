@@ -103,12 +103,12 @@ export default function Footer({ track }) {
                     {town.name}
                   </Link>
                   {guides[town.slug] && (
-                    <Link to={`/${town.slug}/buyers-guide`}
+                    <Link to={`/${guides[town.slug].slug}/buyers-guide`}
                       style={{ display: 'block', marginTop: '4px', fontFamily: FONT_SANS, fontSize: '12px', color: '#fff', textDecoration: 'none', transition: 'color 0.3s' }}
                       onMouseEnter={(e) => e.target.style.color = '#fff'}
                       onMouseLeave={(e) => e.target.style.color = '#fff'}
                     >
-                      {town.name} Buyer’s Guide
+                      {guides[town.slug].town} Buyer’s Guide
                     </Link>
                   )}
                 </li>

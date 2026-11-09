@@ -15,6 +15,12 @@ const p = (text, lead) => (lead ? { type: 'p', lead, text } : { type: 'p', text 
 const bullets = (items) => ({ type: 'bullets', items: items.map((i) => (Array.isArray(i) ? { lead: i[0], text: i[1], ...(i[2] ? { sub: i[2] } : {}) } : typeof i === 'string' ? { text: i } : i)) });
 const steps = (items) => ({ type: 'steps', items: items.map(([lead, text]) => ({ lead, text })) });
 
+// A guide can serve more than one town page (e.g. Roslyn + East Hills share one
+// guide at /roslyn/buyers-guide). `alsoFor` lists the extra town slugs.
+export function guideForTown(slug) {
+  return guides[slug] || Object.values(guides).find((g) => (g.alsoFor || []).includes(slug)) || null;
+}
+
 export const guides = {
   manhasset: {
     slug: 'manhasset',
@@ -531,6 +537,267 @@ export const guides = {
       'Port Washington station – Wikipedia; MTA: Port Washington Branch express trains',
       'Bay Walk Park – Wikipedia',
       'Child care and private schools: Port Washington Public Library – Schools, Childcare and Enrichment, childcarecenter.us, Private School Review',
+    ],
+  },
+  roslyn: {
+    slug: 'roslyn',
+    alsoFor: ['east-hills'],
+    town: 'Roslyn and East Hills',
+    title: 'Roslyn and East Hills Buyer’s Guide | Nicholas Liappas',
+    metaDescription: 'Nicholas Liappas’s guide to buying in Roslyn and East Hills, NY: villages and school zoning, housing stock, taxes, the commute and how buying in New York works.',
+    heading: 'Roslyn and East Hills Buyer’s Guide',
+    subtitle: 'What to know before you buy on the North Shore',
+    updated: 'November 2026',
+    publishedAt: '2026-11-09',
+    modifiedAt: '2026-11-09',
+    intro: 'Roslyn and East Hills combine one of Long Island’s most charming historic villages with some of its most sought-after suburban neighborhoods. Roslyn’s 1895 Clock Tower, harbor-front park and 19th-century streets give the area a character few towns can match, while East Hills offers spacious homes, quiet streets and one of the best village parks on the North Shore. Both are served primarily by the highly regarded Roslyn school district.',
+    sections: [
+      {
+        id: 'why-roslyn-east-hills',
+        heading: 'Why Roslyn and East Hills',
+        blocks: [
+          p('What Roslyn and East Hills are known for:'),
+          bullets([
+            ['Schools.', 'The Roslyn school district is one of the most respected on Long Island.'],
+            ['History and charm.', 'A walkable historic village center with the Clock Tower, Gerry Park, the Bryant Library and the Roslyn Grist Mill.'],
+            ['Space.', 'East Hills and the surrounding villages offer larger homes and lots on quiet, hilly streets, with some of the highest elevations in Nassau County.'],
+            ['Location.', 'Easy access to the Long Island Expressway and Northern State Parkway, with Manhattan, the airports and the rest of Long Island within reach.'],
+            ['The Park at East Hills.', 'A village park with a pool, courts, fields and trails that anchors community life.'],
+          ]),
+          p('Roslyn and East Hills sit firmly in the upper tier of the North Shore market, and well-priced homes draw strong interest. The wider Roslyn area, from village condos to East Hills colonials to Roslyn Harbor estates, offers more ways in than many buyers expect.', 'A note on price.'),
+          p('We work across the North Shore every day and know the Roslyn area street by street, including which side of a school-district line a home sits on.', 'Why listen to us:'),
+        ],
+      },
+      {
+        id: 'at-a-glance',
+        heading: 'Roslyn and East Hills at a glance',
+        blocks: [
+          p('The Greater Roslyn area sits on Long Island’s North Shore at the head of Hempstead Harbor, about 20 miles east of Midtown, on the Harbor Hill Moraine.'),
+          { type: 'facts', rows: [
+            ['Location', 'North Shore of Nassau County, mostly in the Town of North Hempstead'],
+            ['Population (2020 Census)', 'East Hills 7,284 · Roslyn Heights 6,747 · Village of Roslyn 2,988 · Roslyn Estates 1,318 · Roslyn Harbor 1,067 · Greenvale 1,069'],
+            ['Main school district', 'Roslyn Union Free School District (with exceptions; see Schools)'],
+            ['ZIP codes', '11576 (Roslyn, East Hills) and 11577 (Roslyn Heights)'],
+          ] },
+          p('“Roslyn” covers several communities. The Village of Roslyn, East Hills, Roslyn Estates and Roslyn Harbor are incorporated villages, each with its own government, building department and village tax. Roslyn Heights and Greenvale are unincorporated hamlets governed directly by the town. Which one a home is in affects your taxes, permits and services.', 'How it’s governed.'),
+          p('Parts of East Hills, Roslyn Heights, Roslyn Harbor and Greenvale are zoned for other districts. Always confirm the school district for the specific property before you make an offer.', 'A Roslyn address doesn’t guarantee Roslyn schools.'),
+        ],
+      },
+      {
+        id: 'villages',
+        heading: 'Villages and neighborhoods',
+        blocks: [
+          p('Each part of the Roslyn area has its own feel. Here’s a quick guide; ask us for the street-by-street detail.'),
+          { type: 'table', columns: ['Area', 'What it’s like', 'School district'], rows: [
+            ['East Hills (village)', 'The largest village in the area: spacious postwar colonials, ranches and newer homes on hilly, quiet streets, built largely after World War II on former estate land, including Clarence Mackay’s Harbor Hill. Home to The Park at East Hills. Most homes are on cesspools. About 7,300 residents.', 'Mostly Roslyn; parts of the southeast are East Williston, and a small corner is Jericho'],
+            ['Village of Roslyn', 'The historic heart of the area: the Clock Tower, Gerry Park, the Bryant Library, Old Northern Boulevard and 19th-century homes, plus waterfront condos at Roslyn Landing. Walkable and sewered. About 3,000 residents.', 'Roslyn'],
+            ['Roslyn Estates (village)', 'A planned community from 1908, once called “The Eden of Long Island,” with winding streets, ponds and preserves, and a mix of older homes and 1950s ranches and split-levels. About 1,300 residents.', 'Roslyn'],
+            ['Roslyn Harbor (village)', 'The “Millionaire’s Village”: former estates on Hempstead Harbor, home to Cedarmere and the Nassau County Museum of Art. Large properties. About 1,100 residents.', 'Roslyn or North Shore, depending on the property'],
+            ['Roslyn Heights (hamlet)', '“The Heights”: a mix of homes and price points close to the LIRR station, Roslyn High School and the Expressway. About 6,700 residents.', 'Mostly Roslyn; some areas are East Williston or Herricks'],
+            ['Greenvale (hamlet)', 'Small and quiet, along Northern Boulevard near LIU Post, with its own LIRR station. No sewers.', 'Mostly Roslyn; the Oyster Bay side is North Shore'],
+            ['Flower Hill and North Hills (Roslyn parts)', 'Sections of these villages are zoned for Roslyn schools.', 'Roslyn for those sections'],
+          ] },
+        ],
+      },
+      {
+        id: 'schools',
+        heading: 'Schools',
+        blocks: [
+          p('The Roslyn Union Free School District is one of the most respected on Long Island, and for many buyers it’s the reason they look here first. Founded in 1904, it serves about 3,000 students. Students start together at The Heights School, attend one of two elementary schools, then come back together at the middle and high school.'),
+          { type: 'table', columns: ['School', 'Grades', 'Location'], rows: [
+            ['The Heights School', 'Pre-K–1', 'Roslyn Heights'],
+            ['Harbor Hill Elementary', '1–5', 'East Hills'],
+            ['East Hills Elementary', '2–5', 'East Hills'],
+            ['Roslyn Middle School', '6–8', 'East Hills'],
+            ['Roslyn High School', '9–12', 'Roslyn Heights'],
+          ] },
+          p('The district serves the villages of Roslyn and Roslyn Estates entirely, most of East Hills, and parts of Roslyn Heights, Roslyn Harbor, Greenvale, Flower Hill, North Hills, Albertson and Glenwood Landing.'),
+          p('The Roslyn area is split among several districts. Parts of southeastern East Hills go to East Williston, a small Oyster Bay corner of East Hills goes to Jericho, parts of Roslyn Heights go to East Williston or Herricks, and parts of Roslyn Harbor and Greenvale go to North Shore. We verify the school district for every property before our clients make an offer.', 'Watch for zoning traps.'),
+          { type: 'h3', text: 'Schools and child care by age' },
+          p('The Roslyn area has options at every stage, from infant care through high school. Many programs span more than one age group; each is listed under its main one.'),
+          { type: 'table', columns: ['Stage', 'Options in the Roslyn area'], rows: [
+            ['Day care (infants and toddlers)', 'Growing Tree Nursery School (infants through Pre-K, before- and after-school, camp) · Trinity Episcopal Church Roslyn Childcare Center · MunchKIDS PlayHouse'],
+            ['Nursery schools', 'Roslyn-Trinity Day School (toddlers, Pre-K) · Harbor Child Care (toddlers, Pre-K)'],
+            ['Preschools', 'Pierce Country Day School (toddlers through Pre-K, camp) · The Heights School (public Pre-K)'],
+            ['Elementary', 'Harbor Hill and East Hills Elementary (public) · Buckley Country Day School (independent, co-ed, pre-nursery through grade 8, on a 28-acre campus in North Hills)'],
+            ['Middle school', 'Roslyn Middle School, grades 6–8 (public) · Buckley Country Day School, through grade 8'],
+            ['High school', 'Roslyn High School, grades 9–12 (public)'],
+          ] },
+          p('Independent and Catholic high schools elsewhere on the North Shore are a short drive away.'),
+        ],
+      },
+      {
+        id: 'housing',
+        heading: 'Housing stock and architecture',
+        blocks: [
+          p('The Roslyn area spans more than a century of architecture, from 19th-century village homes to brand-new construction.'),
+          bullets([
+            ['Historic homes', 'line the streets of the Village of Roslyn, many dating to the 1800s, with a character you won’t find elsewhere on Long Island.'],
+            ['Postwar colonials, ranches and split-levels', 'fill East Hills and Roslyn Heights, many of them expanded, renovated or rebuilt over the years.'],
+            ['Planned-community homes', 'in Roslyn Estates sit on winding streets laid out in the early 1900s, alongside 1950s ranches and split-levels.'],
+            ['Estates and large properties', 'define Roslyn Harbor and parts of East Hills.'],
+            ['Condos and townhomes', 'offer a lower-maintenance option, including the waterfront Roslyn Landing development in the village.'],
+            ['New construction and teardowns', 'are common in East Hills and Roslyn Heights. Village and town rules on setbacks, height and lot coverage shape what you can build.'],
+          ]),
+          p('With a background in construction, I walk every showing looking at what’s behind the walls, not just the finishes. In the Roslyn area I pay particular attention to cesspools, since much of East Hills and Greenvale has no sewers, as well as steep lots and drainage on the hills, outdated electrical and plumbing, and unpermitted work. For any home you’re considering, I can give you a sense of what a renovation or new build would cost.', 'A builder’s eye on older homes.'),
+        ],
+      },
+      {
+        id: 'market',
+        heading: 'The market and what your budget buys',
+        blocks: [
+          p('The Roslyn area is a competitive market: well-priced homes move quickly and often draw multiple offers. Ask us for current numbers on the streets and price range you care about.'),
+          bullets([
+            ['Entry level:', 'condos and townhomes, and smaller single-family homes in Roslyn Heights and parts of the village.'],
+            ['The core of the market:', 'colonials, ranches and split-levels in East Hills, Roslyn Estates and Roslyn Heights, many updated or expanded.'],
+            ['The top of the market:', 'new construction and large homes in East Hills, and estates in Roslyn Harbor.'],
+          ]),
+          p('Inventory typically peaks in spring, when competition is also highest. Late fall and winter have fewer listings but fewer competing buyers, and sellers who list then are often motivated.', 'Timing.'),
+          p('Roslyn and East Hills have historically held their value well through market cycles, supported by the schools, the location and limited supply.', 'Long-term value.'),
+        ],
+      },
+      {
+        id: 'taxes',
+        heading: 'Taxes and carrying costs',
+        blocks: [
+          p('Property taxes are the cost buyers most often underestimate, so plan for them from the start.'),
+          p('A Roslyn-area tax bill combines several layers: Nassau County, the town, special districts (such as water, fire, sewer and library), and the school district, which is the largest share. Homes inside an incorporated village also pay a village tax.', 'How your tax bill is built.'),
+          p('It may reflect exemptions or a grievance reduction that won’t carry over to you. Homeowners can challenge their assessment each year through Nassau County’s Assessment Review Commission, and many use a grievance firm that works on contingency.', 'Don’t rely on the seller’s tax bill.'),
+          p('New homeowners can apply for the New York State STAR credit, which reduces school taxes for households under the income limit. Seniors, veterans and others may qualify for additional exemptions.', 'STAR and exemptions.'),
+          p('Other carrying costs to budget for:'),
+          bullets([
+            'Homeowners insurance, plus flood insurance for low-lying homes near Hempstead Harbor',
+            'Cesspool maintenance and eventual replacement on homes without sewer service, common in East Hills and Greenvale',
+            'Heating fuel: natural gas where lines exist; some older homes still heat with oil',
+            'Village fees and any club or recreation memberships',
+          ]),
+        ],
+      },
+      {
+        id: 'commute',
+        heading: 'Commute and transportation',
+        blocks: [
+          p('The Roslyn area’s biggest commuting advantage is its location between two rail lines and two major highways.'),
+          bullets([
+            ['LIRR Oyster Bay Branch.', 'Roslyn station (in Roslyn Heights) and Greenvale station serve the area. The Town of North Hempstead runs a free commuter lot at Roslyn station with more than 200 spaces. The branch runs diesel service, so most trips include a quick change at Jamaica.', [
+              'Travel time from Roslyn station to Manhattan typically averages 50 to 60 minutes; limited direct peak-hour trains cut it to about 45 minutes.',
+              'Most trips include a timed transfer to an electric train at Jamaica. You usually just walk across the same platform to the connecting train.',
+              'To Penn Station: typically 53 to 60 minutes with the Jamaica transfer. A few direct trains in the morning rush (around 6:28 and 7:47 AM) skip the transfer and arrive in 45 to 48 minutes.',
+              'To Grand Central Madison: typically 54 to 63 minutes. Virtually all trips change at Jamaica, then run directly to the East Side terminal.',
+              'Trains run about once an hour off-peak, with occasional longer gaps around midday. Check live times in the MTA TrainTime app before heading to the platform.',
+              'The Roslyn station lot is free and needs no permit, a rarity on the LIRR. Because anyone can use it, it fills quickly in the morning rush.',
+            ]],
+            ['Port Washington Branch.', 'Some commuters drive to nearby Port Washington Branch stations for its direct electric trains. Check parking rules first, since many of those lots favor local permit holders.'],
+            ['Driving.', 'The Long Island Expressway and Northern State Parkway run right through the area, and Northern Boulevard (Route 25A) connects to the rest of the North Shore. Figure an hour to an hour and a half in rush-hour traffic.'],
+            ['Airports.', 'LaGuardia and JFK are both a manageable drive by Long Island standards.'],
+            ['Buses.', 'Several NICE bus routes serve the Village of Roslyn and nearby areas.'],
+          ]),
+        ],
+      },
+      {
+        id: 'lifestyle',
+        heading: 'Lifestyle',
+        blocks: [
+          p('Roslyn and East Hills offer a rare mix: a historic village with real character, and suburban neighborhoods with first-class recreation.'),
+          bullets([
+            ['The village.', 'The Ellen E. Ward Memorial Clock Tower, built in 1895, anchors a walkable village of restaurants, shops and historic buildings along Old Northern Boulevard. The Roslyn Grist Mill, an 18th-century Dutch-framed watermill, is being restored. Some of my favorite restaurants:', [
+              'Kyma: high-end Greek with an after-dinner party vibe',
+              'Bryant & Cooper: the best steakhouse in town',
+              'Hendrick’s Tavern: another of the best steakhouses around, with incredible ambiance; same owner as Bryant & Cooper, with a more traditional feel',
+              'Okaru: elegant, chic sushi',
+              'Felice Roslyn: incredible Italian and pasta',
+              'Besito Mexican: delicious cocktails and Mexican fare',
+              'Delicacies Roslyn: one of the best delis on the North Shore',
+            ]],
+            ['Parks and the harbor.', 'Gerry Park sits at the center of the village, and a waterfront promenade runs along Hempstead Harbor. Christopher Morley Park, Clark Botanic Garden, and the trails and preserves of Roslyn Estates are all close by.'],
+            ['The Park at East Hills.', 'Built on the former Roslyn Air National Guard Station, it has a pool, playground, dog park, theater, nature paths, fitness facilities, a baseball field, and tennis, pickleball and basketball courts.'],
+            ['Culture.', 'The Bryant Library, founded in 1878, holds the largest local history archive in Nassau County. Cedarmere, poet William Cullen Bryant’s former home, and the Nassau County Museum of Art are both in Roslyn Harbor.'],
+            ['Clubs and recreation.', 'Wheatley Hills Golf Club, The Tennis King in Roslyn Estates, and golf, tennis and swim clubs across the North Shore.'],
+            ['Community.', 'Village events, youth sports and an active network of houses of worship make it easy to get involved.'],
+            ['Healthcare.', 'St. Francis Hospital, a nationally known heart center, is right next door in Flower Hill, and North Shore University Hospital is a short drive away in Manhasset.'],
+          ]),
+        ],
+      },
+      {
+        id: 'process',
+        heading: 'Buying in Roslyn and East Hills: process and strategy',
+        blocks: [
+          p('Buying in New York works differently than in most states. Attorneys negotiate the contract, and nothing is binding until both sides sign it. Here’s how it unfolds.'),
+          steps([
+            ['Get pre-approved.', 'Many Roslyn-area purchases need a jumbo loan, which comes with stricter requirements for down payment, reserves and documentation. Condo purchases have their own approval steps.'],
+            ['Define your must-haves.', 'Decide early on school district, commute, lot size, and whether you’ll take on renovation.'],
+            ['Search, including off-market.', 'Some of the best homes in the area never hit the open market. Through Compass Private Exclusives and our local relationships, we can show you homes before other buyers see them.'],
+            ['Make an offer and negotiate.', 'Offers in New York are verbal or written but not binding. When multiple buyers are interested, sellers often call for “highest and best” offers by a deadline.'],
+            ['Attorney review and contract.', 'Once an offer is accepted, the seller’s attorney drafts the contract and your attorney reviews it and orders a title search. You sign and put down a deposit, typically 10% of the price, and the seller countersigns.'],
+            ['Inspection, appraisal and mortgage commitment.', 'The home inspection usually happens before contracts are signed. Your lender then orders an appraisal and issues the mortgage commitment.'],
+            ['Title, survey and closing.', 'Your attorney clears title and reviews the survey, and you do a final walkthrough before closing.'],
+          ]),
+          p('How we help you win without overpaying:'),
+          bullets([
+            ['Price by the comps, not by emotion.', 'We show you what comparable homes actually sold for, so you know where the ceiling is.'],
+            ['Make your offer cleaner, not just bigger.', 'A strong pre-approval, a larger down payment, a flexible closing date or a quick inspection can beat a higher price.'],
+            ['Plan for the appraisal.', 'When bidding goes above recent sales, decide in advance how much of any appraisal gap you’re willing to cover.'],
+          ]),
+        ],
+      },
+      {
+        id: 'due-diligence',
+        heading: 'Due diligence checklist',
+        blocks: [
+          p('Use this list before you sign a contract.'),
+          bullets([
+            'Confirm the school district for the specific property, not just the mailing address',
+            'Sewer or cesspool: much of East Hills and all of Greenvale have no sewers. Have the cesspool inspected and know the replacement cost',
+            'Drainage, retaining walls and grading on hilly lots',
+            'Flood zone and elevation for homes near Hempstead Harbor',
+            'Historic preservation rules for older homes in the Village of Roslyn, if you plan changes',
+            'Open permits and certificates of occupancy with the town or village; unpermitted work can delay a closing',
+            'Underground or abandoned oil tanks: test or confirm proper removal',
+            'Roof, foundation, and signs of water in the basement',
+            'Age of the electrical and plumbing systems in older homes',
+            'For condos: building finances, reserves, upcoming assessments and rules',
+            'The current tax bill, and whether it reflects exemptions or reductions that won’t carry over',
+          ]),
+          p('Once you have an accepted offer, schedule the engineer’s inspection right away and keep every step on schedule. If you move too slowly, the seller can lose faith and move on to a backup offer. Time kills deals.', 'The deal-breaker we see most: moving too slowly.'),
+        ],
+      },
+      {
+        id: 'why-us',
+        heading: 'Why The Liappas Team',
+        blocks: [
+          p('We know the North Shore house by house, and we bring a builder’s eye to every showing.'),
+          bullets([
+            ['Local knowledge.', 'We know the Roslyn area’s villages, school-district lines and streets, and which homes have been well cared for.'],
+            ['A proven track record.', 'Many successful sales across the North Shore.'],
+            ['A builder’s eye.', 'My background in construction means I spot structural, mechanical, drainage and permit issues during the showing, before you’ve committed.'],
+            ['The Compass advantage.', 'Early access to off-market homes through Compass Private Exclusives, real-time market data, and the reach of one of the country’s largest brokerages.'],
+          ]),
+        ],
+      },
+      {
+        id: 'faq',
+        heading: 'Frequently asked questions',
+        blocks: [
+          { type: 'faq', items: [
+            { q: 'How competitive is the Roslyn-area market?', a: 'Very. Well-priced homes typically sell quickly, often above asking and with multiple offers. Ask us for current numbers.' },
+            { q: 'Which Roslyn and East Hills addresses aren’t in the Roslyn school district?', a: 'Parts of southeastern East Hills are in East Williston, a small Oyster Bay corner of East Hills is in Jericho, parts of Roslyn Heights are in East Williston or Herricks, and parts of Roslyn Harbor and Greenvale are in North Shore. Always confirm by property.' },
+            { q: 'Roslyn or East Hills?', a: 'The Village of Roslyn offers history, walkability and harbor views; East Hills offers larger homes, quiet streets and The Park at East Hills. Both are mostly in the Roslyn school district, and we can help you compare specific homes.' },
+            { q: 'What will my property taxes be?', a: 'It depends on the home’s assessed value, whether it sits in an incorporated village, its school district, and any exemptions. Before you make an offer, we’ll pull the current tax bill and walk you through what to expect as the new owner.' },
+            { q: 'How long is the commute to Manhattan?', a: 'It depends on the station and the train. Roslyn and Greenvale are on the Oyster Bay Branch, and some commuters drive to the Port Washington Branch for direct electric service. We’ll help you find the best route from any home you’re considering.' },
+            { q: 'When is the best time of year to buy?', a: 'Spring brings the most listings and the most competition. Fall and winter bring fewer buyers and often more motivated sellers.' },
+          ] },
+        ],
+      },
+    ],
+    cta: {
+      heading: 'Ready to find your home in Roslyn or East Hills?',
+      text: 'Let’s start with a conversation. Book a buyer consultation and we’ll review your goals, budget and timeline, and map out the right neighborhoods for you. Or ask for a custom market report on the streets and price range you care about, or a private tour of the area.',
+    },
+    sources: [
+      'Wikipedia pages for Roslyn, East Hills, Roslyn Heights, Roslyn Estates, Roslyn Harbor and Greenvale',
+      'Roslyn Union Free School District – Wikipedia',
+      'Roslyn station – Wikipedia; MTA TrainTime',
+      'Child care and private schools: childcarecenter.us, Buckley Country Day School – Wikipedia, Private School Review',
     ],
   },
 };

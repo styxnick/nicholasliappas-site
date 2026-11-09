@@ -137,7 +137,7 @@ Tests: `npm test` (Vitest + jsdom).
 
 ## Buyer's guides
 
-`src/data/guides.js` holds one entry per town that has a guide (Manhasset so far). Each entry
+`src/data/guides.js` holds one entry per guide (Manhasset, Port Washington, Roslyn and East Hills). An entry may serve extra town pages via `alsoFor` (East Hills shares the Roslyn guide; `guideForTown(slug)` resolves it, and netlify.toml redirects the alias URL). Each entry
 renders at `/<slug>/buyers-guide` (prerendered, in the sitemap) and adds a request section to
 that town's page. Requests post to the `buyers-guide` Netlify form; `submission-created`
 emails the lead the guide link and alerts Nicholas like any other lead.
