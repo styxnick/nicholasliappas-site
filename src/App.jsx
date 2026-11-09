@@ -11,6 +11,7 @@ import NotFound from './pages/NotFound';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Terms from './pages/Terms';
 import BuyersGuide from './pages/BuyersGuide';
+import Relocation from './pages/Relocation';
 import { getStyles } from './components/styles';
 import { initAnalytics, trackPageView, track } from './lib/analytics';
 
@@ -35,6 +36,7 @@ export default function App() {
         <Route path="/" element={<Home track={track} />} />
         <Route path="/home-valuation" element={<HomeValuation track={track} />} />
         <Route path="/commercial" element={<Commercial track={track} />} />
+        <Route path="/moving-to-long-island" element={<Relocation track={track} />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/:slug" element={<TownPage track={track} />} />

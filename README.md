@@ -135,6 +135,10 @@ Tests: `npm test` (Vitest + jsdom).
 1. Add an entry to `src/data/towns.js`.
 2. That's it: the route, nav dropdown, mobile menu, footer, 404 links, sitemap and prerender all derive from it.
 
+## Relocation landing page
+
+`/moving-to-long-island` (src/pages/Relocation.jsx, copy in src/data/relocation.js) is the landing page for NYC-buyer ad campaigns. It routes city buyers to town pages and buyer's guides and ends in the contact form with the interest preset to Relocation. Guides listed there come from `guides.js`.
+
 ## Buyer's guides
 
 `src/data/guides.js` holds one entry per guide (Manhasset, Port Washington, Roslyn and East Hills). An entry may serve extra town pages via `alsoFor` (East Hills shares the Roslyn guide; `guideForTown(slug)` resolves it, and netlify.toml redirects the alias URL). Each entry
