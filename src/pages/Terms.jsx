@@ -22,7 +22,7 @@ export default function Terms() {
       <p style={s.p}>Using the Site or submitting a form does not create an agency, brokerage or client relationship. Any such relationship is established only through a written agreement and the disclosures required by New York law.</p>
 
       <h2 style={s.h2}>Your submissions</h2>
-      <p style={s.p}>You agree that the information you submit through the Site is accurate and that you are authorized to provide it. By submitting a form you consent to be contacted by phone, email or text about your inquiry. Our handling of your information is described in the <a href="/privacy" style={{ color: '#1a1a1a' }}>Privacy Policy</a>.</p>
+      <p style={s.p}>You agree that the information you submit through the Site is accurate and that you are authorized to provide it. By submitting a form you consent to be contacted by phone, email or text about your inquiry. Our handling of your information is described in the <a href="/privacy" style={{ color: '#000' }}>Privacy Policy</a>.</p>
 
       <h2 style={s.h2}>Intellectual property</h2>
       <p style={s.p}>Text, photographs and design on the Site belong to Nicholas Liappas or their respective owners and may not be reproduced without permission. Client testimonials are reproduced from public Google reviews.</p>

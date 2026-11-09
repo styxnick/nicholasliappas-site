@@ -32,12 +32,12 @@ export default function GuideForm({ track, guide }) {
     }
   };
 
-  const small = { fontFamily: FONT_SANS, fontSize: '13px', color: '#666', lineHeight: 1.8 };
+  const small = { fontFamily: FONT_SANS, fontSize: '13px', color: '#000', lineHeight: 1.5 };
 
   if (submitted) {
     return (
-      <div style={{ background: '#fafafa', padding: '48px', textAlign: 'center' }}>
-        <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: '#1a1a1a', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px', fontSize: '22px' }}>✓</div>
+      <div style={{ background: '#fff', border: '1px solid #ccc', padding: '48px', textAlign: 'center' }}>
+        <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: '#000', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px', fontSize: '22px' }}>✓</div>
         <h3 style={{ fontSize: '26px', fontWeight: 400, marginBottom: '12px' }}>It’s on its way</h3>
         <p style={{ ...small, marginBottom: '24px' }}>Check your inbox for the {guide.town} Buyer’s Guide. You can also read it right now.</p>
         <Link to={guidePath} style={{ ...styles.btnPrimary }}>Read the guide</Link>
@@ -46,14 +46,14 @@ export default function GuideForm({ track, guide }) {
   }
 
   return (
-    <div style={{ background: '#fafafa', padding: '48px', position: 'relative' }}>
+    <div style={{ background: '#fff', border: '1px solid #ccc', padding: '48px', position: 'relative' }}>
       <form name="buyers-guide" method="POST" onSubmit={handleSubmit} aria-label={`Request the ${guide.town} Buyer's Guide`}>
         <input type="hidden" name="form-name" value="buyers-guide" />
         <input type="hidden" name="town" value={guide.town} />
         <input type="hidden" name="guide" value={guidePath} />
         <HoneypotField value={formData[HONEYPOT_FIELD]} onChange={(e) => setFormData({ ...formData, [HONEYPOT_FIELD]: e.target.value })} />
         <p style={styles.sectionSubtitle}>Free guide</p>
-        <h3 style={{ fontSize: '26px', fontWeight: 400, marginBottom: '8px', letterSpacing: '1px' }}>The {guide.town} Buyer’s Guide</h3>
+        <h3 style={{ fontSize: '26px', fontWeight: 400, marginBottom: '8px', }}>The {guide.town} Buyer’s Guide</h3>
         <p style={{ ...small, marginBottom: '28px' }}>The villages and school zoning, housing stock, taxes, the commute, and how buying in New York actually works. Emailed to you instantly.</p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <label htmlFor={`${id}-name`} style={styles.srOnly}>Full Name</label>
@@ -70,7 +70,7 @@ export default function GuideForm({ track, guide }) {
               Something went wrong. Please email <a href="mailto:nicholas.liappas@compass.com" style={{ color: '#b00020' }}>nicholas.liappas@compass.com</a> and I’ll send it over.
             </p>
           )}
-          <p style={{ ...small, fontSize: '11px', color: '#707070', textAlign: 'center' }}>By submitting, you agree to receive communications from Nicholas Liappas.</p>
+          <p style={{ ...small, fontSize: '11px', color: '#000', textAlign: 'center' }}>By submitting, you agree to receive communications from Nicholas Liappas.</p>
         </div>
       </form>
     </div>

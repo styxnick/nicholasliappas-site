@@ -75,7 +75,7 @@ export default function TownPage({ track }) {
         ...styles.hero,
         paddingTop: '200px',
         minHeight: '600px',
-        background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 40%, #1a1a1a 100%)',
+        background: '#000',
         textAlign: 'center'
       }}>
         <div style={styles.heroContent}>
@@ -83,19 +83,17 @@ export default function TownPage({ track }) {
             fontFamily: FONT_SANS,
             fontSize: '11px',
             fontWeight: 400,
-            letterSpacing: '4px',
+            letterSpacing: '0.08em',
             textTransform: 'uppercase',
             marginBottom: '24px',
-            opacity: 0.7,
             color: '#fff'
           }}>
-            North Shore Real Estate
+            North Shore Real&nbsp;Estate
           </p>
 
           <h1 style={{
             fontSize: 'clamp(36px, 8vw, 80px)',
             fontWeight: 300,
-            letterSpacing: '4px',
             lineHeight: 1,
             marginBottom: '24px',
             color: '#fff'
@@ -107,17 +105,16 @@ export default function TownPage({ track }) {
             fontFamily: FONT_SANS,
             fontSize: 'clamp(14px, 2vw, 18px)',
             fontWeight: 500,
-            letterSpacing: '1.5px',
+            letterSpacing: '0.08em',
             textTransform: 'uppercase',
             marginBottom: '40px',
-            opacity: 0.9,
             color: '#fff'
           }}>
             {town.subtitle}
           </p>
 
           <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to={`/${town.slug}#contact`} onClick={() => track('cta_click', { cta: 'schedule', placement: 'hero' })} style={styles.btnPrimary}>
+            <Link to={`/${town.slug}#contact`} onClick={() => track('cta_click', { cta: 'schedule', placement: 'hero' })} style={{ ...styles.btnPrimary, background: '#fff', color: '#000' }}>
               Schedule Consultation
             </Link>
             <a href="tel:516-214-7761"
@@ -132,12 +129,12 @@ export default function TownPage({ track }) {
       {/* Town Description */}
       <section style={{ padding: '120px 5%', background: '#fff' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-          <h2 style={styles.sectionTitle}>{town.name} Real Estate</h2>
+          <h2 style={styles.sectionTitle}>{town.name} Real&nbsp;Estate</h2>
           <p style={{
             fontFamily: FONT_SANS,
             fontSize: '16px',
-            lineHeight: 2,
-            color: '#666',
+            lineHeight: 1.5,
+            color: '#000',
             marginBottom: '40px'
           }}>
             {town.description}
@@ -149,7 +146,6 @@ export default function TownPage({ track }) {
               fontSize: '18px',
               fontWeight: 500,
               marginBottom: '24px',
-              letterSpacing: '1px'
             }}>
               Why {town.name}?
             </h3>
@@ -158,14 +154,14 @@ export default function TownPage({ track }) {
                 <li key={i} style={{
                   fontFamily: FONT_SANS,
                   fontSize: '14px',
-                  lineHeight: 2,
-                  color: '#666',
+                  lineHeight: 1.5,
+                  color: '#000',
                   marginBottom: '8px',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '12px'
                 }}>
-                  <span style={{ color: '#1a1a1a', fontSize: '8px' }}>◆</span>
+                  <span style={{ color: '#000', fontSize: '8px' }}>◆</span>
                   {highlight}
                 </li>
               ))}
@@ -181,17 +177,17 @@ export default function TownPage({ track }) {
             <div>
               <p style={styles.sectionSubtitle}>Buying in {town.name}?</p>
               <h2 style={styles.sectionTitle}>Start With the Buyer’s Guide</h2>
-              <p style={{ fontFamily: FONT_SANS, fontSize: '15px', lineHeight: 1.9, color: '#555', marginBottom: '28px', maxWidth: '500px' }}>
+              <p style={{ fontFamily: FONT_SANS, fontSize: '15px', lineHeight: 1.5, color: '#000', marginBottom: '28px', maxWidth: '500px' }}>
                 {guides[slug].intro}
               </p>
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px' }}>
                 {guides[slug].sections.slice(0, 6).map((sec) => (
-                  <li key={sec.id} style={{ fontFamily: FONT_SANS, fontSize: '13px', lineHeight: 2, color: '#444', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <span aria-hidden="true" style={{ color: '#1a1a1a', fontSize: '8px' }}>◆</span>{sec.heading}
+                  <li key={sec.id} style={{ fontFamily: FONT_SANS, fontSize: '13px', lineHeight: 1.5, color: '#000', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <span aria-hidden="true" style={{ color: '#000', fontSize: '8px' }}>◆</span>{sec.heading}
                   </li>
                 ))}
               </ul>
-              <Link to={`/${town.slug}/buyers-guide`} onClick={() => track('cta_click', { cta: 'read_guide', placement: 'town' })} style={{ fontFamily: FONT_SANS, fontSize: '12px', letterSpacing: '2px', textTransform: 'uppercase', color: '#1a1a1a', textDecoration: 'none', borderBottom: '1px solid #1a1a1a', paddingBottom: '4px' }}>
+              <Link to={`/${town.slug}/buyers-guide`} onClick={() => track('cta_click', { cta: 'read_guide', placement: 'town' })} style={{ fontFamily: FONT_SANS, fontSize: '12px', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#000', textDecoration: 'none', borderBottom: '1px solid #000', paddingBottom: '4px' }}>
                 Read it online →
               </Link>
             </div>
@@ -201,7 +197,7 @@ export default function TownPage({ track }) {
       )}
 
       {/* Market Snapshot */}
-      <section style={{ padding: '120px 5%', background: '#f8f8f8' }}>
+      <section style={{ padding: '120px 5%', background: '#fff', borderTop: '1px solid #ccc' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           <h2 style={{
             ...styles.sectionTitle,
@@ -218,20 +214,19 @@ export default function TownPage({ track }) {
               background: '#fff',
               padding: '40px',
               textAlign: 'center',
-              borderRadius: '4px'
-            }}>
+              }}>
               <p style={{
                 fontFamily: FONT_SANS,
                 fontSize: '12px',
-                letterSpacing: '1.5px',
+                letterSpacing: '0.08em',
                 textTransform: 'uppercase',
-                color: '#707070',
+                color: '#000',
                 marginBottom: '12px'
               }}>Average Price</p>
               <p style={{
                 fontSize: '32px',
                 fontWeight: 300,
-                color: '#1a1a1a',
+                color: '#000',
                 marginBottom: '8px'
               }}>
                 {town.avgPrice}
@@ -242,20 +237,19 @@ export default function TownPage({ track }) {
               background: '#fff',
               padding: '40px',
               textAlign: 'center',
-              borderRadius: '4px'
-            }}>
+              }}>
               <p style={{
                 fontFamily: FONT_SANS,
                 fontSize: '12px',
-                letterSpacing: '1.5px',
+                letterSpacing: '0.08em',
                 textTransform: 'uppercase',
-                color: '#707070',
+                color: '#000',
                 marginBottom: '12px'
               }}>Zip Code</p>
               <p style={{
                 fontSize: '32px',
                 fontWeight: 300,
-                color: '#1a1a1a',
+                color: '#000',
                 marginBottom: '8px'
               }}>
                 {town.zipCode}
@@ -266,20 +260,19 @@ export default function TownPage({ track }) {
               background: '#fff',
               padding: '40px',
               textAlign: 'center',
-              borderRadius: '4px'
-            }}>
+              }}>
               <p style={{
                 fontFamily: FONT_SANS,
                 fontSize: '12px',
-                letterSpacing: '1.5px',
+                letterSpacing: '0.08em',
                 textTransform: 'uppercase',
-                color: '#707070',
+                color: '#000',
                 marginBottom: '12px'
               }}>Property Style</p>
               <p style={{
                 fontSize: '14px',
                 fontWeight: 300,
-                color: '#1a1a1a',
+                color: '#000',
                 marginBottom: '8px',
                 lineHeight: 1.5
               }}>
@@ -306,8 +299,8 @@ export default function TownPage({ track }) {
             <p style={{
               fontFamily: FONT_SANS,
               fontSize: '14px',
-              lineHeight: 2,
-              color: '#666',
+              lineHeight: 1.5,
+              color: '#000',
               marginBottom: '40px'
             }}>
               Whether you're searching for your dream home, ready to sell, or exploring investment opportunities in {town.name}, I'm here to guide you through every step. Schedule a consultation to discuss your real estate goals.
@@ -315,7 +308,7 @@ export default function TownPage({ track }) {
 
             <div style={{
               paddingTop: '32px',
-              borderTop: '1px solid #e8e8e8',
+              borderTop: '1px solid #ccc',
               display: 'flex',
               flexDirection: 'column',
               gap: '12px'
@@ -325,9 +318,8 @@ export default function TownPage({ track }) {
                  style={{
                    fontFamily: FONT_SANS,
                    fontSize: '14px',
-                   color: '#1a1a1a',
+                   color: '#000',
                    textDecoration: 'none',
-                   letterSpacing: '1px'
                  }}>
                 M: 516-214-7761
               </a>
@@ -336,7 +328,7 @@ export default function TownPage({ track }) {
                  style={{
                    fontFamily: FONT_SANS,
                    fontSize: '14px',
-                   color: '#1a1a1a',
+                   color: '#000',
                    textDecoration: 'none'
                  }}>
                 nicholas.liappas@compass.com
@@ -349,7 +341,7 @@ export default function TownPage({ track }) {
       </section>
 
       {/* Browse Other Communities */}
-      <section style={{ padding: '120px 5%', background: '#f8f8f8' }}>
+      <section style={{ padding: '120px 5%', background: '#fff', borderTop: '1px solid #ccc' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <h2 style={{
             ...styles.sectionTitle,
@@ -371,8 +363,7 @@ export default function TownPage({ track }) {
                   background: '#fff',
                   textDecoration: 'none',
                   transition: 'all 0.3s ease',
-                  borderRadius: '4px'
-                }}
+                  }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.1)';
                   e.currentTarget.style.transform = 'translateY(-4px)';
@@ -386,26 +377,25 @@ export default function TownPage({ track }) {
                   fontSize: '24px',
                   fontWeight: 400,
                   marginBottom: '12px',
-                  color: '#1a1a1a',
-                  letterSpacing: '1px'
+                  color: '#000',
                 }}>
                   {t.name}
                 </h3>
                 <p style={{
                   fontFamily: FONT_SANS,
                   fontSize: '13px',
-                  color: '#707070',
+                  color: '#000',
                   marginBottom: '16px',
-                  lineHeight: 1.6
+                  lineHeight: 1.5
                 }}>
                   {t.description.substring(0, 120)}...
                 </p>
                 <span style={{
                   fontFamily: FONT_SANS,
                   fontSize: '12px',
-                  letterSpacing: '1.5px',
+                  letterSpacing: '0.08em',
                   textTransform: 'uppercase',
-                  color: '#1a1a1a',
+                  color: '#000',
                   fontWeight: 500
                 }}>
                   Explore {t.name} →

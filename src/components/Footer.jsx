@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import { towns } from '../data/towns';
 import { guides } from '../data/guides';
-import { FONT_SANS } from './styles';
+import { FONT_SANS, FONT_MONO } from './styles';
 
 export default function Footer({ track }) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer style={{ background: '#1a1a1a', color: '#fff', padding: '80px 5% 40px' }}>
+    <footer style={{ background: '#000', color: '#fff', padding: '80px 5% 40px' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <div style={{
           display: 'grid',
@@ -15,7 +15,7 @@ export default function Footer({ track }) {
           gap: '60px',
           marginBottom: '60px',
           paddingBottom: '60px',
-          borderBottom: '1px solid rgba(255,255,255,0.1)'
+          borderBottom: '1px solid #ccc'
         }}>
           {/* About */}
           <div>
@@ -23,18 +23,26 @@ export default function Footer({ track }) {
               fontFamily: FONT_SANS,
               fontSize: '12px',
               fontWeight: 600,
-              letterSpacing: '2px',
+              letterSpacing: '0.08em',
               textTransform: 'uppercase',
               marginBottom: '24px'
             }}>About</h2>
             <p style={{
               fontFamily: FONT_SANS,
               fontSize: '13px',
-              lineHeight: 2,
-              color: '#ccc',
+              lineHeight: 1.5,
+              color: '#fff',
               marginBottom: '16px'
             }}>
-              Licensed Associate Real Estate Broker specializing in residential, commercial, and development sales across the North Shore, Queens & North Fork.
+              Licensed Associate Real Estate Broker specializing in residential, commercial, and development sales across the North Shore, Queens and North Fork.
+            </p>
+            {/* Compass accoutrement: the needle (45°, weight 6–9% of length) and the
+                office coordinates in mono with prime marks, kept small and technical. */}
+            <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" style={{ display: 'block', margin: '8px 0 10px' }}>
+              <line x1="3" y1="19" x2="19" y2="3" stroke="#fff" strokeWidth="1.6" strokeLinecap="square" />
+            </svg>
+            <p style={{ fontFamily: FONT_MONO, fontSize: '11px', lineHeight: 1.5, color: '#fff', margin: '0 0 20px' }} aria-label="Office coordinates">
+              40°47'36"N&nbsp;&nbsp;|&nbsp;&nbsp;73°41'32"W
             </p>
             <div style={{ display: 'flex', gap: '16px', marginTop: '20px' }}>
               <a href="https://instagram.com/nicholasliappas" target="_blank" rel="noopener noreferrer"
@@ -43,8 +51,8 @@ export default function Footer({ track }) {
                  style={{ color: '#fff', textDecoration: 'none' }}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <rect x="2" y="2" width="20" height="20" rx="5" />
-                  <circle cx="12" cy="12" r="4" fill="#1a1a1a" />
-                  <circle cx="18" cy="6" r="1.5" fill="#1a1a1a" />
+                  <circle cx="12" cy="12" r="4" fill="#000" />
+                  <circle cx="18" cy="6" r="1.5" fill="#000" />
                 </svg>
               </a>
               <a href="https://www.linkedin.com/in/nicholas-liappas-73482128/" target="_blank" rel="noopener noreferrer"
@@ -74,7 +82,7 @@ export default function Footer({ track }) {
               fontFamily: FONT_SANS,
               fontSize: '12px',
               fontWeight: 600,
-              letterSpacing: '2px',
+              letterSpacing: '0.08em',
               textTransform: 'uppercase',
               marginBottom: '24px'
             }}>Communities</h2>
@@ -85,7 +93,7 @@ export default function Footer({ track }) {
                     style={{
                       fontFamily: FONT_SANS,
                       fontSize: '13px',
-                      color: '#ccc',
+                      color: '#fff',
                       textDecoration: 'none',
                       transition: 'color 0.3s'
                     }}
@@ -96,9 +104,9 @@ export default function Footer({ track }) {
                   </Link>
                   {guides[town.slug] && (
                     <Link to={`/${town.slug}/buyers-guide`}
-                      style={{ display: 'block', marginTop: '4px', fontFamily: FONT_SANS, fontSize: '12px', color: '#999', textDecoration: 'none', transition: 'color 0.3s' }}
+                      style={{ display: 'block', marginTop: '4px', fontFamily: FONT_SANS, fontSize: '12px', color: '#fff', textDecoration: 'none', transition: 'color 0.3s' }}
                       onMouseEnter={(e) => e.target.style.color = '#fff'}
-                      onMouseLeave={(e) => e.target.style.color = '#999'}
+                      onMouseLeave={(e) => e.target.style.color = '#fff'}
                     >
                       {town.name} Buyer’s Guide
                     </Link>
@@ -114,7 +122,7 @@ export default function Footer({ track }) {
               fontFamily: FONT_SANS,
               fontSize: '12px',
               fontWeight: 600,
-              letterSpacing: '2px',
+              letterSpacing: '0.08em',
               textTransform: 'uppercase',
               marginBottom: '24px'
             }}>Services</h2>
@@ -125,7 +133,7 @@ export default function Footer({ track }) {
                     style={{
                       fontFamily: FONT_SANS,
                       fontSize: '13px',
-                      color: '#ccc',
+                      color: '#fff',
                       textDecoration: 'none',
                       transition: 'color 0.3s'
                     }}
@@ -145,7 +153,7 @@ export default function Footer({ track }) {
               fontFamily: FONT_SANS,
               fontSize: '12px',
               fontWeight: 600,
-              letterSpacing: '2px',
+              letterSpacing: '0.08em',
               textTransform: 'uppercase',
               marginBottom: '24px'
             }}>Contact</h2>
@@ -155,7 +163,7 @@ export default function Footer({ track }) {
                  style={{
                    fontFamily: FONT_SANS,
                    fontSize: '13px',
-                   color: '#ccc',
+                   color: '#fff',
                    textDecoration: 'none'
                  }}>
                 516-214-7761
@@ -165,7 +173,7 @@ export default function Footer({ track }) {
                  style={{
                    fontFamily: FONT_SANS,
                    fontSize: '13px',
-                   color: '#ccc',
+                   color: '#fff',
                    textDecoration: 'none'
                  }}>
                 nicholas.liappas@compass.com
@@ -174,7 +182,7 @@ export default function Footer({ track }) {
                 style={{
                   fontFamily: FONT_SANS,
                   fontSize: '13px',
-                  color: '#ccc',
+                  color: '#fff',
                   textDecoration: 'none',
                   transition: 'color 0.3s'
                 }}
@@ -194,20 +202,20 @@ export default function Footer({ track }) {
           alignItems: 'center',
           fontFamily: FONT_SANS,
           fontSize: '12px',
-          color: '#888',
+          color: '#fff',
           paddingTop: '20px',
-          borderTop: '1px solid rgba(255,255,255,0.1)'
+          borderTop: '1px solid #ccc'
         }}>
           <p>&copy; {currentYear} Nicholas Liappas. All rights reserved.</p>
           <div style={{ display: 'flex', gap: '24px' }}>
             <a href="https://www.compass.com" target="_blank" rel="noopener noreferrer"
-               style={{ color: '#888', textDecoration: 'none' }}>
+               style={{ color: '#fff', textDecoration: 'none' }}>
               Compass
             </a>
-            <Link to="/privacy" style={{ color: '#888', textDecoration: 'none' }}>
+            <Link to="/privacy" style={{ color: '#fff', textDecoration: 'none' }}>
               Privacy Policy
             </Link>
-            <Link to="/terms" style={{ color: '#888', textDecoration: 'none' }}>
+            <Link to="/terms" style={{ color: '#fff', textDecoration: 'none' }}>
               Terms of Service
             </Link>
           </div>

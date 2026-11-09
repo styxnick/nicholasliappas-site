@@ -38,19 +38,10 @@ export default function ContactForm({ track, formName = 'contact' }) {
 
   return (
     <div style={{
-      background: '#fafafa',
+      background: '#fff', border: '1px solid #ccc',
       padding: '56px',
       position: 'relative'
     }}>
-      <div style={{
-        position: 'absolute',
-        top: '-20px',
-        right: '-20px',
-        width: '80px',
-        height: '80px',
-        border: '1px solid #e0e0e0',
-        background: '#fff'
-      }} />
 
       {formSubmitted ? (
         <div style={{ textAlign: 'center', padding: '60px 20px' }}>
@@ -58,7 +49,7 @@ export default function ContactForm({ track, formName = 'contact' }) {
             width: '64px',
             height: '64px',
             borderRadius: '50%',
-            background: '#1a1a1a',
+            background: '#000',
             color: '#fff',
             display: 'flex',
             alignItems: 'center',
@@ -70,8 +61,8 @@ export default function ContactForm({ track, formName = 'contact' }) {
           <p style={{
             fontFamily: FONT_SANS,
             fontSize: '14px',
-            color: '#666'
-          }}>I'll be in touch within 24 hours.</p>
+            color: '#000'
+          }}>I’ll be in touch within 24 hours.</p>
         </div>
       ) : (
         <form
@@ -86,7 +77,6 @@ export default function ContactForm({ track, formName = 'contact' }) {
             fontSize: '24px',
             fontWeight: 400,
             marginBottom: '32px',
-            letterSpacing: '1px'
           }}>Request a Consultation</h3>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -126,19 +116,19 @@ export default function ContactForm({ track, formName = 'contact' }) {
               required
               style={styles.input}
             />
-            <label htmlFor={`${id}-interest`} style={styles.srOnly}>I'm interested in</label>
+            <label htmlFor={`${id}-interest`} style={styles.srOnly}>I’m interested in</label>
             <select
               id={`${id}-interest`}
               name="interest"
               value={formData.interest}
               onChange={(e) => setFormData({...formData, interest: e.target.value})}
               required
-              style={{ ...styles.input, color: formData.interest ? '#1a1a1a' : '#707070' }}
+              style={{ ...styles.input, color: '#000' }}
             >
-              <option value="">I'm interested in...</option>
+              <option value="">I’m interested in...</option>
               <option value="buying">Buying a Home</option>
               <option value="selling">Selling a Property</option>
-              <option value="both">Buying & Selling</option>
+              <option value="both">Buying and Selling</option>
               <option value="valuation">Home Valuation</option>
               <option value="investing">Investment Properties</option>
               <option value="relocation">Relocation Services</option>
@@ -155,7 +145,7 @@ export default function ContactForm({ track, formName = 'contact' }) {
                 fontSize: '13px',
                 color: '#b00020',
                 textAlign: 'center',
-                lineHeight: 1.6
+                lineHeight: 1.5
               }}>
                 Something went wrong sending your request. Please call or text{' '}
                 <a href="tel:+15162147761" style={{ color: '#b00020' }}>516-214-7761</a>{' '}
@@ -166,9 +156,9 @@ export default function ContactForm({ track, formName = 'contact' }) {
             <p style={{
               fontFamily: FONT_SANS,
               fontSize: '11px',
-              color: '#707070',
+              color: '#000',
               textAlign: 'center',
-              lineHeight: 1.6
+              lineHeight: 1.5
             }}>
               By submitting, you agree to receive communications.
             </p>

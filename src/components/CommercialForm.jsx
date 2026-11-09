@@ -33,18 +33,17 @@ export default function CommercialForm({ track }) {
     }
   };
 
-  const selectStyle = (v) => ({ ...styles.input, color: v ? '#1a1a1a' : '#707070' });
+  const selectStyle = (v) => ({ ...styles.input, color: '#000' });
   const label = (htmlFor, text) => <label htmlFor={htmlFor} style={styles.srOnly}>{text}</label>;
-  const small = { fontFamily: FONT_SANS, fontSize: '12px', color: '#6b6b6b', lineHeight: 1.8 };
+  const small = { fontFamily: FONT_SANS, fontSize: '12px', color: '#000', lineHeight: 1.5 };
 
   return (
-    <div style={{ background: '#fafafa', padding: 'clamp(32px, 5vw, 60px)', position: 'relative' }}>
-      <div aria-hidden="true" style={{ position: 'absolute', top: '-20px', right: '-20px', width: '70px', height: '70px', background: '#fff' }} />
+    <div style={{ background: '#fff', border: '1px solid #ccc', padding: 'clamp(32px, 5vw, 60px)', position: 'relative' }}>
       {submitted ? (
         <div style={{ textAlign: 'center', padding: '60px 20px' }}>
-          <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: '#1a1a1a', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px', fontSize: '24px' }}>✓</div>
+          <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: '#000', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px', fontSize: '24px' }}>✓</div>
           <h3 style={{ fontSize: '28px', fontWeight: 400, marginBottom: '12px' }}>Thank You</h3>
-          <p style={{ fontFamily: FONT_SANS, fontSize: '14px', color: '#666' }}>I'll be in touch within one business day.</p>
+          <p style={{ fontFamily: FONT_SANS, fontSize: '14px', color: '#000' }}>I’ll be in touch within one business day.</p>
         </div>
       ) : (
         <form name="commercial" method="POST" onSubmit={handleSubmit} aria-label="Commercial inquiry form"

@@ -13,7 +13,7 @@ export default function PrivacyPolicy() {
       <p style={s.p}>This website, nicholasliappas.com (the "Site"), is operated by Nicholas Liappas, a Licensed Associate Real Estate Broker with Compass ("we", "us"). This policy explains what information we collect through the Site and how we use it.</p>
 
       <h2 style={s.h2}>Information you give us</h2>
-      <p style={s.p}>When you submit the contact form or the home valuation form, we collect the details you enter: your name, email address, phone number, what you're interested in, and, for a valuation request, the property address and ZIP code. Submissions are processed and stored by Netlify Forms, which hosts the Site, and forwarded to us by email.</p>
+      <p style={s.p}>When you submit the contact form or the home valuation form, we collect the details you enter: your name, email address, phone number, what you’re interested in, and, for a valuation request, the property address and ZIP code. Submissions are processed and stored by Netlify Forms, which hosts the Site, and forwarded to us by email.</p>
 
       <h2 style={s.h2}>How we use it</h2>
       <ul style={s.ul}>
@@ -24,7 +24,7 @@ export default function PrivacyPolicy() {
       <p style={s.p}>We do not sell your personal information. We share it only with service providers that help us run the Site and respond to you (for example, our hosting and email providers), and with Compass as required to provide brokerage services.</p>
 
       <h2 style={s.h2}>Analytics and cookies</h2>
-      <p style={s.p}>We use Google Analytics to understand how visitors use the Site. Google Analytics sets cookies and collects information such as pages visited, approximate location, device and browser type. You can limit this tracking with your browser's cookie settings or the Google Analytics opt-out browser add-on. When you submit a form, we also record the page you arrived on and the site or campaign that referred you, so we know how you found us.</p>
+      <p style={s.p}>We use Google Analytics to understand how visitors use the Site. Google Analytics sets cookies and collects information such as pages visited, approximate location, device and browser type. You can limit this tracking with your browser’s cookie settings or the Google Analytics opt-out browser add-on. When you submit a form, we also record the page you arrived on and the site or campaign that referred you, so we know how you found us.</p>
 
       <h2 style={s.h2}>Retention</h2>
       <p style={s.p}>We keep form submissions for as long as needed to respond to you and to meet our legal obligations. You can ask us to delete your information at any time using the contact details below.</p>

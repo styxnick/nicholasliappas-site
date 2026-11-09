@@ -88,7 +88,7 @@ export default function HomeValuation({ track }) {
       fontFamily: FONT_SANS,
       fontSize: '13px',
       color: '#b00020',
-      lineHeight: 1.6,
+      lineHeight: 1.5,
       margin: 0
     }}>
       {stepError}
@@ -102,29 +102,27 @@ export default function HomeValuation({ track }) {
         ...styles.hero,
         paddingTop: '200px',
         minHeight: '600px',
-        background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 40%, #1a1a1a 100%)',
+        background: '#000',
         textAlign: 'center'
       }}>
         <div style={styles.heroContent}>
           <h1 style={{
             fontSize: 'clamp(36px, 8vw, 80px)',
             fontWeight: 300,
-            letterSpacing: '4px',
             lineHeight: 1,
             marginBottom: '24px',
             color: '#fff'
           }}>
-            What's Your Home Worth?
+            What’s Your Home Worth?
           </h1>
 
           <p style={{
             fontFamily: FONT_SANS,
             fontSize: 'clamp(14px, 2vw, 18px)',
             fontWeight: 500,
-            letterSpacing: '1.5px',
+            letterSpacing: '0.08em',
             textTransform: 'uppercase',
             marginBottom: '40px',
-            opacity: 0.9,
             color: '#fff'
           }}>
             Get a Free, No-Obligation Home Valuation
@@ -133,10 +131,10 @@ export default function HomeValuation({ track }) {
           <p style={{
             fontFamily: FONT_SANS,
             fontSize: '14px',
-            color: 'rgba(255,255,255,0.8)',
+            color: '#fff',
             maxWidth: '600px',
             margin: '0 auto',
-            lineHeight: 1.8
+            lineHeight: 1.5
           }}>
             Receive a personalized Comparative Market Analysis (CMA) from Nicholas Liappas, a Licensed Associate Real Estate Broker at Compass with 8 years of North Shore expertise.
           </p>
@@ -152,7 +150,7 @@ export default function HomeValuation({ track }) {
                 width: '80px',
                 height: '80px',
                 borderRadius: '50%',
-                background: '#1a1a1a',
+                background: '#000',
                 color: '#fff',
                 display: 'flex',
                 alignItems: 'center',
@@ -164,14 +162,13 @@ export default function HomeValuation({ track }) {
                 fontSize: '32px',
                 fontWeight: 300,
                 marginBottom: '12px',
-                letterSpacing: '1px'
               }}>Thank You</h2>
               <p style={{
                 fontFamily: FONT_SANS,
                 fontSize: '14px',
-                color: '#666',
+                color: '#000',
                 marginBottom: '24px',
-                lineHeight: 1.8
+                lineHeight: 1.5
               }}>
                 Your request has been received. Nicholas will prepare your personalized home valuation and reach out within 24-48 hours.
               </p>
@@ -210,8 +207,8 @@ export default function HomeValuation({ track }) {
                       width: '40px',
                       height: '40px',
                       borderRadius: '50%',
-                      background: step >= s ? '#1a1a1a' : '#e0e0e0',
-                      color: step >= s ? '#fff' : '#5f5f5f',
+                      background: step >= s ? '#000' : '#ccc',
+                      color: step >= s ? '#fff' : '#000',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -226,7 +223,7 @@ export default function HomeValuation({ track }) {
                       <div style={{
                         flex: 1,
                         height: '2px',
-                        background: step > s ? '#1a1a1a' : '#e0e0e0',
+                        background: step > s ? '#000' : '#ccc',
                         marginLeft: '12px',
                         transition: 'all 0.3s ease'
                       }} />
@@ -242,12 +239,11 @@ export default function HomeValuation({ track }) {
                     fontSize: '28px',
                     fontWeight: 400,
                     marginBottom: '12px',
-                    letterSpacing: '1px'
                   }}>Property Details</h2>
                   <p style={{
                     fontFamily: FONT_SANS,
                     fontSize: '14px',
-                    color: '#666',
+                    color: '#000',
                     marginBottom: '40px'
                   }}>
                     Where is the property located?
@@ -297,12 +293,11 @@ export default function HomeValuation({ track }) {
                     fontSize: '28px',
                     fontWeight: 400,
                     marginBottom: '12px',
-                    letterSpacing: '1px'
                   }}>Your Information</h2>
                   <p style={{
                     fontFamily: FONT_SANS,
                     fontSize: '14px',
-                    color: '#666',
+                    color: '#000',
                     marginBottom: '40px'
                   }}>
                     How can we reach you?
@@ -353,9 +348,9 @@ export default function HomeValuation({ track }) {
                         style={{
                           ...styles.btnOutline,
                           flex: 1,
-                          background: '#f8f8f8',
-                          border: '1px solid #e0e0e0',
-                          color: '#1a1a1a'
+                          background: '#fff', borderTop: '1px solid #ccc',
+                          border: '1px solid #ccc',
+                          color: '#000'
                         }}>
                         Back
                       </button>
@@ -367,42 +362,40 @@ export default function HomeValuation({ track }) {
                 </div>
               )}
 
-              {/* Step 3: Review & Submit */}
+              {/* Step 3: Review and Submit */}
               {step === 3 && (
                 <div style={{ animation: 'fadeIn 0.3s ease' }}>
                   <h2 style={{
                     fontSize: '28px',
                     fontWeight: 400,
                     marginBottom: '12px',
-                    letterSpacing: '1px'
                   }}>Review Your Information</h2>
                   <p style={{
                     fontFamily: FONT_SANS,
                     fontSize: '14px',
-                    color: '#666',
+                    color: '#000',
                     marginBottom: '40px'
                   }}>
                     Please verify your details before submitting.
                   </p>
 
                   <div style={{
-                    background: '#f8f8f8',
+                    background: '#fff', borderTop: '1px solid #ccc',
                     padding: '32px',
                     marginBottom: '32px',
-                    borderRadius: '4px'
-                  }}>
+                    }}>
                     <div style={{ marginBottom: '24px' }}>
                       <p style={{
                         fontFamily: FONT_SANS,
                         fontSize: '11px',
-                        letterSpacing: '1.5px',
+                        letterSpacing: '0.08em',
                         textTransform: 'uppercase',
-                        color: '#707070',
+                        color: '#000',
                         marginBottom: '8px'
                       }}>Property Address</p>
                       <p style={{
                         fontSize: '16px',
-                        color: '#1a1a1a',
+                        color: '#000',
                         fontWeight: 400
                       }}>{formData.address}</p>
                     </div>
@@ -411,14 +404,14 @@ export default function HomeValuation({ track }) {
                       <p style={{
                         fontFamily: FONT_SANS,
                         fontSize: '11px',
-                        letterSpacing: '1.5px',
+                        letterSpacing: '0.08em',
                         textTransform: 'uppercase',
-                        color: '#707070',
+                        color: '#000',
                         marginBottom: '8px'
                       }}>Zip Code</p>
                       <p style={{
                         fontSize: '16px',
-                        color: '#1a1a1a',
+                        color: '#000',
                         fontWeight: 400
                       }}>{formData.zipCode}</p>
                     </div>
@@ -427,14 +420,14 @@ export default function HomeValuation({ track }) {
                       <p style={{
                         fontFamily: FONT_SANS,
                         fontSize: '11px',
-                        letterSpacing: '1.5px',
+                        letterSpacing: '0.08em',
                         textTransform: 'uppercase',
-                        color: '#707070',
+                        color: '#000',
                         marginBottom: '8px'
                       }}>Your Name</p>
                       <p style={{
                         fontSize: '16px',
-                        color: '#1a1a1a',
+                        color: '#000',
                         fontWeight: 400
                       }}>{formData.name}</p>
                     </div>
@@ -443,14 +436,14 @@ export default function HomeValuation({ track }) {
                       <p style={{
                         fontFamily: FONT_SANS,
                         fontSize: '11px',
-                        letterSpacing: '1.5px',
+                        letterSpacing: '0.08em',
                         textTransform: 'uppercase',
-                        color: '#707070',
+                        color: '#000',
                         marginBottom: '8px'
                       }}>Email Address</p>
                       <p style={{
                         fontSize: '16px',
-                        color: '#1a1a1a',
+                        color: '#000',
                         fontWeight: 400
                       }}>{formData.email}</p>
                     </div>
@@ -459,11 +452,11 @@ export default function HomeValuation({ track }) {
                   <p style={{
                     fontFamily: FONT_SANS,
                     fontSize: '13px',
-                    color: '#666',
+                    color: '#000',
                     marginBottom: '32px',
-                    lineHeight: 1.8
+                    lineHeight: 1.5
                   }}>
-                    Nicholas will analyze recent comparable sales in your area and provide a comprehensive Comparative Market Analysis (CMA) to determine your home's market value. You can expect to hear from him within 24-48 business hours.
+                    Nicholas will analyze recent comparable sales in your area and provide a comprehensive Comparative Market Analysis (CMA) to determine your home’s market value. You can expect to hear from him within 24-48 business hours.
                   </p>
 
                   <div style={{ display: 'flex', gap: '12px' }}>
@@ -473,9 +466,9 @@ export default function HomeValuation({ track }) {
                       style={{
                         ...styles.btnOutline,
                         flex: 1,
-                        background: '#f8f8f8',
-                        border: '1px solid #e0e0e0',
-                        color: '#1a1a1a'
+                        background: '#fff', borderTop: '1px solid #ccc',
+                        border: '1px solid #ccc',
+                        color: '#000'
                       }}>
                       Back
                     </button>
@@ -489,7 +482,7 @@ export default function HomeValuation({ track }) {
                       fontSize: '13px',
                       color: '#b00020',
                       textAlign: 'center',
-                      lineHeight: 1.6,
+                      lineHeight: 1.5,
                       marginTop: '16px'
                     }}>
                       Something went wrong sending your request. Please call or text{' '}
@@ -505,7 +498,7 @@ export default function HomeValuation({ track }) {
       </section>
 
       {/* Why Valuation Section */}
-      <section style={{ padding: '120px 5%', background: '#f8f8f8' }}>
+      <section style={{ padding: '120px 5%', background: '#fff', borderTop: '1px solid #ccc' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           <h2 style={{
             ...styles.sectionTitle,
@@ -541,15 +534,14 @@ export default function HomeValuation({ track }) {
                   fontSize: '22px',
                   fontWeight: 400,
                   marginBottom: '12px',
-                  letterSpacing: '1px'
                 }}>
                   {item.title}
                 </h3>
                 <p style={{
                   fontFamily: FONT_SANS,
                   fontSize: '14px',
-                  lineHeight: 1.9,
-                  color: '#666'
+                  lineHeight: 1.5,
+                  color: '#000'
                 }}>
                   {item.description}
                 </p>
@@ -587,15 +579,14 @@ export default function HomeValuation({ track }) {
               },
             ].map((testimonial, i) => (
               <div key={i} style={{
-                background: '#f8f8f8',
+                background: '#fff', borderTop: '1px solid #ccc',
                 padding: '32px',
-                borderRadius: '4px'
-              }}>
+                }}>
                 <p style={{
                   fontSize: '18px',
                   fontStyle: 'italic',
-                  lineHeight: 1.8,
-                  color: '#333',
+                  lineHeight: 1.5,
+                  color: '#000',
                   marginBottom: '24px'
                 }}>
                   "{testimonial.text}"
@@ -604,8 +595,7 @@ export default function HomeValuation({ track }) {
                   fontFamily: FONT_SANS,
                   fontSize: '12px',
                   fontWeight: 600,
-                  letterSpacing: '1px',
-                  color: '#1a1a1a'
+                  color: '#000'
                 }}>
                   {testimonial.name}
                 </p>
@@ -620,11 +610,11 @@ export default function HomeValuation({ track }) {
                marginTop: '40px',
                fontFamily: FONT_SANS,
                fontSize: '12px',
-               letterSpacing: '1.5px',
+               letterSpacing: '0.08em',
                textTransform: 'uppercase',
-               color: '#1a1a1a',
+               color: '#000',
                textDecoration: 'none',
-               borderBottom: '1px solid #1a1a1a',
+               borderBottom: '1px solid #000',
                paddingBottom: '4px'
              }}>
             Read all reviews on Google →
