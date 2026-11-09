@@ -220,15 +220,13 @@ export default function Nav({ track }) {
               Communities
             </button>
             {dropdownOpen && (
-              <div id="communities-menu" style={{
-                position: 'absolute',
-                top: '100%',
-                left: 0,
-                background: isScrolled ? '#fff' : '#fff',
+              <div id="communities-menu" style={{ position: 'absolute', top: '100%', left: 0, paddingTop: '12px', zIndex: 1001 }}>
+              {/* The 12px gap below the button is padding on this box, so moving the
+                  pointer down into the menu never leaves the hover area. */}
+              <div style={{
+                background: '#fff',
                 minWidth: '220px',
-                zIndex: 1001,
                 padding: '12px 0',
-                marginTop: '12px',
                 border: '1px solid #ccc'
               }}>
                 {townList.map((town) => (
@@ -267,6 +265,7 @@ export default function Nav({ track }) {
                   )}
                   </div>
                 ))}
+              </div>
               </div>
             )}
           </div>
