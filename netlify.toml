@@ -33,6 +33,12 @@
   to = "/home-valuation"
   status = 301
 
+# East Hills shares the Roslyn guide (src/data/guides.js `alsoFor`).
+[[redirects]]
+  from = "/east-hills/buyers-guide"
+  to = "/roslyn/buyers-guide"
+  status = 301
+
 # Every route is prerendered to its own HTML file at build time
 # (scripts/prerender.mjs), so anything that reaches this rule is a real 404.
 [[redirects]]
