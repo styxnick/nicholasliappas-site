@@ -191,6 +191,10 @@ export default function Footer({ track }) {
               >
                 Free Home Valuation
               </Link>
+              <Link to="/moving-to-long-island"
+                style={{ fontFamily: FONT_SANS, fontSize: '13px', color: '#fff', textDecoration: 'none' }}>
+                Moving from NYC
+              </Link>
             </div>
           </div>
         </div>
