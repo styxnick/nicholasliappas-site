@@ -26,7 +26,19 @@ function Block({ block }) {
           {block.items.map((it, i) => (
             <li key={i} style={{ display: 'flex', gap: '14px', marginBottom: '12px' }}>
               <span aria-hidden="true" style={{ color: INK, fontSize: '8px', marginTop: '11px', flex: 'none' }}>◆</span>
-              <span>{it.lead && <span style={lead}>{it.lead} </span>}{it.text}</span>
+              <span>
+                {it.lead && <span style={lead}>{it.lead} </span>}{it.text}
+                {it.sub && (
+                  <ul style={{ listStyle: 'none', padding: 0, margin: '10px 0 4px' }}>
+                    {it.sub.map((t, j) => (
+                      <li key={j} style={{ display: 'flex', gap: '12px', marginBottom: '6px', fontSize: '15px', color: '#4a4a4a' }}>
+                        <span aria-hidden="true" style={{ color: '#9a9a9a', marginTop: '1px', flex: 'none' }}>–</span>
+                        <span>{t}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </span>
             </li>
           ))}
         </ul>
