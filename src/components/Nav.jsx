@@ -103,7 +103,7 @@ export default function Nav({ track }) {
 
   const styles = getStyles(isScrolled);
   const townList = Object.values(towns);
-  const textColor = isScrolled ? '#1a1a1a' : '#fff';
+  const textColor = isScrolled ? '#000' : '#fff';
 
   const handleDropdownKeyDown = (e) => {
     if (e.key === 'Escape' && dropdownOpen) {
@@ -118,7 +118,7 @@ export default function Nav({ track }) {
   };
 
   const renderLogo = (dark) => (
-    <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '16px', textDecoration: 'none', position: 'relative', zIndex: 1003 }} aria-label="The Liappas Team at Compass – home">
+    <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '24px', textDecoration: 'none', position: 'relative', zIndex: 1003 }} aria-label="The Liappas Team at Compass – home">
       <img
         src={dark ? '/logo-black.png' : '/logo-white.png'}
         alt="The Liappas Team"
@@ -129,7 +129,7 @@ export default function Nav({ track }) {
       <div aria-hidden="true" style={{
         height: '24px',
         width: '1px',
-        background: dark ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.3)'
+        background: dark ? 'rgba(0,0,0,0.2)' : '#fff'
       }} />
       <img
         src={dark ? '/compass_black.png' : '/compass_white.png'}
@@ -162,7 +162,7 @@ export default function Nav({ track }) {
     fontFamily: FONT_SANS,
     fontSize: '14px',
     fontWeight: 400,
-    letterSpacing: '2px',
+    letterSpacing: '0.08em',
     textTransform: 'uppercase',
     color: '#fff',
     textDecoration: 'none',
@@ -172,7 +172,6 @@ export default function Nav({ track }) {
   const menuSubLink = {
     ...menuLink,
     fontSize: '13px',
-    letterSpacing: '1px',
     textTransform: 'none',
     color: '#ccc',
     padding: '10px 0 10px 20px'
@@ -214,7 +213,7 @@ export default function Nav({ track }) {
                 fontFamily: 'inherit',
                 fontSize: '11px',
                 fontWeight: 400,
-                letterSpacing: '1.5px',
+                letterSpacing: '0.08em',
                 textTransform: 'uppercase'
               }}
             >
@@ -225,14 +224,12 @@ export default function Nav({ track }) {
                 position: 'absolute',
                 top: '100%',
                 left: 0,
-                background: isScrolled ? '#fff' : 'rgba(255,255,255,0.95)',
-                backdropFilter: 'blur(20px)',
-                borderRadius: '4px',
+                background: isScrolled ? '#fff' : '#fff',
                 minWidth: '220px',
                 zIndex: 1001,
                 padding: '12px 0',
                 marginTop: '12px',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
+                border: '1px solid #ccc'
               }}>
                 {townList.map((town) => (
                   <div key={town.slug}>
@@ -241,18 +238,17 @@ export default function Nav({ track }) {
                     style={{
                       display: 'block',
                       padding: '12px 24px',
-                      color: '#1a1a1a',
+                      color: '#000',
                       textDecoration: 'none',
                       fontFamily: FONT_SANS,
                       fontSize: '12px',
                       fontWeight: 400,
-                      letterSpacing: '1px',
                       transition: 'background 0.2s',
                       cursor: 'pointer'
                     }}
-                    onMouseEnter={(e) => e.currentTarget.style.background = '#f5f5f5'}
+                    onMouseEnter={(e) => e.currentTarget.style.background = '#ccc'}
                     onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
-                    onFocus={(e) => e.currentTarget.style.background = '#f5f5f5'}
+                    onFocus={(e) => e.currentTarget.style.background = '#ccc'}
                     onBlur={(e) => e.currentTarget.style.background = 'transparent'}
                   >
                     {town.name}
@@ -260,11 +256,11 @@ export default function Nav({ track }) {
                   {guides[town.slug] && (
                     <Link
                       to={`/${town.slug}/buyers-guide`}
-                      style={{ display: 'block', padding: '0 24px 12px 40px', marginTop: '-6px', color: '#666', textDecoration: 'none', fontFamily: FONT_SANS, fontSize: '11px', letterSpacing: '1px' }}
-                      onMouseEnter={(e) => e.currentTarget.style.color = '#1a1a1a'}
-                      onMouseLeave={(e) => e.currentTarget.style.color = '#666'}
-                      onFocus={(e) => e.currentTarget.style.color = '#1a1a1a'}
-                      onBlur={(e) => e.currentTarget.style.color = '#666'}
+                      style={{ display: 'block', padding: '0 24px 12px 40px', marginTop: '-6px', color: '#000', textDecoration: 'none', fontFamily: FONT_SANS, fontSize: '11px', }}
+                      onMouseEnter={(e) => e.currentTarget.style.color = '#000'}
+                      onMouseLeave={(e) => e.currentTarget.style.color = '#000'}
+                      onFocus={(e) => e.currentTarget.style.color = '#000'}
+                      onBlur={(e) => e.currentTarget.style.color = '#000'}
                     >
                       {town.name} Buyer’s Guide →
                     </Link>
@@ -285,12 +281,12 @@ export default function Nav({ track }) {
             fontFamily: FONT_SANS,
             fontSize: '11px',
             fontWeight: 400,
-            letterSpacing: '1.5px',
+            letterSpacing: '0.08em',
             textTransform: 'uppercase',
             padding: '12px 28px',
             border: `1px solid ${textColor}`
           }} onClick={() => track('cta_click', { cta: 'connect', placement: 'nav' })}>
-            LET'S CONNECT
+            LET’S CONNECT
           </Link>
         </div>
       </div>
@@ -327,7 +323,7 @@ export default function Nav({ track }) {
           style={{
             position: 'fixed',
             inset: 0,
-            background: '#1a1a1a',
+            background: '#000',
             color: '#fff',
             zIndex: 1002,
             overflowY: 'auto',
@@ -337,12 +333,12 @@ export default function Nav({ track }) {
           <Link to="/" style={menuLink}>Home</Link>
           <Link to="/#about" style={menuLink}>About</Link>
           <Link to="/#services" style={menuLink}>Services</Link>
-          <div style={{ ...menuLink, color: '#888', fontSize: '11px', paddingBottom: '4px' }}>Communities</div>
+          <div style={{ ...menuLink, fontSize: '11px', paddingBottom: '4px' }}>Communities</div>
           {townList.map((town) => (
             <div key={town.slug}>
               <Link to={`/${town.slug}`} style={menuSubLink}>{town.name}</Link>
               {guides[town.slug] && (
-                <Link to={`/${town.slug}/buyers-guide`} style={{ ...menuSubLink, padding: '2px 0 10px 36px', fontSize: '12px', color: '#999' }}>{town.name} Buyer’s Guide</Link>
+                <Link to={`/${town.slug}/buyers-guide`} style={{ ...menuSubLink, padding: '2px 0 10px 36px', fontSize: '12px' }}>{town.name} Buyer’s Guide</Link>
               )}
             </div>
           ))}
@@ -357,7 +353,7 @@ export default function Nav({ track }) {
           <Link to="/#contact"
             onClick={() => track('cta_click', { cta: 'connect', placement: 'nav' })}
             style={{ ...styles.btnOutline, display: 'block', textAlign: 'center' }}>
-            LET'S CONNECT
+            LET’S CONNECT
           </Link>
         </div>
       )}

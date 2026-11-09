@@ -20,7 +20,7 @@ export default function Home({ track }) {
   useEffect(() => { setMounted(true); }, []);
   const showHeroVideo = mounted && !reducedMotion && !smallScreen;
   // Tighter tracking on phones so the hero lines don't wrap or orphan a word.
-  const heroButtonMobile = smallScreen ? { letterSpacing: '1.5px', padding: '18px 28px', whiteSpace: 'nowrap' } : {};
+  const heroButtonMobile = smallScreen ? { padding: '18px 28px', whiteSpace: 'nowrap' } : {};
 
   // Verbatim excerpts from Google reviews (5.0, all five-star). Full names as shown on Google.
   const testimonials = [
@@ -32,7 +32,7 @@ export default function Home({ track }) {
     {
       name: "Kevin Caballes",
       text: "We were moving from Brooklyn back to Long Island and he really helped us navigate the buying process when searching for the right home for us including recommending different lawyers, inspectors, etc who were all also great to work with. He also was able to guide us in getting my mother's home ready for sale and had multiple offers ready for us after the first open house.",
-      location: "Bought & Sold, Long Island"
+      location: "Bought and Sold, Long Island"
     },
     {
       name: "Matthew Weitzman",
@@ -57,7 +57,7 @@ export default function Home({ track }) {
   ];
 
   useSeo({
-    title: 'Nicholas Liappas | North Shore, Queens & North Fork Real Estate',
+    title: 'Nicholas Liappas | North Shore, Queens and North Fork Real Estate',
     meta: [
       { name: 'description', content: 'Licensed Associate Real Estate Broker at Compass. Residential, commercial and development sales on the North Shore, in Queens and on the North Fork.' },
       { name: 'keywords', content: 'Nicholas Liappas, Nicholas Liappas realtor, Nicholas Liappas Compass, Liappas Team, real estate agent Manhasset NY, real estate agent Port Washington NY, real estate agent Roslyn NY, real estate agent East Hills NY, real estate agent Glen Head NY, real estate agent Glenwood Landing NY, real estate agent Great Neck NY, real estate agent Bayside Queens, real estate agent North Fork NY, real estate broker North Shore Long Island, luxury homes North Shore Long Island, homes for sale Manhasset, homes for sale Port Washington, homes for sale Roslyn, homes for sale East Hills, homes for sale Glen Head, homes for sale Glenwood Landing, homes for sale Great Neck, Compass real estate Long Island, buy home Long Island, sell home Long Island, commercial real estate Long Island, developer sales Long Island, Nassau County realtor, Suffolk County realtor, North Fork luxury homes' },
@@ -72,11 +72,11 @@ export default function Home({ track }) {
       { name: 'language', content: 'English' },
       { name: 'category', content: 'Real Estate' },
       { name: 'coverage', content: 'Long Island, Queens, North Fork, New York' },
-      { property: 'og:title', content: 'Nicholas Liappas | Real Estate Broker | North Shore, Queens & North Fork NY' },
-      { property: 'og:description', content: 'Licensed Associate Real Estate Broker at Compass. Record-breaking results for buyers & sellers across Manhasset, Port Washington, Roslyn, East Hills, Glen Head, Glenwood Landing, Great Neck, Bayside & North Fork. Built Different, Sold Better.' },
+      { property: 'og:title', content: 'Nicholas Liappas | Real Estate Broker | North Shore, Queens and North Fork NY' },
+      { property: 'og:description', content: 'Licensed Associate Real Estate Broker at Compass. Record-breaking results for buyers and sellers across Manhasset, Port Washington, Roslyn, East Hills, Glen Head, Glenwood Landing, Great Neck, Bayside and North Fork. Built Different, Sold Better.' },
       { property: 'og:url', content: `${SITE_URL}/` },
-      { name: 'twitter:title', content: 'Nicholas Liappas | Real Estate Broker | North Shore, Queens & North Fork NY' },
-      { name: 'twitter:description', content: 'Licensed Associate Real Estate Broker at Compass. Record-breaking results for buyers & sellers across Long Island & Queens. Built Different, Sold Better.' },
+      { name: 'twitter:title', content: 'Nicholas Liappas | Real Estate Broker | North Shore, Queens and North Fork NY' },
+      { name: 'twitter:description', content: 'Licensed Associate Real Estate Broker at Compass. Record-breaking results for buyers and sellers across Long Island and Queens. Built Different, Sold Better.' },
     ],
     links: [{ rel: 'canonical', href: `${SITE_URL}/` }],
     schemas,
@@ -111,15 +111,11 @@ export default function Home({ track }) {
             <source src="/video/colonial-home-loop.mp4" type="video/mp4" />
           </video>
         )}
-        {/* Dark overlay keeps the white hero text readable over the footage:
-            ~50% base plus a soft radial darkening centred behind the text block */}
+        {/* One flat scrim keeps the white hero text readable over the footage (single hue, no gradients) */}
         <div style={{
           position: 'absolute',
           inset: 0,
-          background: [
-            'radial-gradient(ellipse 58% 52% at 50% 52%, rgba(8,8,8,0.7) 0%, rgba(8,8,8,0.45) 55%, rgba(8,8,8,0) 100%)',
-            'linear-gradient(180deg, rgba(10,10,10,0.5) 0%, rgba(10,10,10,0.45) 50%, rgba(10,10,10,0.65) 100%)'
-          ].join(', '),
+          background: 'rgba(0,0,0,0.5)',
           zIndex: 1
         }} />
 
@@ -131,17 +127,16 @@ export default function Home({ track }) {
             letterSpacing: smallScreen ? '2px' : '4px',
             textTransform: 'uppercase',
             marginBottom: '24px',
-            opacity: 0.7
           }}>
             The Liappas Team at Compass
           </p>
 
           <h1 style={{
-            fontSize: 'clamp(48px, 10vw, 100px)',
+            fontSize: 'clamp(34px, 9vw, 100px)',
             fontWeight: 300,
-            letterSpacing: '4px',
             lineHeight: 1,
-            marginBottom: '24px'
+            marginBottom: '24px',
+            whiteSpace: 'nowrap'
           }}>
             Nicholas Liappas
           </h1>
@@ -153,7 +148,6 @@ export default function Home({ track }) {
             letterSpacing: smallScreen ? '2px' : '5px',
             textTransform: 'uppercase',
             marginBottom: '40px',
-            opacity: 0.9
           }}>
             Built Different, Sold Better.
           </p>
@@ -162,14 +156,12 @@ export default function Home({ track }) {
             fontFamily: FONT_SANS,
             fontSize: '13px',
             fontWeight: 400,
-            letterSpacing: '1px',
             maxWidth: '600px',
             margin: '0 auto 48px',
-            lineHeight: 2,
-            opacity: 0.85,
+            lineHeight: 1.5,
             textShadow: '0 1px 14px rgba(0,0,0,0.7), 0 0 2px rgba(0,0,0,0.5)'
           }}>
-            Licensed Associate Real Estate Broker specializing in residential, commercial, and development sales across the North Shore, Queens & North Fork markets.
+            Licensed Associate Real Estate Broker specializing in residential, commercial, and development sales across the North Shore, Queens and North Fork markets.
           </p>
 
           <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -196,15 +188,13 @@ export default function Home({ track }) {
           <span style={{
             fontFamily: FONT_SANS,
             fontSize: '10px',
-            letterSpacing: '3px',
             color: '#fff',
-            opacity: 0.6,
             textShadow: '0 1px 8px rgba(0,0,0,0.7)'
           }}>SCROLL</span>
           <div style={{
             width: '1px',
             height: '60px',
-            background: 'linear-gradient(to bottom, rgba(255,255,255,0.5), transparent)'
+            background: '#fff'
           }} />
         </div>
       </section>
@@ -220,17 +210,17 @@ export default function Home({ track }) {
           alignItems: 'center'
         }}>
           <div>
-            <p style={styles.sectionSubtitle}>Let's Connect</p>
-            <h2 style={styles.sectionTitle}>Your Real Estate<br />Journey Starts Here</h2>
+            <p style={styles.sectionSubtitle}>Let’s Connect</p>
+            <h2 style={styles.sectionTitle}>Your Real&nbsp;Estate<br />Journey Starts Here</h2>
             <p style={{
               fontFamily: FONT_SANS,
               fontSize: '14px',
-              lineHeight: 2,
-              color: '#666',
+              lineHeight: 1.5,
+              color: '#000',
               marginBottom: '40px',
               maxWidth: '480px'
             }}>
-              Whether you're buying your dream home, selling for top dollar, or exploring investment opportunities across the North Shore, Queens, or North Fork—I bring a consultative approach with construction expertise that protects your investment.
+              Whether you’re buying your dream home, selling for top dollar, or exploring investment opportunities across the North Shore, Queens, or North Fork—I bring a consultative approach with construction expertise that protects your investment.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginBottom: '40px' }}>
@@ -238,14 +228,13 @@ export default function Home({ track }) {
                 'Construction expertise that identifies critical issues',
                 'Deep local knowledge as a North Shore native',
                 'Record-breaking results for sellers',
-                'Commercial sales & developer relationships',
+                'Commercial sales and developer relationships',
               ].map((item, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                  <span style={{ color: '#1a1a1a', fontSize: '8px' }}>◆</span>
+                  <span style={{ color: '#000', fontSize: '8px' }}>◆</span>
                   <span style={{
                     fontFamily: FONT_SANS,
                     fontSize: '13px',
-                    letterSpacing: '0.5px'
                   }}>{item}</span>
                 </div>
               ))}
@@ -253,7 +242,7 @@ export default function Home({ track }) {
 
             <div style={{
               paddingTop: '32px',
-              borderTop: '1px solid #e8e8e8',
+              borderTop: '1px solid #ccc',
               display: 'flex',
               flexDirection: 'column',
               gap: '12px'
@@ -263,9 +252,8 @@ export default function Home({ track }) {
                  style={{
                    fontFamily: FONT_SANS,
                    fontSize: '14px',
-                   color: '#1a1a1a',
+                   color: '#000',
                    textDecoration: 'none',
-                   letterSpacing: '1px'
                  }}>
                 M: 516-214-7761
               </a>
@@ -274,7 +262,7 @@ export default function Home({ track }) {
                  style={{
                    fontFamily: FONT_SANS,
                    fontSize: '14px',
-                   color: '#1a1a1a',
+                   color: '#000',
                    textDecoration: 'none'
                  }}>
                 nicholas.liappas@compass.com
@@ -284,7 +272,7 @@ export default function Home({ track }) {
                  style={{
                    fontFamily: FONT_SANS,
                    fontSize: '14px',
-                   color: '#1a1a1a',
+                   color: '#000',
                    textDecoration: 'none',
                    marginTop: '8px',
                    display: 'flex',
@@ -303,7 +291,7 @@ export default function Home({ track }) {
                  style={{
                    fontFamily: FONT_SANS,
                    fontSize: '14px',
-                   color: '#1a1a1a',
+                   color: '#000',
                    textDecoration: 'none',
                    marginTop: '4px',
                    display: 'flex',
@@ -322,7 +310,7 @@ export default function Home({ track }) {
                  style={{
                    fontFamily: FONT_SANS,
                    fontSize: '14px',
-                   color: '#1a1a1a',
+                   color: '#000',
                    textDecoration: 'none',
                    marginTop: '4px',
                    display: 'flex',
@@ -342,7 +330,7 @@ export default function Home({ track }) {
       </section>
 
       {/* About Nicholas Section */}
-      <section id="about" aria-label="About Nicholas Liappas" style={{ padding: '120px 5%', background: '#f8f8f8', scrollMarginTop: '72px' }}>
+      <section id="about" aria-label="About Nicholas Liappas" style={{ padding: '120px 5%', background: '#fff', borderTop: '1px solid #ccc', scrollMarginTop: '72px' }}>
         <div style={{
           maxWidth: '1200px',
           margin: '0 auto',
@@ -354,7 +342,7 @@ export default function Home({ track }) {
           <div style={{ position: 'relative' }}>
             <div style={{
               aspectRatio: '3/4',
-              background: 'linear-gradient(135deg, #c0c0c0 0%, #888 100%)',
+              background: '#ccc',
               position: 'relative',
               overflow: 'hidden'
             }}>
@@ -380,31 +368,30 @@ export default function Home({ track }) {
               position: 'absolute',
               bottom: '-24px',
               right: '-24px',
-              background: '#1a1a1a',
+              background: '#000',
               color: '#fff',
               padding: '32px'
             }}>
               <span style={{
                 fontFamily: FONT_SANS,
                 fontSize: '11px',
-                letterSpacing: '2px',
+                letterSpacing: '0.08em',
                 textTransform: 'uppercase',
-                opacity: 0.7,
                 display: 'block',
                 marginBottom: '8px'
               }}>Co-Principal</span>
-              <span style={{ fontSize: '18px', fontWeight: 300, letterSpacing: '1px' }}>The Liappas Team</span>
+              <span style={{ fontSize: '18px', fontWeight: 300, }}>The Liappas Team</span>
             </div>
           </div>
 
           <div>
             <p style={styles.sectionSubtitle}>Meet Nicholas</p>
-            <h2 style={styles.sectionTitle}>Your Trusted North Shore Real Estate Team</h2>
+            <h2 style={styles.sectionTitle}>Your Trusted North Shore Real&nbsp;Estate Team</h2>
             <p style={{
               fontFamily: FONT_SANS,
               fontSize: '14px',
-              lineHeight: 2,
-              color: '#666',
+              lineHeight: 1.5,
+              color: '#000',
               marginBottom: '24px'
             }}>
               As a native of the North Shore and co-principal of The Liappas Team at Compass, I bring a unique combination of deep local knowledge and hands-on construction expertise to every transaction.
@@ -412,17 +399,17 @@ export default function Home({ track }) {
             <p style={{
               fontFamily: FONT_SANS,
               fontSize: '14px',
-              lineHeight: 2,
-              color: '#666',
+              lineHeight: 1.5,
+              color: '#000',
               marginBottom: '24px'
             }}>
-              My background in construction allows me to identify critical issues that may impact your real estate investment, while helping you visualize a home's true potential through cost-effective modifications and strategic upgrades.
+              My background in construction allows me to identify critical issues that may impact your real estate investment, while helping you visualize a home’s true potential through cost-effective modifications and strategic upgrades.
             </p>
             <p style={{
               fontFamily: FONT_SANS,
               fontSize: '14px',
-              lineHeight: 2,
-              color: '#666',
+              lineHeight: 1.5,
+              color: '#000',
               marginBottom: '24px'
             }}>
               Beyond residential sales, I specialize in commercial real estate transactions, connecting property owners with developers seeking prime locations for new construction and mixed-use projects throughout Long Island and Queens.
@@ -433,26 +420,26 @@ export default function Home({ track }) {
               flexWrap: 'wrap',
               gap: '12px',
               paddingTop: '32px',
-              borderTop: '1px solid #e0e0e0'
+              borderTop: '1px solid #ccc'
             }}>
               {['Buyer\'s Agent', 'Listing Agent', 'Commercial', 'Relocation', 'Consulting'].map((spec, i) => (
                 <span key={i} style={{
                   fontFamily: FONT_SANS,
                   fontSize: '10px',
-                  letterSpacing: '1.5px',
+                  letterSpacing: '0.08em',
                   textTransform: 'uppercase',
                   padding: '10px 20px',
                   background: '#fff',
-                  border: '1px solid #e0e0e0'
+                  border: '1px solid #ccc'
                 }}>{spec}</span>
               ))}
             </div>
 
             <div style={{ marginTop: '24px' }}>
-              <p style={{ fontFamily: FONT_SANS, fontSize: '12px', color: '#707070', marginBottom: '8px' }}>
-                Languages: English & Greek
+              <p style={{ fontFamily: FONT_SANS, fontSize: '12px', color: '#000', marginBottom: '8px' }}>
+                Languages: English and Greek
               </p>
-              <p style={{ fontFamily: FONT_SANS, fontSize: '12px', color: '#707070' }}>
+              <p style={{ fontFamily: FONT_SANS, fontSize: '12px', color: '#000' }}>
                 Education: Stony Brook University, B.A. Philosophy
               </p>
             </div>
@@ -472,12 +459,12 @@ export default function Home({ track }) {
         }}>
           <div style={{ order: 2 }}>
             <p style={styles.sectionSubtitle}>The Liappas Team</p>
-            <h2 style={styles.sectionTitle}>Full-Service Real Estate Solutions</h2>
+            <h2 style={styles.sectionTitle}>Full-Service Real&nbsp;Estate Solutions</h2>
             <p style={{
               fontFamily: FONT_SANS,
               fontSize: '14px',
-              lineHeight: 2,
-              color: '#666',
+              lineHeight: 1.5,
+              color: '#000',
               marginBottom: '24px'
             }}>
               The Liappas Team is a premier real estate group at Compass, combining decades of collective experience with an unwavering commitment to client success. Our team approach ensures you always have a knowledgeable professional available to assist you.
@@ -485,17 +472,17 @@ export default function Home({ track }) {
             <p style={{
               fontFamily: FONT_SANS,
               fontSize: '14px',
-              lineHeight: 2,
-              color: '#666',
+              lineHeight: 1.5,
+              color: '#000',
               marginBottom: '24px'
             }}>
-              From first-time homebuyers to seasoned investors, from residential sales to commercial development deals, our diverse expertise covers every aspect of real estate across Long Island's North Shore, Queens, and the North Fork.
+              From first-time homebuyers to seasoned investors, from residential sales to commercial development deals, our diverse expertise covers every aspect of real estate across Long Island’s North Shore, Queens, and the North Fork.
             </p>
             <p style={{
               fontFamily: FONT_SANS,
               fontSize: '14px',
-              lineHeight: 2,
-              color: '#666',
+              lineHeight: 1.5,
+              color: '#000',
               marginBottom: '24px'
             }}>
               When you work with The Liappas Team, you get the personalized attention of a boutique firm backed by the global reach and cutting-edge technology of Compass.
@@ -506,7 +493,7 @@ export default function Home({ track }) {
               flexWrap: 'wrap',
               gap: '24px',
               paddingTop: '32px',
-              borderTop: '1px solid #e0e0e0'
+              borderTop: '1px solid #ccc'
             }}>
               <div>
                 <span style={{
@@ -519,9 +506,9 @@ export default function Home({ track }) {
                 <span style={{
                   fontFamily: FONT_SANS,
                   fontSize: '10px',
-                  letterSpacing: '1.5px',
+                  letterSpacing: '0.08em',
                   textTransform: 'uppercase',
-                  color: '#707070'
+                  color: '#000'
                 }}>In Sales Volume</span>
               </div>
               <div>
@@ -535,9 +522,9 @@ export default function Home({ track }) {
                 <span style={{
                   fontFamily: FONT_SANS,
                   fontSize: '10px',
-                  letterSpacing: '1.5px',
+                  letterSpacing: '0.08em',
                   textTransform: 'uppercase',
-                  color: '#707070'
+                  color: '#000'
                 }}>Transactions Closed</span>
               </div>
               <div>
@@ -551,9 +538,9 @@ export default function Home({ track }) {
                 <span style={{
                   fontFamily: FONT_SANS,
                   fontSize: '10px',
-                  letterSpacing: '1.5px',
+                  letterSpacing: '0.08em',
                   textTransform: 'uppercase',
-                  color: '#707070'
+                  color: '#000'
                 }}>Years Experience</span>
               </div>
             </div>
@@ -562,7 +549,7 @@ export default function Home({ track }) {
           <div style={{ position: 'relative', order: 1 }}>
             <div style={{
               aspectRatio: '4/3',
-              background: 'linear-gradient(135deg, #c0c0c0 0%, #888 100%)',
+              background: '#ccc',
               position: 'relative',
               overflow: 'hidden'
             }}>
@@ -588,16 +575,15 @@ export default function Home({ track }) {
               position: 'absolute',
               bottom: '-24px',
               left: '-24px',
-              background: '#1a1a1a',
+              background: '#000',
               color: '#fff',
               padding: '32px'
             }}>
               <span style={{
                 fontFamily: FONT_SANS,
                 fontSize: '11px',
-                letterSpacing: '2px',
+                letterSpacing: '0.08em',
                 textTransform: 'uppercase',
-                opacity: 0.7,
                 display: 'block',
                 marginBottom: '12px'
               }}>Powered By</span>
@@ -619,7 +605,7 @@ export default function Home({ track }) {
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '80px' }}>
             <p style={styles.sectionSubtitle}>Full-Service Real Estate</p>
-            <h2 style={styles.sectionTitle}>Full-Service Real Estate Solutions</h2>
+            <h2 style={styles.sectionTitle}>Full-Service Real&nbsp;Estate Solutions</h2>
           </div>
 
           <div style={{
@@ -640,14 +626,14 @@ export default function Home({ track }) {
                 icon: '◈'
               },
               {
-                title: 'Commercial & Development',
+                title: 'Commercial and Development',
                 description: 'Specialized expertise in commercial real estate sales to developers. From land assemblage to mixed-use properties, I connect sellers with qualified developers for maximum returns.',
                 icon: '◆',
                 to: '/commercial',
                 cta: 'Commercial services →'
               },
               {
-                title: 'Relocation & Consulting',
+                title: 'Relocation and Consulting',
                 description: 'Whether you\'re moving to Long Island or exploring investment opportunities, I provide comprehensive market analysis and timely guidance.',
                 icon: '◇'
               },
@@ -657,10 +643,10 @@ export default function Home({ track }) {
               return (
               <Card key={i} {...linkProps} style={{
                 padding: '40px',
-                background: '#fafafa',
+                background: '#fff', border: '1px solid #ccc',
                 transition: 'all 0.4s ease',
                 textDecoration: 'none',
-                color: '#1a1a1a',
+                color: '#000',
                 display: 'block'
               }}>
                 <span style={{ fontSize: '32px', display: 'block', marginBottom: '24px' }}>{service.icon}</span>
@@ -668,23 +654,22 @@ export default function Home({ track }) {
                   fontSize: '22px',
                   fontWeight: 400,
                   marginBottom: '16px',
-                  letterSpacing: '1px'
                 }}>{service.title}</h3>
                 <p style={{
                   fontFamily: FONT_SANS,
                   fontSize: '13px',
-                  lineHeight: 1.9,
-                  color: '#666'
+                  lineHeight: 1.5,
+                  color: '#000'
                 }}>{service.description}</p>
                 {service.guideLinks && Object.values(guides).map((g) => (
                   <Link key={g.slug} to={`/${g.slug}/buyers-guide`}
                     onClick={() => track('cta_click', { cta: 'buyers_guide', town: g.slug, placement: 'services' })}
-                    style={{ fontFamily: FONT_SANS, fontSize: '12px', letterSpacing: '1.5px', textTransform: 'uppercase', color: '#1a1a1a', fontWeight: 500, display: 'inline-block', marginTop: '20px', display: 'block', textDecoration: 'none' }}>
+                    style={{ fontFamily: FONT_SANS, fontSize: '12px', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#000', fontWeight: 500, display: 'inline-block', marginTop: '20px', display: 'block', textDecoration: 'none' }}>
                     {g.town} Buyer’s Guide →
                   </Link>
                 ))}
                 {service.cta && (
-                  <span style={{ fontFamily: FONT_SANS, fontSize: '12px', letterSpacing: '1.5px', textTransform: 'uppercase', color: '#1a1a1a', fontWeight: 500, display: 'inline-block', marginTop: '20px' }}>{service.cta}</span>
+                  <span style={{ fontFamily: FONT_SANS, fontSize: '12px', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#000', fontWeight: 500, display: 'inline-block', marginTop: '20px' }}>{service.cta}</span>
                 )}
               </Card>
               );
@@ -710,14 +695,14 @@ export default function Home({ track }) {
                 transition: 'all 0.6s ease',
                 pointerEvents: i === activeTestimonial ? 'auto' : 'none'
               }}>
-                <div aria-hidden="true" style={{ fontSize: '48px', color: '#e0e0e0', marginBottom: '24px' }}>"</div>
+                <div aria-hidden="true" style={{ fontSize: '48px', color: '#ccc', marginBottom: '24px' }}>"</div>
                 <p style={{
                   fontSize: 'clamp(16px, 2vw, 22px)',
                   fontWeight: 300,
-                  lineHeight: 1.7,
+                  lineHeight: 1.5,
                   fontStyle: 'italic',
                   marginBottom: '32px',
-                  color: '#333',
+                  color: '#000',
                   maxWidth: '750px',
                   margin: '0 auto 32px'
                 }}>
@@ -728,7 +713,7 @@ export default function Home({ track }) {
                     fontFamily: FONT_SANS,
                     fontSize: '11px',
                     fontWeight: 500,
-                    letterSpacing: '2px',
+                    letterSpacing: '0.08em',
                     textTransform: 'uppercase',
                     display: 'block',
                     marginBottom: '4px'
@@ -736,8 +721,7 @@ export default function Home({ track }) {
                   <span style={{
                     fontFamily: FONT_SANS,
                     fontSize: '11px',
-                    color: '#707070',
-                    letterSpacing: '1px'
+                    color: '#000',
                   }}>{testimonial.location}</span>
                 </div>
               </div>
@@ -752,8 +736,7 @@ export default function Home({ track }) {
                 style={{
                 width: i === activeTestimonial ? '40px' : '10px',
                 height: '10px',
-                borderRadius: '5px',
-                background: i === activeTestimonial ? '#1a1a1a' : '#ddd',
+                background: i === activeTestimonial ? '#000' : '#ccc',
                 border: 'none',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease'
@@ -768,11 +751,11 @@ export default function Home({ track }) {
                marginTop: '40px',
                fontFamily: FONT_SANS,
                fontSize: '12px',
-               letterSpacing: '1.5px',
+               letterSpacing: '0.08em',
                textTransform: 'uppercase',
-               color: '#1a1a1a',
+               color: '#000',
                textDecoration: 'none',
-               borderBottom: '1px solid #1a1a1a',
+               borderBottom: '1px solid #000',
                paddingBottom: '4px'
              }}>
             Read all reviews on Google →
@@ -781,10 +764,10 @@ export default function Home({ track }) {
       </section>
 
       {/* Instagram CTA */}
-      <section style={{ padding: '80px 5%', background: '#f8f8f8', textAlign: 'center' }}>
+      <section style={{ padding: '80px 5%', background: '#fff', borderTop: '1px solid #ccc', textAlign: 'center' }}>
         <a href="https://instagram.com/nicholasliappas" target="_blank" rel="noopener noreferrer"
            onClick={() => track('social_click', { network: 'instagram', placement: 'bottom_cta' })}
-           style={{ textDecoration: 'none', color: '#1a1a1a' }}>
+           style={{ textDecoration: 'none', color: '#000' }}>
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ marginBottom: '24px' }}>
             <rect x="2" y="2" width="20" height="20" rx="5" />
             <circle cx="12" cy="12" r="4" />
@@ -793,19 +776,19 @@ export default function Home({ track }) {
           <p style={{
             fontFamily: FONT_SANS,
             fontSize: '11px',
-            letterSpacing: '3px',
+            letterSpacing: '0.08em',
             textTransform: 'uppercase',
             marginBottom: '12px',
-            color: '#707070'
+            color: '#000'
           }}>Follow Along</p>
-          <h3 style={{ fontSize: '28px', fontWeight: 300, letterSpacing: '1px' }}>@nicholasliappas</h3>
+          <h3 style={{ fontSize: '28px', fontWeight: 300, }}>@nicholasliappas</h3>
         </a>
       </section>
 
       {/* CTA Section */}
       <section style={{
         padding: '100px 5%',
-        background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)',
+        background: '#000',
         textAlign: 'center',
         color: '#fff'
       }}>
@@ -814,7 +797,6 @@ export default function Home({ track }) {
             fontSize: 'clamp(28px, 4vw, 42px)',
             fontWeight: 300,
             marginBottom: '24px',
-            letterSpacing: '2px',
             lineHeight: 1.3
           }}>
             Ready to Make Your Move?
@@ -822,21 +804,21 @@ export default function Home({ track }) {
           <p style={{
             fontFamily: FONT_SANS,
             fontSize: '14px',
-            color: 'rgba(255,255,255,0.7)',
+            color: '#fff',
             marginBottom: '40px',
-            lineHeight: 1.8
+            lineHeight: 1.5
           }}>
-            Let's discuss your real estate goals and create a personalized strategy.
+            Let’s discuss your real estate goals and create a personalized strategy.
           </p>
           <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/#contact" onClick={() => track('cta_click', { cta: 'schedule', placement: 'bottom_cta' })} style={{ ...styles.btnPrimary, background: '#fff', color: '#1a1a1a' }}>
+            <Link to="/#contact" onClick={() => track('cta_click', { cta: 'schedule', placement: 'bottom_cta' })} style={{ ...styles.btnPrimary, background: '#fff', color: '#000' }}>
               Schedule Consultation
             </Link>
             <a href="tel:516-214-7761"
                onClick={() => track('phone_click', { placement: 'bottom_cta' })}
                style={{
                  ...styles.btnOutline,
-                 border: '1px solid rgba(255,255,255,0.3)'
+                 border: '1px solid #fff'
                }}>
               Call 516-214-7761
             </a>

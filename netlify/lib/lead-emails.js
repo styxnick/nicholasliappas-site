@@ -67,24 +67,24 @@ export function leadFromPayload(payload = {}) {
 // Cormorant pairing maps to Helvetica/Arial and Georgia.
 const SANS = "-apple-system,'Segoe UI',Helvetica,Arial,sans-serif";
 const SERIF = "Georgia,'Times New Roman',serif";
-const INK = '#1a1a1a';
-const MUTED = '#6b6b6b';
-const RULE = '#e6e6e2';
+const INK = '#000000';
+const MUTED = '#000000';
+const RULE = '#cccccc';
 
 const button = (href, label, solid) => `<a href="${escapeHtml(href)}" style="display:inline-block;white-space:nowrap;margin:0 10px 10px 0;padding:13px 24px;font-family:${SANS};font-size:12px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border:1px solid ${INK};${solid ? `background:${INK};color:#ffffff;` : `background:#ffffff;color:${INK};`}">${escapeHtml(label)}</a>`;
 
 const shell = ({ preheader, body }) => `<!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>Nicholas Liappas</title></head>
-<body style="margin:0;padding:0;background:#f4f4f1;">
+<body style="margin:0;padding:0;background:#ffffff;">
 <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">${escapeHtml(preheader)}</div>
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f1;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#ffffff;">
   <tr><td align="center" style="padding:32px 16px;">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:#ffffff;">
       <tr><td style="padding:36px 40px 0;font-family:${SANS};font-size:10px;letter-spacing:3px;text-transform:uppercase;color:${MUTED};">The Liappas Team at Compass</td></tr>
       ${body}
     </table>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;">
-      <tr><td style="padding:20px 40px 0;font-family:${SANS};font-size:11px;line-height:1.7;color:#8a8a8a;">
+      <tr><td style="padding:20px 40px 0;font-family:${SANS};font-size:11px;line-height:1.7;color:#000000;">
         Nicholas Liappas, Licensed Associate Real Estate Broker · The Liappas Team at Compass · ${escapeHtml(OFFICE)}<br>
         Compass is a licensed real estate broker and abides by Equal Housing Opportunity laws.
       </td></tr>
@@ -105,7 +105,7 @@ const signature = () => `
               <span style="color:${MUTED};">Licensed Associate Real Estate Broker</span><br>
               <span style="color:${MUTED};">The Liappas Team at Compass</span><br>
               <a href="tel:${PHONE_E164}" style="color:${INK};text-decoration:none;">${PHONE_DISPLAY}</a>
-              <span style="color:#c4c4c0;">&nbsp;·&nbsp;</span>
+              <span style="color:#cccccc;">&nbsp;·&nbsp;</span>
               <a href="mailto:${NICHOLAS_EMAIL}" style="color:${INK};text-decoration:none;">${NICHOLAS_EMAIL}</a><br>
               <a href="${SITE_URL}" style="color:${INK};text-decoration:none;">nicholasliappas.com</a>
             </td>

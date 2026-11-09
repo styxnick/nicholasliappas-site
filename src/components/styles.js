@@ -1,13 +1,24 @@
-// Font tokens: the only place a font family is spelled out. Inter carries
-// everything except the big display headings, which stay in Cormorant Garamond.
+// Font tokens: the only place a font family is spelled out. The pairing follows
+// Compass's "Designing for Agents" guide (v2) with open-licence stand-ins:
+//   Compass Sans  -> Inter          (body, UI, caps details)
+//   Compass Serif -> Newsreader     (display headings; Tiempos-like)
+//   Pressura Mono -> IBM Plex Mono  (coordinates and technical details)
 export const FONT_SANS = "'Inter', 'Helvetica Neue', Arial, sans-serif";
-export const FONT_SERIF = "'Cormorant Garamond', Georgia, serif";
+export const FONT_SERIF = "'Newsreader', Georgia, 'Times New Roman', serif";
+export const FONT_MONO = "'IBM Plex Mono', Menlo, Consolas, monospace";
+
+// Brand palette: black, white, and #CCCCCC as the only gray (hairlines, borders).
+export const INK = '#000';
+export const PAPER = '#fff';
+export const RULE = '#ccc';
+// Caps details may carry modest tracking; everything else sets at 0.
+export const TRACK_CAPS = '0.08em';
 
 export const getStyles = (isScrolled) => ({
   container: {
     fontFamily: FONT_SERIF,
-    color: '#1a1a1a',
-    background: '#fefefe',
+    color: '#000',
+    background: '#fff',
     minHeight: '100vh',
     overflowX: 'hidden'
   },
@@ -18,20 +29,18 @@ export const getStyles = (isScrolled) => ({
     right: 0,
     zIndex: 1000,
     padding: isScrolled ? '16px 5%' : '28px 5%',
-    background: isScrolled ? 'rgba(255,255,255,0.98)' : 'transparent',
-    backdropFilter: isScrolled ? 'blur(20px)' : 'none',
+    background: isScrolled ? '#fff' : 'transparent',
     transition: 'all 0.4s ease',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderBottom: isScrolled ? '1px solid rgba(0,0,0,0.05)' : 'none'
+    borderBottom: isScrolled ? '1px solid #ccc' : 'none'
   },
   logo: {
     fontFamily: FONT_SANS,
     fontWeight: 500,
     fontSize: '12px',
-    letterSpacing: '4px',
-    color: isScrolled ? '#1a1a1a' : '#fff',
+    color: isScrolled ? '#000' : '#fff',
     display: 'flex',
     alignItems: 'center',
     gap: '12px'
@@ -42,11 +51,11 @@ export const getStyles = (isScrolled) => ({
     fontFamily: FONT_SANS,
     fontSize: '11px',
     fontWeight: 400,
-    letterSpacing: '1.5px',
+    letterSpacing: '0.08em',
     textTransform: 'uppercase'
   },
   navLink: {
-    color: isScrolled ? '#1a1a1a' : '#fff',
+    color: isScrolled ? '#000' : '#fff',
     textDecoration: 'none',
     transition: 'opacity 0.3s',
     cursor: 'pointer'
@@ -59,7 +68,7 @@ export const getStyles = (isScrolled) => ({
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
-    background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 40%, #1a1a1a 100%)'
+    background: '#000'
   },
   heroContent: {
     position: 'relative',
@@ -73,27 +82,26 @@ export const getStyles = (isScrolled) => ({
     fontFamily: FONT_SANS,
     fontSize: '11px',
     fontWeight: 500,
-    letterSpacing: '3px',
+    letterSpacing: '0.08em',
     textTransform: 'uppercase',
-    color: '#707070',
+    color: '#000',
     marginBottom: '16px'
   },
   sectionTitle: {
     fontSize: 'clamp(32px, 5vw, 56px)',
     fontWeight: 300,
-    letterSpacing: '2px',
     marginBottom: '20px',
     lineHeight: 1.2
   },
   btnPrimary: {
-    background: '#1a1a1a',
+    background: '#000',
     color: '#fff',
     border: 'none',
     padding: '18px 48px',
     fontFamily: FONT_SANS,
     fontSize: '11px',
     fontWeight: 500,
-    letterSpacing: '2px',
+    letterSpacing: '0.08em',
     textTransform: 'uppercase',
     cursor: 'pointer',
     transition: 'all 0.3s ease',
@@ -103,12 +111,12 @@ export const getStyles = (isScrolled) => ({
   btnOutline: {
     background: 'transparent',
     color: '#fff',
-    border: '1px solid rgba(255,255,255,0.5)',
+    border: '1px solid #fff',
     padding: '18px 48px',
     fontFamily: FONT_SANS,
     fontSize: '11px',
     fontWeight: 500,
-    letterSpacing: '2px',
+    letterSpacing: '0.08em',
     textTransform: 'uppercase',
     cursor: 'pointer',
     transition: 'all 0.3s ease',
@@ -118,7 +126,7 @@ export const getStyles = (isScrolled) => ({
   input: {
     width: '100%',
     padding: '16px 20px',
-    border: '1px solid #e0e0e0',
+    border: '1px solid #ccc',
     fontFamily: FONT_SANS,
     fontSize: '14px',
     transition: 'all 0.3s ease',
