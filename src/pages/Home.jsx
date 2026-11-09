@@ -4,6 +4,7 @@ import { getStyles, FONT_SANS, FONT_SERIF } from '../components/styles';
 import ContactForm from '../components/ContactForm';
 import { useSeo, SITE_URL } from '../lib/seo';
 import { GOOGLE_REVIEWS_URL } from '../data/site';
+import { guides } from '../data/guides';
 import { useMediaQuery } from '../lib/useMediaQuery';
 
 export default function Home({ track }) {
@@ -631,9 +632,7 @@ export default function Home({ track }) {
                 title: 'Buyer Representation',
                 description: 'With deep understanding of design, construction, and renovation, I help you visualize potential and identify issues before they become problems.',
                 icon: '⌂',
-                to: '/manhasset/buyers-guide',
-                cta: 'Read the Manhasset Buyer’s Guide →',
-                ctaKey: 'buyers_guide'
+                guideLinks: true
               },
               {
                 title: 'Seller Services',
@@ -677,6 +676,13 @@ export default function Home({ track }) {
                   lineHeight: 1.9,
                   color: '#666'
                 }}>{service.description}</p>
+                {service.guideLinks && Object.values(guides).map((g) => (
+                  <Link key={g.slug} to={`/${g.slug}/buyers-guide`}
+                    onClick={() => track('cta_click', { cta: 'buyers_guide', town: g.slug, placement: 'services' })}
+                    style={{ fontFamily: FONT_SANS, fontSize: '12px', letterSpacing: '1.5px', textTransform: 'uppercase', color: '#1a1a1a', fontWeight: 500, display: 'inline-block', marginTop: '20px', display: 'block', textDecoration: 'none' }}>
+                    {g.town} Buyer’s Guide →
+                  </Link>
+                ))}
                 {service.cta && (
                   <span style={{ fontFamily: FONT_SANS, fontSize: '12px', letterSpacing: '1.5px', textTransform: 'uppercase', color: '#1a1a1a', fontWeight: 500, display: 'inline-block', marginTop: '20px' }}>{service.cta}</span>
                 )}
