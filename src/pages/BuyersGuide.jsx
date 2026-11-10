@@ -3,6 +3,7 @@ import { guides } from '../data/guides';
 import { towns } from '../data/towns';
 import { getStyles, FONT_SANS } from '../components/styles';
 import ContactForm from '../components/ContactForm';
+import Photo from '../components/Photo';
 import NotFound from './NotFound';
 import { useSeo, pageMeta, SITE_URL } from '../lib/seo';
 
@@ -107,9 +108,15 @@ export default function BuyersGuide({ track }) {
   const styles = getStyles(false);
   const path = `/${slug}/buyers-guide`;
   const seo = guide ? pageMeta({ title: guide.title, description: guide.metaDescription, path, ogType: 'article' }) : null;
+  const heroImage = guide?.hero ? `${SITE_URL}${guide.hero.src}.jpg` : `${SITE_URL}/nicholas-headshot.jpg`;
 
   useSeo(guide ? {
     ...seo,
+    meta: [
+      ...seo.meta,
+      { property: 'og:image', content: heroImage },
+      { name: 'twitter:image', content: heroImage },
+    ],
     schemas: [
       {
         '@context': 'https://schema.org',
@@ -119,7 +126,7 @@ export default function BuyersGuide({ track }) {
         datePublished: guide.publishedAt,
         dateModified: guide.modifiedAt || guide.publishedAt,
         url: SITE_URL + path,
-        image: `${SITE_URL}/nicholas-headshot.jpg`,
+        image: heroImage,
         author: { '@type': 'Person', '@id': `${SITE_URL}/#person`, name: 'Nicholas Liappas' },
         publisher: { '@type': 'Organization', name: 'Nicholas Liappas – The Liappas Team at Compass', logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo-black.png` } },
         about: { '@type': 'City', name: guide.town },
@@ -147,8 +154,14 @@ export default function BuyersGuide({ track }) {
 
   return (
     <div style={styles.container}>
-      <section style={{ ...styles.hero, height: 'auto', minHeight: '480px', padding: '180px 24px 90px', background: '#000', textAlign: 'center' }}>
-        <div style={styles.heroContent}>
+      <section style={{ ...styles.hero, height: 'auto', minHeight: guide.hero ? '560px' : '480px', padding: '180px 24px 90px', background: '#000', textAlign: 'center' }}>
+        {guide.hero && (
+          <>
+            <Photo src={guide.hero.src} small={guide.hero.small} alt={guide.hero.alt} eager position={guide.hero.position} style={{ position: 'absolute', inset: 0, zIndex: 0 }} />
+            <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'rgba(10,10,10,0.5)', zIndex: 1 }} />
+          </>
+        )}
+        <div style={{ ...styles.heroContent, textShadow: guide.hero ? '0 1px 14px rgba(0,0,0,0.6)' : 'none' }}>
           <p style={{ fontFamily: FONT_SANS, fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '24px', }}>
             <Link to={`/${slug}`} style={{ color: '#fff', textDecoration: 'none' }}>{guide.town}</Link> · Buyer’s Guide
           </p>
