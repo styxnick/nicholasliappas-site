@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getStyles, FONT_SANS } from '../components/styles';
 import CommercialForm from '../components/CommercialForm';
+import Photo from '../components/Photo';
 import { useSeo, pageMeta, SITE_URL } from '../lib/seo';
 import { propertyTypes, whoIRepresent, walkthroughChecks, howItWorks, markets, greekLine, faqs, seo, complianceLine } from '../data/commercial';
 import { commercialTransactions } from '../data/commercialTransactions';
@@ -15,28 +16,6 @@ const photoAlt = (p) => {
 };
 
 const PHONE = '516-214-7761';
-const FALLBACK = '#ccc';
-
-// <picture> with webp + jpg sources that degrades to a dark gradient when the
-// file is missing or fails to load. `src` is the path without extension.
-// `small` (optional) is a phone-sized variant of the same photo, served below 768px.
-function Photo({ src, alt, style, eager = false, small = null }) {
-  const [failed, setFailed] = useState(!src);
-  const box = { position: 'relative', overflow: 'hidden', background: FALLBACK, ...style };
-  if (failed) return <div aria-hidden="true" style={box} />;
-  return (
-    <div style={box}>
-      <picture>
-        {small && <source media="(max-width: 768px)" srcSet={`${small}.webp`} type="image/webp" />}
-        {small && <source media="(max-width: 768px)" srcSet={`${small}.jpg`} />}
-        <source srcSet={`${src}.webp`} type="image/webp" />
-        <img src={`${src}.jpg`} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async"
-             onError={() => setFailed(true)}
-             style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-      </picture>
-    </div>
-  );
-}
 
 const Eyebrow = ({ children, light }) => (
   <p style={{ fontFamily: FONT_SANS, fontSize: '11px', fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', color: light ? '#fff' : '#000', marginBottom: '16px' }}>{children}</p>

@@ -31,7 +31,16 @@ export const guides = {
     subtitle: 'What to know before you buy on the North Shore',
     updated: 'November 2026',
     publishedAt: '2026-11-05',
-    modifiedAt: '2026-11-05',
+    modifiedAt: '2026-11-10',
+    // Hero photo behind the title. Files live in public/guides/<slug>/ as
+    // hero.{webp,jpg} (1920w landscape) and hero-960.{webp,jpg} (phones; a portrait crop of
+    // the same photo works best). Omit for a flat black hero.
+    hero: {
+      src: '/guides/manhasset/hero',
+      small: '/guides/manhasset/hero-960',
+      alt: 'Plaza Avenue in downtown Manhasset, looking past the Manhasset Cinemas marquee in autumn',
+      position: 'center 40%',
+    },
     intro: 'Manhasset isn’t just one of the most desirable places to live in New York; it’s one of the most desirable in the country. It has a top-ranked school district, a sub-40-minute train ride to Midtown, Manhasset Bay at its doorstep, and streets lined with classic Colonial and Tudor homes. It’s a small, close-knit community, and the bar to entry is high. For those who buy here, it’s worth it.',
     sections: [
       {
